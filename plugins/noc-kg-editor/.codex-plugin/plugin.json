@@ -1,0 +1,52 @@
+{
+  "name": "noc-kg-editor",
+  "version": "0.1.0",
+  "description": "Local notary-facing editor companion for usecase knowledge graphs.",
+  "author": {
+    "name": "NoC Maintainers",
+    "email": "security@example.com",
+    "url": "https://github.com/ofunk/NoC"
+  },
+  "homepage": "https://github.com/ofunk/NoC/tree/main/docs/de/kg-editor-workstream.md",
+  "repository": "https://github.com/ofunk/NoC",
+  "license": "GPL-3.0-only",
+  "keywords": [
+    "noc",
+    "notariat",
+    "notary",
+    "knowledge-graph",
+    "kg-editor",
+    "usecase",
+    "local-companion",
+    "pull-request"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "NoC KG Editor",
+    "shortDescription": "Open notarial usecase KGs as safe forms and checklists.",
+    "longDescription": "Local Codex plugin for notaries and notary-office staff. It opens usecase-local knowledge graphs through a safe no-code editor view, renders open information, documents, decisions, gates and evidence without exposing value fields, and keeps all changes in a proposal-only patch, validation, review and pull-request flow.",
+    "developerName": "NoC Maintainers",
+    "category": "Compliance",
+    "capabilities": [
+      "Local",
+      "Notary",
+      "KnowledgeGraph",
+      "NoCodeEditor",
+      "MarkdownEntry",
+      "PatchProposal",
+      "PullRequest",
+      "NoMandateDataInGit"
+    ],
+    "websiteURL": "https://github.com/ofunk/NoC/tree/main/docs/de/kg-editor-workstream.md",
+    "privacyPolicyURL": "https://github.com/ofunk/NoC/blob/main/SECURITY.md",
+    "termsOfServiceURL": "https://github.com/ofunk/NoC/blob/main/LICENSE",
+    "defaultPrompt": [
+      "Open the KG editor for a notarial usecase.",
+      "Create a KG editor session sheet.",
+      "Validate a KG patch before PR."
+    ],
+    "brandColor": "#245C4F",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

@@ -11,6 +11,7 @@ gantt
     section Core gates
     Regulated core manifest and skill baseline :done,   p1, 2026-04-01, 2026-05-14
     Plugin validation in quality gate          :done,   p2, 2026-04-15, 2026-05-14
+    KG editor local plugin MVP                 :done,   p2a, 2026-05-15, 1d
     Marketplace packaging policy               :active, p3, 2026-05-14, 14d
     IDaaS eID/IAM companion                    :active, p4, 2026-05-14, 14d
 
@@ -32,6 +33,7 @@ gantt
 | Plugin | Purpose | Status | Next gate |
 | --- | --- | --- | --- |
 | `noc-regulated-core` | Shared regulated workflow guardrails | Baseline ready | Recheck GPT Store/workspace packaging assumptions. |
+| `noc-kg-editor` | Local no-code editor for usecase knowledge graphs | Installable MVP | Bind Markdown session-sheet and JSON view to future ChatGPT App or GPT Action surface without storing mandate values. |
 | `noc-idaas` | German eID verification and IAM projection readiness | Active | Confirm connector boundary and data-processing basis before any production pilot. |
 | `noc-cyberjack-rfid` | Local card, RFID-off, SAK and XNP local-interface readiness | Active | Windows DriverPackage, morris middleware, optional morris loopback API/PCSC probe and Linux driver preflight are implemented; current local gate still needs a connected cyberJack reader or manual attestation. |
 | `noc-bnotk-xnp` | XNP authentication readiness | Active | Runnable local reader-prompt evidence now binds XNP preflight to the CyberJack gate and can pass through the optional morris API probe; next gate is workstation validation with XNP installed. |

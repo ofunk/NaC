@@ -17,6 +17,18 @@
       "category": "Compliance"
     },
     {
+      "name": "noc-kg-editor",
+      "source": {
+        "source": "local",
+        "path": "./plugins/noc-kg-editor"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Compliance"
+    },
+    {
       "name": "noc-idaas",
       "source": {
         "source": "local",

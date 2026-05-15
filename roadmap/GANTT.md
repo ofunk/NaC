@@ -17,6 +17,7 @@ gantt
 
     section A: Plugins and marketplace readiness
     Plugin inventory and installability gate     :done,    a1, 2026-04-01, 2026-05-14
+    KG editor local plugin MVP                   :done,    a1a, 2026-05-15, 1d
     GPT Store and workspace packaging split      :active,  a2, 2026-05-14, 21d
     IDaaS plugin migration                       :active,  a3, 2026-05-14, 14d
     Repository consolidation ledger              :active,  a4, 2026-05-14, 7d
@@ -61,7 +62,7 @@ gantt
 
 | Track | Scope | Status | Progress | Current gate |
 | --- | --- | --- | --- | --- |
-| A | Installable plugins for notary offices | Active | 67% | `noc-cyberjack-rfid` now detects REINER SCT DriverPackage, morris browser middleware and the optional morris loopback API/PCSC path locally; `noc-pkcs7-certbundle` adds a separate local certificate-bundle evidence track without signing; OpenAI-backed processing has an AVV/DPA governance section; and SBOM for AI now has a repo-wide baseline, minimum-requirements inventory and strict validator. |
+| A | Installable plugins for notary offices | Active | 68% | `noc-kg-editor` now packages the usecase KG editor as a local notary-facing plugin with Markdown and JSON entry surfaces; `noc-cyberjack-rfid` detects REINER SCT DriverPackage, morris browser middleware and the optional morris loopback API/PCSC path locally; `noc-pkcs7-certbundle` adds a separate local certificate-bundle evidence track without signing; OpenAI-backed processing has an AVV/DPA governance section; and SBOM for AI now has a repo-wide baseline, minimum-requirements inventory and strict validator. |
 | B | Installable skills and deterministic Python workflows | Active | 40% | First executable KG runtime package and CLI are implemented with unit tests; `START_HERE` is now the operational entry path distinct from the README overview, startup verification has environment profiles for base, plugin-dev and notary-workstation setups, docs are grouped into `eventstream/`, `issues/`, `operations/` and `service-model/`, README/index references now have clickable-link validation, PDF export is manual-only during active development, `fertig` means merged to `main` plus clean local `main`, the GitHub root README uses a Deutsch/English start table, language parity now blocks copied identical localized Markdown/text mirrors, and the KG editor exposes a safe no-code form/checklist view plus patch contract. |
 | C | Notarial usecases such as property, register, company, association, estate, family and power-of-attorney matters | Active | 56% | Every usecase now owns a case-local static KG; German is explicit as the leading and legally binding language for German-law notarial usecases; Fachpersonal edits those KGs through the no-code editor view instead of raw JSON. |
 

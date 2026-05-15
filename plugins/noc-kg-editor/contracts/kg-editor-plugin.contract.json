@@ -1,0 +1,59 @@
+{
+  "schema_version": "noc.plugin-contract/v0.1",
+  "plugin": "noc-kg-editor",
+  "title": "NoC KG Editor local plugin contract",
+  "status": "installable_mvp",
+  "last_update": "2026-05-15",
+  "purpose": "Expose usecase-local notarial knowledge graphs to notaries and notary-office staff through a local plugin surface instead of raw JSON editing.",
+  "source_runtime": {
+    "python_module": "notary_kg.editor",
+    "cli": "python plugins/noc-kg-editor/scripts/open_editor.py <usecase_slug>"
+  },
+  "entry_surfaces": [
+    {
+      "id": "markdown_session_sheet",
+      "status": "implemented",
+      "command": "python plugins/noc-kg-editor/scripts/open_editor.py <usecase_slug> --format markdown --output out/kg-editor/<usecase_slug>.md"
+    },
+    {
+      "id": "plugin_json_view",
+      "status": "implemented",
+      "command": "python plugins/noc-kg-editor/scripts/open_editor.py <usecase_slug> --format json"
+    },
+    {
+      "id": "chatgpt_app_or_action",
+      "status": "planned",
+      "boundary": "Must use approved authentication, confirmation for consequential actions and no real mandate values in Git or LLM-visible files."
+    }
+  ],
+  "actions": [
+    {
+      "name": "get_graph",
+      "status": "implemented_via_runtime",
+      "mutates": false
+    },
+    {
+      "name": "propose_patch",
+      "status": "contract_only",
+      "mutates": false
+    },
+    {
+      "name": "validate_graph_patch",
+      "status": "contract_only",
+      "mutates": false
+    },
+    {
+      "name": "create_pull_request",
+      "status": "contract_only",
+      "mutates": true,
+      "requires_confirmation": true
+    }
+  ],
+  "guardrails": {
+    "raw_json_editing_for_notaries": false,
+    "value_fields_editable": false,
+    "real_mandate_data_in_git": false,
+    "proposal_only_patch_mode": true,
+    "human_confirmation_required": true
+  }
+}

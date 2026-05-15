@@ -1,0 +1,54 @@
+{
+  "schema_version": "oac.plugin.contract/v1",
+  "plugin": "noc-kg-editor",
+  "status": "installable-mvp",
+  "source_contract": "workflows/contracts/kg-editor.contract.json",
+  "runtime_mode": "local-kg-editor-companion",
+  "data_boundary": {
+    "secrets_in_git": false,
+    "client_content_in_git": false,
+    "mandate_values_in_git": false,
+    "llm_receives_secret_values": false,
+    "value_fields_editable": false,
+    "evidence_is_metadata_only_by_default": true
+  },
+  "human_approval_required_for": [
+    "knowledge_graph_patch",
+    "pull_request_creation",
+    "regulated_notarial_decision",
+    "external_action_or_submission"
+  ],
+  "allowed_work": [
+    "Open a usecase-local KG as a safe editor view.",
+    "Render text, JSON or Markdown session views.",
+    "Prepare schema-bound patch proposals without real values.",
+    "Validate KG patch proposals before pull request creation.",
+    "Create pull requests only after explicit human confirmation."
+  ],
+  "prohibited_work": [
+    "Store real mandate, client, family, health, estate, property or secret values in Git.",
+    "Edit value fields in knowledge-graph.graph.json.",
+    "Bypass review for notarial or regulated decisions.",
+    "Send local workstation, XNP, card-reader, morris, portal or credential values to public action endpoints.",
+    "Treat LLM output as fachliche Wahrheit without validation and review."
+  ],
+  "day0": [
+    "Confirm the usecase slug and local repository root.",
+    "Confirm the actor is allowed to view the usecase KG.",
+    "Confirm no real mandate data will be entered into Git-visible files."
+  ],
+  "day1": [
+    "Open the KG editor view.",
+    "Produce a session sheet or JSON view.",
+    "Prepare a patch proposal only if the operator asks for a change."
+  ],
+  "day2": [
+    "Review open questions, stale gates and patch drift after usecase updates.",
+    "Recertify the plugin boundary when ChatGPT App or GPT Action channels are added."
+  ],
+  "required_accounts_or_approvals": [
+    "Local repository access",
+    "GitHub pull-request permission for patch creation",
+    "Approved reviewer for notarial KG changes"
+  ]
+}
