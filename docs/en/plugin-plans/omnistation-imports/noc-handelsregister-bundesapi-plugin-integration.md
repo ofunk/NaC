@@ -3,8 +3,9 @@
 This file is part of the Omnistation import archive. It is not the active
 English plugin-plan source.
 
-- German source artifact:
-  [docs/de/plugin-plans/omnistation-imports/noc-handelsregister-bundesapi-plugin-integration.md](../../../de/plugin-plans/omnistation-imports/noc-handelsregister-bundesapi-plugin-integration.md)
+- German source artifact: retained in the separate German Omnistation import
+  archive with the same filename; intentionally not linked from this English
+  reading flow.
 - Active English plan:
   [docs/en/plugin-plans/handelsregister-bundesapi.md](../handelsregister-bundesapi.md)
 - Integrity hashes:

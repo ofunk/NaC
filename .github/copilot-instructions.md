@@ -29,6 +29,7 @@ Dieses Repository ist ein Muster fuer `Notariat as Code` mit `NoC` als konkreter
 - Mehrsprachigkeit ist repo-weit verbindlich nach [policies/language-policy.yaml](../policies/language-policy.yaml); die Policy gilt fuer alle menschlich lesbaren Inhalte, inklusive GitHub-Root-[README.md](../README.md).
 - Sprachabhaengige Inhalte liegen in ISO-639-Ordnern; `de` und `en` sind immer zu pflegen.
 - Die Sprache des Prompts begrenzt die Aenderung nicht: bei lokalisierten Inhalten immer alle Standardsprachen aktualisieren.
+- Lokalisierte Markdown-Links bleiben im Sprachpfad der Quelldatei: deutsche Inhalte verlinken deutsch, englische Inhalte verlinken englisch.
 - Fuer deutsches Recht und notarielle Usecases ist Deutsch die fuehrende und rechtlich bindende Sprache; Englisch ist nur Uebersetzung oder Orientierung. Usecase-Indizes und fachliche Usecase-Inhalte werden deutsch gefuehrt.
 - Standard-MVP-Module im Referenzrepo sind synchron: `software_company`, `notary`, `wealth_management`.
 - Zusaetzlicher MVP-Use-Case: `property_management`.
@@ -87,6 +88,7 @@ Dieses Repository ist ein Muster fuer `Notariat as Code` mit `NoC` als konkreter
 - Folge immer [policies/culture-policy.yaml](../policies/culture-policy.yaml).
 - Folge immer [policies/language-policy.yaml](../policies/language-policy.yaml).
 - Lokal gepflegte Inhalte muessen immer in `de` und `en` aktualisiert werden.
+- Lokalisierte Markdown-Links duerfen nicht in den anderen Sprachpfad springen.
 - Bei Genderfragen gilt die konfigurierte Policy.
 - Wenn keine Policy gesetzt ist, nutze neutrale Sprache und bitte einmal um Entscheidung.
 

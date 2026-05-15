@@ -15,16 +15,12 @@ rechtlich bindende Sprache; Englisch ist nur Uebersetzung oder Orientierung.
   fuehrt Startpfade in einer Deutsch/English-Tabelle.
 - [usecases/](../../usecases) wird als deutsche fachliche Usecase-Flaeche
   gefuehrt.
-- [docs/en/README.md](../en/README.md) und
-  [docs/en/START_HERE.md](../en/START_HERE.md) sind englische
-  Einstiegsfassungen.
+- Die englischen Einstiegsfassungen werden parallel gepflegt, aber nicht als
+  Navigationsziel aus diesem deutschen Lesefluss verlinkt.
 - Die wichtigsten englischen Einstiegs-, Governance-, Betriebs-, Eventstream-,
   Service- und aktiven Pluginplan-Dokumente sind nicht mehr nur Dateispiegel.
-- Alte Omnistation-Importe unter
-  [docs/en/plugin-plans/omnistation-imports/](../en/plugin-plans/omnistation-imports/)
-  sind als englische Importnotizen gefuehrt; die deutschen Originalartefakte
-  bleiben unter
-  [docs/de/plugin-plans/omnistation-imports/](plugin-plans/omnistation-imports/)
+- Alte Omnistation-Importe werden in beiden Sprachpfaden getrennt gefuehrt; die
+  deutschen Originalartefakte bleiben im deutschen Importordner
   nachvollziehbar.
 
 ## Technische Kontrolle
@@ -35,6 +31,7 @@ prueft:
 - Pflicht-Sprachordner fuer `de` und `en`,
 - Dateiparitaet fuer lokalisierte Flaechen,
 - Root-README- und Usecase-Sprachregeln,
+- sprachgleiche Markdown-Links fuer lokalisierte Dokumente und Prompts,
 - keine identischen Markdown-/Textspiegel zwischen `docs/de` und `docs/en`.
 
 ## Naechster sinnvoller Schritt

@@ -36,19 +36,19 @@ and moved into verifiable execution through an Enterprise Control Plane.
 
 Language-specific content is maintained under ISO-639 folder codes:
 
-- German: [docs/de/](../de), [prompts/de/](../../prompts/de)
-- English: [docs/en/](.), [prompts/en/](../../prompts/en)
+- English documentation: [docs/en/](.)
+- English prompts: [prompts/en/](../../prompts/en)
 
 `de` and `en` are mandatory. Every localized change must update both languages,
 regardless of the language used in the prompt. The binding rule is defined in
 [policies/language-policy.yaml](../../policies/language-policy.yaml) and checked by [scripts/validate_language_parity.py](../../scripts/validate_language_parity.py).
+English Markdown links stay in the English language path; German counterparts
+are maintained in parallel without interrupting this reading flow.
 
 ## Repository Structure
 
 - [docs/en/](.) contains English documentation.
-- [docs/de/](../de) contains German documentation.
 - [prompts/en/](../../prompts/en) contains English prompt templates.
-- [prompts/de/](../../prompts/de) contains German prompt templates.
 - [roadmap/GANTT.md](../../roadmap/GANTT.md) tracks global progress for plugins, workflows, and usecases.
 - [plugins/GANTT.md](../../plugins/GANTT.md), [workflows/GANTT.md](../../workflows/GANTT.md), and [usecases/GANTT.md](../../usecases/GANTT.md) track area progress.
 - [plugins/](../../plugins) contains installable plugin artifacts for GPT Store review or workspace installation.

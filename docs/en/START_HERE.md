@@ -120,12 +120,14 @@ Every push must update [roadmap/GANTT.md](../../roadmap/GANTT.md). Changes below
 ## Localization Rule
 
 German and English are standard languages. Changes to localized content must
-always maintain both language paths:
+always maintain both language paths. Reading flow stays language-local: English
+Markdown links point to English localized surfaces.
 
-- [docs/de/](../de)
 - [docs/en/](.)
-- [prompts/de/](../../prompts/de)
 - [prompts/en/](../../prompts/en)
+
+German counterparts are maintained in parallel, but are not linked as reading
+targets from English documents.
 
 Parity is checked with [scripts/validate_language_parity.py](../../scripts/validate_language_parity.py).
 

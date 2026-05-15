@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 STANDARD_LANGUAGES = ("de", "en")
 LOCALIZED_SURFACES = ("docs", "prompts")
 LANGUAGE_CODE_PATTERN = re.compile(r"^[a-z]{2,3}$")
+MARKDOWN_LINK_PATTERN = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 GERMAN_USECASE_MARKER = "Deutsch ist fuer diese Usecases die fuehrende und rechtlich bindende Sprache"
 GERMAN_ROOT_MARKER = "Deutsch ist repo-weit die fuehrende Sprache"
 TEXT_FILE_SUFFIXES = {".md", ".mdc", ".txt"}
@@ -81,6 +82,71 @@ def validate_localized_text_is_not_copied() -> list[str]:
     return errors
 
 
+def localized_surface_language(path: Path) -> tuple[str, str] | None:
+    resolved = path.resolve()
+    for surface in LOCALIZED_SURFACES:
+        for language in STANDARD_LANGUAGES:
+            root = (REPO_ROOT / surface / language).resolve()
+            try:
+                resolved.relative_to(root)
+            except ValueError:
+                continue
+            return surface, language
+    return None
+
+
+def resolve_markdown_target(source: Path, value: str) -> Path | None:
+    target = value.strip().strip("<>")
+    if (
+        not target
+        or target.startswith(("#", "http://", "https://", "mailto:"))
+        or "://" in target
+    ):
+        return None
+
+    target = target.split("#", maxsplit=1)[0].split("?", maxsplit=1)[0]
+    if not target:
+        return None
+
+    if target.startswith("/"):
+        return REPO_ROOT / target.lstrip("/")
+
+    candidate = Path(target)
+    if candidate.is_absolute():
+        return candidate
+    return source.parent / candidate
+
+
+def validate_localized_markdown_link_languages() -> list[str]:
+    errors: list[str] = []
+    for surface in LOCALIZED_SURFACES:
+        for language in STANDARD_LANGUAGES:
+            root = REPO_ROOT / surface / language
+            if not root.exists():
+                continue
+
+            for path in sorted(root.rglob("*.md")):
+                text = path.read_text(encoding="utf-8")
+                for line_number, line in enumerate(text.splitlines(), start=1):
+                    for match in MARKDOWN_LINK_PATTERN.finditer(line):
+                        target = resolve_markdown_target(path, match.group(1))
+                        if target is None:
+                            continue
+
+                        target_language = localized_surface_language(target)
+                        if target_language is None:
+                            continue
+
+                        _, linked_language = target_language
+                        if linked_language != language:
+                            rel_path = path.relative_to(REPO_ROOT).as_posix()
+                            errors.append(
+                                f"{rel_path}:{line_number}: Lokalisierter Markdown-Link "
+                                f"muss im Sprachpfad {language} bleiben: {match.group(1)}"
+                            )
+    return errors
+
+
 def validate_domain_language_rules() -> list[str]:
     errors: list[str] = []
     policy_text = (REPO_ROOT / "policies" / "language-policy.yaml").read_text(encoding="utf-8")
@@ -90,6 +156,9 @@ def validate_domain_language_rules() -> list[str]:
         "root_readme_language: de",
         "github_project_page_language: de",
         "non_localized_human_content_defaults_to_german: true",
+        "localized_navigation:",
+        "localized_markdown_links_follow_source_language: true",
+        "cross_language_markdown_links_allowed_in_localized_content: false",
         "legal_domain_language:",
         "leading_language: de",
         "legally_binding_language: de",
@@ -129,6 +198,7 @@ def main() -> int:
     errors = validate_language_roots()
     errors.extend(validate_file_parity())
     errors.extend(validate_localized_text_is_not_copied())
+    errors.extend(validate_localized_markdown_link_languages())
     errors.extend(validate_domain_language_rules())
 
     if errors:
@@ -139,7 +209,7 @@ def main() -> int:
         return 1
 
     print("STATUS: PASSED")
-    print("OK: ISO-639-Sprachordner und de/en-Paritaet sind gepflegt.")
+    print("OK: ISO-639-Sprachordner, de/en-Paritaet und sprachgleiche Links sind gepflegt.")
     return 0
 
 

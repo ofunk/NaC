@@ -123,12 +123,14 @@ Themen-Gantt aktualisieren:
 ## Lokalisierungsregel
 
 Deutsch und Englisch sind Standardsprachen. Aenderungen an lokalisierten
-Inhalten muessen immer beide Sprachpfade pflegen:
+Inhalten muessen immer beide Sprachpfade pflegen. Der Lesefluss bleibt dabei
+sprachgleich: deutsche Markdown-Links fuehren in deutsche lokalisierte Flaechen.
 
 - [docs/de/](.)
-- [docs/en/](../en)
 - [prompts/de/](../../prompts/de)
-- [prompts/en/](../../prompts/en)
+
+Die englischen Gegenstuecke werden parallel gepflegt, aber nicht als
+Navigationsziel aus deutschen Dokumenten verlinkt.
 
 Die Paritaet wird mit [scripts/validate_language_parity.py](../../scripts/validate_language_parity.py) geprueft.
 

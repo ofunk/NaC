@@ -8,6 +8,10 @@ alwaysApply: true
 - Folge [policies/process-policy.yaml](../../policies/process-policy.yaml), Abschnitt `documentation_links`.
 - Wenn README-, START_HERE-, Index- oder Agentenregel-Dateien auf andere
   Repo-Bereiche verweisen, muss der Verweis ein Markdown-Link sein.
+- In lokalisierten Markdown-Dateien muessen Links auf lokalisierte Flaechen im
+  gleichen Sprachpfad bleiben, also deutsch zu [docs/de](../../docs/de) oder
+  [prompts/de](../../prompts/de) und englisch zu [docs/en](../../docs/en) oder
+  [prompts/en](../../prompts/en).
 - Nutze Code-Formatierung nur fuer Befehle, Konfigurationsschluessel,
   Dateimuster und echte Code-Identifier.
 - Beispiele:

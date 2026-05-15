@@ -10,6 +10,7 @@ alwaysApply: true
 - Die Sprachpolicy gilt repo-weit fuer alle menschlich lesbaren Inhalte, inklusive GitHub-Root-[README.md](../../README.md).
 - Sprachabhaengige Inhalte liegen in ISO-639-Ordnern.
 - `de` und `en` sind immer zu pflegen, unabhaengig von der Prompt-Sprache.
+- Lokalisierte Markdown-Links bleiben im Sprachpfad der Quelldatei: deutsche Inhalte verlinken deutsch, englische Inhalte verlinken englisch.
 - Fuer deutsches Recht und notarielle Usecases ist Deutsch die fuehrende und rechtlich bindende Sprache; Englisch ist nur Uebersetzung oder Orientierung.
 - Usecase-Indizes und fachliche Usecase-Inhalte werden deutsch gefuehrt; stabile technische Identifier duerfen englisch bleiben.
 - Bei Genderfragen gilt die konfigurierte Policy, nicht spontane Einzelfallwahl.
