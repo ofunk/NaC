@@ -1,72 +1,81 @@
-# Positionierung: Notariat as Code und Enterprise GitOps
+# Positionierung: Notariat as Code, NoC und Enterprise Control Plane
 
-## Ziel
+Status: verbindliche Projektpositionierung
 
-Dieses Dokument schaerft den Begriffsrahmen:
+Letzte inhaltliche Anpassung: 2026-05-15
 
-- `NoC` ist die konkrete Produkt- und Betriebsauspraegung in diesem Repository.
-- Das uebergeordnete Architekturmodell ist `Notariat as Code (NoC)`.
-- Das operative Steuerungsprinzip ist `Enterprise GitOps`.
+## Zweck
+
+Dieses Dokument ist kein alter Konzeptzettel, sondern der verbindliche
+Begriffsrahmen fuer den aktuellen NoC-Stand. Es trennt Zielmodell,
+Betriebsprinzip, Produktname und implementierte Repo-Flaechen.
+
+Der laufende Entwicklungsstand steht in [roadmap/BUILD_NOW.md](../../roadmap/BUILD_NOW.md).
 
 ## Begriffsrahmen
 
-### Notariat as Code (NoC)
+| Begriff | Bedeutung in diesem Repo |
+| --- | --- |
+| `Notariat as Code` | Zielmodell: notarielle Vorgangsarten, Rollen, Freigaben, Nachweise, Plugins und Workflows werden deklarativ, versioniert und pruefbar beschrieben. |
+| `NoC` | Konkrete Referenzumsetzung dieses Zielmodells in diesem Repository. |
+| `Enterprise Control Plane` | Plattformname fuer die Bedien-, Kontroll- und Ausfuehrungsschicht von NoC. |
+| `Enterprise GitOps` | Operatives Steuerungsprinzip: Aenderungen laufen ueber Branch, Pull Request, Review, Freigabe, Checks und Merge. |
 
-Unternehmen wird deklarativ und versioniert beschrieben:
+`Organization as Code` bleibt die allgemeinere Oberkategorie. Dieses Repo ist
+die notariatsspezifische Auspraegung: `Notariat as Code`.
 
-- Policies
-- Rollen und Rechte
-- Prozessmodelle
-- Kontrollpunkte
-- Nachweise
+## Was heute konkret ist
 
-### Enterprise GitOps
+NoC ist nicht mehr nur Dokumentation. Auf `main` gibt es am 2026-05-15 eine
+erste ausfuehrbare notariatsspezifische Runtime-Flaeche:
 
-Aenderungen an Organisationslogik laufen kontrolliert ueber:
+- usecase-lokale statische Knowledge Graphs unter [usecases/](../../usecases),
+  jeweils als `knowledge-graph.graph.json` und `knowledge-graph.md`,
+- eine KG-Validierung ueber [scripts/validate_knowledge_graph.py](../../scripts/validate_knowledge_graph.py),
+- eine notarielle KG-Runtime unter [src/notary_kg/](../../src/notary_kg),
+- eine CLI unter [scripts/notary_kg.py](../../scripts/notary_kg.py),
+- eine no-code KG-Editor-Ansicht fuer Fachpersonal mit Vertrag in
+  [workflows/contracts/kg-editor.contract.json](../../workflows/contracts/kg-editor.contract.json),
+- ein strikter Quality Gate ueber [scripts/quality_gate.py](../../scripts/quality_gate.py).
 
-- Branch
-- Pull Request
-- Review/Freigabe
-- automatisierte Policy- und Compliance-Checks
+Die Produktstruktur ist verbindlich getrennt:
 
-### NoC
+- [plugins/](../../plugins): installierbare Plugin-Artefakte,
+- [workflows/](../../workflows): Skills, Workflow-Vertraege und deterministische
+  Python-Workflows,
+- [usecases/](../../usecases): konkrete notarielle Vorgangsarten mit jeweils
+  eigener statischer KG/DB.
 
-`NoC` ist die konkrete Umsetzung von Notariat as Code + Enterprise GitOps in diesem Repo.
+## Was bewusst nicht behauptet wird
 
-## Warum diese Trennung wichtig ist
+NoC ersetzt kein vorgeschriebenes Fachsystem und keine notarielle
+Berufspflichtpruefung. Das Repo behauptet aktuell auch nicht:
 
-- reduziert Missverstaendnisse zwischen Tooling und Zielmodell,
-- macht das Konzept anschlussfaehig fuer Fachseite, Audit und Betriebsverantwortung,
-- erlaubt Drittbetrieb und Ersetzbarkeit ohne Begriffskonflikte.
+- produktionsreife Ende-zu-Ende-Automation fuer notarielle Vorgaenge,
+- unkontrollierte SaaS-Verarbeitung von Mandatsdaten,
+- Ersetzung von XNP, Kartenleser-, morris- oder Registerportal-Pflichten,
+- fachliche Wahrheit durch ein LLM ohne versionierte Aenderung, Review und
+  Freigabe.
+
+Das LLM ist Eingabeoberflaeche. Verbindlich wird ein Stand erst durch
+versionierte Aenderung, Validierung, Review, Merge und Nachweis.
 
 ## Architekturzuordnung
 
-- `Intent Layer`: Policies, Rollen, Prozessdefinitionen
-- `Control Layer`: PR, Review, Approval, Rulesets
-- `Execution Layer`: Runtime, Automationen, Prozessausfuehrung
-- `Evidence Layer`: revisionssicheres Event-Journal
+| Schicht | Aufgabe | Aktuelle Repo-Flaechen |
+| --- | --- | --- |
+| Intent Layer | fachliche Absicht, Policies, Rollen, Usecases | [policies/](../../policies), [usecases/](../../usecases), [prompts/de/](../../prompts/de) |
+| Control Layer | Branch, Pull Request, Review, Freigabe, Rulesets | [AGENTS.md](../../AGENTS.md), [.github/copilot-instructions.md](../../.github/copilot-instructions.md), [.cursor/rules/](../../.cursor/rules) |
+| Execution Layer | deterministische Runtime und Workflow-Ausfuehrung | [src/](../../src), [scripts/](../../scripts), [workflows/](../../workflows) |
+| Evidence Layer | Nachweise, SBOM, Eventstream, Gantt-Fortschritt | [sbom/](../../sbom), [docs/de/eventstream/](eventstream), [roadmap/GANTT.md](../../roadmap/GANTT.md) |
 
-## Projektentscheidung
+## Produktversprechen
 
-Dieses Repository fuehrt die Positionierung als aktive Projektentscheidung. Die
-folgenden Begriffe sind der verbindliche Begriffsrahmen fuer NoC.
+Notarielle Vorgangsarten, Plugins, Workflows, Rollen, Freigaben und Nachweise
+laufen deklarativ, auditierbar und automatisiert ueber Git, ohne dass Fachseite
+oder Betrieb die Compliance-Kette aus Branch, Review, Check und Merge umgehen.
 
-Begriff:
-
-- `Notariat as Code`
-
-Plattformname:
-
-- `Enterprise Control Plane`
-
-Erstes Produktversprechen:
-
-- "Notarielle Vorgangsarten, Plugins, Workflows, Rollen, Freigaben und
-  Nachweise laufen deklarativ, auditierbar und automatisiert ueber Git."
-
-Der aktuelle Entwicklungsstand wird in `roadmap/BUILD_NOW.md` gepflegt.
-
-## Der Ein-Satz-Pitch
+## Ein-Satz-Pitch
 
 Notariat as Code ist ein Betriebsmodell, in dem notarielle Vorgangsarten,
 Plugins, Workflows, Policies und operative Aenderungen deklarativ in Git

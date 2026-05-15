@@ -1,75 +1,80 @@
-# Positioning: Notariat As Code And Enterprise GitOps
+# Positioning: Notariat as Code, NoC and Enterprise Control Plane
 
-## Goal
+Status: binding project positioning
 
-This document defines the project terminology:
+Last content update: 2026-05-15
 
-- `NoC` is the concrete product and operating implementation in this
-  repository.
-- The overarching architecture model is `Notariat as Code`.
-- The operational control principle is `Enterprise GitOps`.
+## Purpose
+
+This document is not an old concept note. It is the binding terminology for the
+current NoC state. It separates the target model, operating principle, product
+name and implemented repository surfaces.
+
+The current development state is maintained in [roadmap/BUILD_NOW.md](../../roadmap/BUILD_NOW.md).
 
 ## Terminology
 
-### Notariat As Code
+| Term | Meaning in this repository |
+| --- | --- |
+| `Notariat as Code` | Target model: notarial case types, roles, approvals, evidence, plugins and workflows are described declaratively, versioned and verifiably. |
+| `NoC` | Concrete reference implementation of that target model in this repository. |
+| `Enterprise Control Plane` | Platform name for the operating, control and execution layer of NoC. |
+| `Enterprise GitOps` | Operating principle: changes move through branch, pull request, review, approval, checks and merge. |
 
-Notarial operations are described declaratively and versioned:
+`Organization as Code` remains the broader category. This repository is the
+notary-specific form: `Notariat as Code`.
 
-- policies,
-- roles and permissions,
-- process models,
-- control points,
-- evidence.
+## What Is Concrete Today
 
-### Enterprise GitOps
+NoC is no longer only documentation. On `main` as of 2026-05-15, it has a first
+executable notary-specific runtime surface:
 
-Changes to organizational and notarial process logic are controlled through:
+- case-local static knowledge graphs under [usecases/](../../usecases), each as
+  `knowledge-graph.graph.json` and `knowledge-graph.md`,
+- KG validation through [scripts/validate_knowledge_graph.py](../../scripts/validate_knowledge_graph.py),
+- a notarial KG runtime under [src/notary_kg/](../../src/notary_kg),
+- a CLI under [scripts/notary_kg.py](../../scripts/notary_kg.py),
+- a no-code KG editor view for subject-matter staff with its contract in
+  [workflows/contracts/kg-editor.contract.json](../../workflows/contracts/kg-editor.contract.json),
+- a strict quality gate through [scripts/quality_gate.py](../../scripts/quality_gate.py).
 
-- branches,
-- pull requests,
-- review and approval,
-- automated policy and compliance checks.
+The product structure is binding:
 
-### NoC
+- [plugins/](../../plugins): installable plugin artifacts,
+- [workflows/](../../workflows): skills, workflow contracts and deterministic
+  Python workflows,
+- [usecases/](../../usecases): concrete notarial case types with their own
+  static KG/DB.
 
-`NoC` is the concrete implementation of Notariat as Code plus Enterprise GitOps
-in this repository.
+## What Is Not Claimed
 
-## Why The Separation Matters
+NoC does not replace a required professional system or notarial professional
+review. The repository also does not currently claim:
 
-- It reduces misunderstandings between tooling and target model.
-- It makes the model easier to review for business users, auditors and
-  operations owners.
-- It supports third-party operation and replaceability without terminology
-  conflicts.
+- production-ready end-to-end automation for notarial matters,
+- uncontrolled SaaS processing of mandate data,
+- replacement of XNP, card-reader, morris or register-portal obligations,
+- subject-matter truth through an LLM without versioned change, review and
+  approval.
+
+The LLM is an input interface. A state becomes binding only through versioned
+change, validation, review, merge and evidence.
 
 ## Architecture Mapping
 
-- `Intent Layer`: policies, roles, process definitions.
-- `Control Layer`: pull requests, reviews, approvals, rulesets.
-- `Execution Layer`: runtime, automation, process execution.
-- `Evidence Layer`: audit-proof event journal.
+| Layer | Job | Current repository surfaces |
+| --- | --- | --- |
+| Intent Layer | business intent, policies, roles, usecases | [policies/](../../policies), [usecases/](../../usecases), [prompts/en/](../../prompts/en) |
+| Control Layer | branch, pull request, review, approval, rulesets | [AGENTS.md](../../AGENTS.md), [.github/copilot-instructions.md](../../.github/copilot-instructions.md), [.cursor/rules/](../../.cursor/rules) |
+| Execution Layer | deterministic runtime and workflow execution | [src/](../../src), [scripts/](../../scripts), [workflows/](../../workflows) |
+| Evidence Layer | evidence, SBOM, eventstream, Gantt progress | [sbom/](../../sbom), [docs/en/eventstream/](eventstream), [roadmap/GANTT.md](../../roadmap/GANTT.md) |
 
-## Project Decision
+## Product Promise
 
-This repository maintains the positioning as an active project decision. The
-following terms are the binding terminology for NoC.
-
-Term:
-
-- `Notariat as Code`
-
-Platform name:
-
-- `Enterprise Control Plane`
-
-First product promise:
-
-- "Notarial case types, plugins, workflows, roles, approvals and evidence run
-  declaratively, auditable and automated through Git."
-
-The current development status is maintained in
-[roadmap/BUILD_NOW.md](../../roadmap/BUILD_NOW.md).
+Notarial case types, plugins, workflows, roles, approvals and evidence run
+declaratively, auditable and automated through Git, without letting subject
+matter or operations bypass the compliance chain of branch, review, check and
+merge.
 
 ## One-Sentence Pitch
 
