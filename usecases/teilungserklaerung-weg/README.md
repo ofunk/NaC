@@ -1,87 +1,80 @@
 # Teilungserklaerung nach WEG
 
-Status: KG baseline  
-KG node: `case.teilungserklaerung_weg`  
+Status: KG-Basis
+KG-Knoten: `case.teilungserklaerung_weg`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, WEG Section 8, GBO
+Primaere Quellenanker: `src.beurkg`, `src.gbo.19_29_46`, `src.weg.8`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for division of a property into
-apartment ownership or partial ownership. The package must connect owner
-authority, unit structure, co-ownership shares, plans, certificates, community
-rules, encumbrance handling and land-register implementation.
+Aufteilung eines Gebaeudes in Wohnungs- oder Teileigentum mit Teilungserklaerung, Gemeinschaftsordnung, Plaenen, Bescheinigungen und Grundbuchumsetzung.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for base property, owner, planned units, co-ownership shares and
-  special-use rights.
-- Review of plans, numbering, separation certificate and community rules.
-- Handling of existing land-register encumbrances across future units.
-- Filing trace for new apartment or partial-ownership registers.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No technical plan verification by the LLM.
-- No real plans, certificate files or owner data in Git.
-- No automated land-register filing without reviewed connector.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `property.identity` | Which base land-register object will be divided? | Notary clerk | Property register data |
-| `owner.identity` | Who owns and is authorized to divide? | Notary | Personal or company data |
-| `unit.structure` | Which units, rooms and special-use areas are planned? | Client | Property metadata |
-| `ownership.shares` | Which co-ownership fractions are assigned? | Client | Property metadata |
-| `plans.certificates` | Are plans and separation certificate available and consistent? | Client | Property metadata |
-| `encumbrance.handling` | How do existing rights affect the future unit registers? | Notary | Property register data |
+| `property.identity` | Welches Grundstueck, Grundbuchblatt, Flurstueck, Einheit oder welche aktuelle Bezeichnung identifiziert den Gegenstand? | notary_clerk | `property_register_data` |
+| `owner.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten owner.identity fachlich zu klaeren? | notary | `personal_or_company_data` |
+| `unit.structure` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten unit.structure fachlich zu klaeren? | client | `property_metadata` |
+| `ownership.shares` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten ownership.shares fachlich zu klaeren? | client | `property_metadata` |
+| `plans.certificates` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten plans.certificates fachlich zu klaeren? | client | `property_metadata` |
+| `encumbrance.handling` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten encumbrance.handling fachlich zu klaeren? | notary | `property_register_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Declaration of division | Core notarial declaration and community rules. | Synthetic or metadata only. |
-| Plans and separation certificate | Supports land-register implementation. | Evidence reference only. |
-| Land-register excerpt | Confirms property and encumbrances. | Evidence reference only. |
-| Unit-register application trace | Tracks implementation. | Metadata only. |
+| `doc.division_declaration` | Dokument/Nachweis: teilung erklaerung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.plans_certificate` | Dokument/Nachweis: plaene bescheinigung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.land_register_excerpt` | Dokument/Nachweis: grundbuch register excerpt | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Residential, partial ownership or mixed division.
-- Special-use rights included or not.
-- Existing encumbrances stay global, are allocated or require consents.
-- Whether corrections to plans/certificates are blocking.
+- `decision.use_case`: Entscheidung: nutzung vorgang. Optionen: `residential`, `partial`, `mixed`, `unknown`.
+- `decision.special_use_rights`: Entscheidung: sonderfall nutzung rights. Optionen: `yes`, `no`, `needs_review`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Owner and base property reviewed | Notary | Draft release |
-| Plans and certificate reviewed | Notary clerk | Filing |
-| Encumbrance implementation reviewed | Notary | Land-register application |
-| Unit-register package ready | Notary clerk | Submission |
+| `gate.plan_certificate_review` | Prueftor: plan bescheinigung pruefung | notary_clerk |
+| `gate.land_register_implementation` | Prueftor: grundbuch register umsetzung | notary |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Regulated workflow and evidence model. |
-| `noc-grundbuch-portal` | Base property and encumbrance review. |
-| `noc-bnotk-xnp` | Land-register filing route readiness. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-grundbuch-portal` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define unit and co-ownership-share intake schema.
-2. Add plan/certificate checklist.
-3. Add encumbrance allocation review.
-4. Add unit-register filing state model.
-5. Validate with synthetic multi-unit fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Plans and certificate references are mandatory before filing.
-- Encumbrances cannot be ignored.
-- Unit structure and share totals must be internally complete.
-- No real plans or owner data are committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

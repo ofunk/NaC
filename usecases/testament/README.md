@@ -1,38 +1,79 @@
 # Testament
 
-Status: legacy starter alias
-
-Canonical Top-10 usecase: `usecases/testament-erbvertrag/`  
-KG node: `case.testament_erbvertrag`
+Status: KG-Basis
+KG-Knoten: `case.testament`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
+Primaere Quellenanker: `src.beurkg`
 
-This folder is kept as a compatibility starter. New work should use
-`usecases/testament-erbvertrag/`.
+## Ziel
 
-## Goal
+Legacy-Starteralias fuer usecases/testament-erbvertrag; bleibt zur Kompatibilitaet erhalten, waehrend neue Workflow-Arbeit den kanonischen Usecase nutzt.
 
-Prepare a notary-office usecase package for testament intake, preparation,
-execution tracking, and evidence metadata.
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-## Boundaries
+## Umfang
 
-- The LLM is an intake and drafting assistant, not the legal authority.
-- Capacity, identity, interpretation, and execution require human notarial
-  review.
-- No real personal data or sensitive estate information is stored in Git.
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-## Initial Dependencies
+## Ausserhalb des Umfangs
 
-| Layer | Dependency | Purpose |
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
+
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
+| --- | --- | --- | --- |
+| `testator.identity` | Wer errichtet die Verfuegung und wie werden Identitaet und Testierfaehigkeit geprueft? | notary | `personal_data` |
+| `capacity.flags` | Gibt es Hinweise zu Geschaeftsfaehigkeit, Sprache, Hoeren, Sehen, Krankheit oder Unterstuetzung? | notary | `sensitive_personal_data` |
+| `family.structure` | Welche Ehegatten, Kinder, Angehoerige, fruehere Ehen oder Abhaengigkeiten sind relevant? | testator | `family_data` |
+| `assets.categories` | Welche relevanten Vermoegenskategorien bestehen, ohne Detailwerte in Git zu speichern? | testator | `financial_data` |
+| `dispositions.wishes` | Wer soll erben, Vermaechtnisse erhalten, Testamentsvollstrecker sein oder Bedingungen unterliegen? | testator | `sensitive_personal_data` |
+| `prior.dispositions` | Gibt es fruehere Verfuegungen und sind sie widerruflich oder bindend? | notary | `sensitive_legal_data` |
+| `executor.choice` | Sollen Testamentsvollstrecker, Ersatzerben, Sorgerechtswuensche oder Verwaltungsregeln aufgenommen werden? | testator | `sensitive_personal_data` |
+| `custody.register` | Welche Verwahrungs- und Registrierschritte sind nach der Beurkundung erforderlich? | notary_clerk | `mandate_metadata` |
+
+## Dokumente und Nachweise
+
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Plugin | `noc-regulated-core` | Shared regulated workflow guardrails. |
-| Workflow | `workflows/contracts/` | Intake, approval, and evidence contract. |
-| Workflow | `workflows/python/` | Deterministic checks and plan preview. |
+| `doc.disposition_draft` | Dokument/Nachweis: verfuegung entwurf | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.prior_dispositions` | Dokument/Nachweis: vorherig verfuegungen | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Delivery Plan
+## Entscheidungen
 
-1. Define intake contract for person, family situation, assets as categories,
-   wishes, capacity flags, and approvals.
-2. Define review gates for sensitive legal interpretation and execution.
-3. Create evidence metadata for intake, review, appointment, execution, and
-   retention.
+- `decision.instrument_type`: Entscheidung: instrument art. Optionen: `single_testament`, `joint_will`, `inheritance_contract`, `unknown`.
+- `decision.executor`: Entscheidung: testamentsvollstrecker. Optionen: `yes`, `no`, `needs_review`, `unknown`.
+
+## Prueftore
+
+| Prueftor | Pruefzweck | Verantwortung |
+| --- | --- | --- |
+| `gate.capacity_review` | Prueftor: geschaeftsfaehigkeit pruefung | notary |
+| `gate.binding_effect_review` | Prueftor: bindung wirkung pruefung | notary |
+
+## Plugin-Abhaengigkeiten
+
+| Plugin | Zweck |
+| --- | --- |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+
+## Lieferaufgaben
+
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
+
+## Annahmekriterien
+
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

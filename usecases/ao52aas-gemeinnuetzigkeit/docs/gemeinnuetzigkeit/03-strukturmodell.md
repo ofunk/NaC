@@ -1,90 +1,94 @@
-# Structure Model
+# Strukturmodell
 
-## Goal
+## Ziel
 
-This document evaluates which organization model is most robust for a nonprofit
-software company.
+Dieses Dokument bewertet, welches Organisationsmodell fuer ein gemeinnuetzig
+ausgerichtetes Softwareunternehmen am robustesten ist.
 
-## Three Basic Models
+## Drei Grundmodelle
 
-### Model A: Pure gGmbH Or gUG
+### Modell A: Reine gGmbH oder gUG
 
-Suitable when almost all services directly implement the nonprofit purpose and
-commercial activities are only subordinate.
+Geeignet, wenn nahezu alle Leistungen den gemeinnuetzigen Zweck unmittelbar
+verwirklichen und kommerzielle Taetigkeiten nur untergeordnet sind.
 
-Strong fits:
+Starke Passungen:
 
-- open educational software
-- research infrastructure
-- assistive or inclusive specialized software
-- public-benefit platforms with limited sales pressure
+- offene Bildungssoftware
+- Forschungsinfrastruktur
+- assistive oder inklusive Spezialsoftware
+- gemeinwohlorientierte Plattformen mit begrenztem Vertriebsdruck
 
-### Model B: Nonprofit Entity With Economic Business Operation
+### Modell B: Gemeinnuetziger Rechtstraeger mit wirtschaftlichem Geschaeftsbetrieb
 
-Suitable when the organization also offers market-style services, but those
-services remain subordinate to and clearly separable from the nonprofit core.
+Geeignet, wenn die Organisation auch marktfoermige Leistungen anbietet, diese
+aber dem gemeinnuetzigen Kern untergeordnet bleiben und klar abgrenzbar sind.
 
-Typical cases:
+Typische Faelle:
 
-- support contracts
-- training
-- implementation
-- limited licensing revenue
+- Supportvertraege
+- Schulungen
+- Implementierung
+- begrenzte Lizenzerloese
 
-### Model C: Hybrid Structure
+### Modell C: Hybridstruktur
 
-Structure:
+Struktur:
 
-- nonprofit entity for mission, grant projects, open-source, education, or
-  research work
-- separate taxable company for commercial products, enterprise distribution, or
-  custom client projects
+- gemeinnuetziger Rechtstraeger fuer Mission, Foerderprojekte, Open Source,
+  Bildung oder Forschung
+- separate steuerpflichtige Gesellschaft fuer kommerzielle Produkte,
+  Enterprise-Vertrieb oder individuelle Kundenprojekte
 
-Typical cases:
+Typische Faelle:
 
-- relevant SaaS distribution
-- enterprise licenses
-- strong B2B growth logic
-- white-label or custom development
+- relevante SaaS-Verbreitung
+- Enterprise-Lizenzen
+- starke B2B-Wachstumslogik
+- White-Label- oder Individualentwicklung
 
-## Recommended Decision
+## Empfohlene Entscheidung
 
-For a real software company with serious product and revenue ambitions,
-`Model C: Hybrid Structure` is usually the most robust target model.
+Fuer eine echte Softwaregesellschaft mit ernsthaften Produkt- und
+Einnahmeambitionen ist `Modell C: Hybridstruktur` meist das robusteste Zielbild.
 
-Reasons:
+Gruende:
 
-- classic software companies almost always develop revenue forms beyond a pure
-  purpose operation
-- SaaS, licensing, support, and enterprise business can quickly become taxable
-  market activity
-- a separate commercial entity protects the nonprofit mission entity
-- funders, partners, and tax authorities can more easily understand the roles
+- klassische Softwaregesellschaften entwickeln fast immer Einnahmeformen
+  jenseits eines reinen Zweckbetriebs
+- SaaS, Lizenzierung, Support und Enterprise-Geschaeft koennen schnell
+  steuerpflichtige Markttaetigkeit werden
+- eine separate kommerzielle Einheit schuetzt den gemeinnuetzigen
+  Missionsrechtstraeger
+- Foerderer, Partner und Finanzverwaltung koennen Rollen leichter verstehen
 
-## Decision Matrix
+## Entscheidungsmatrix
 
-| Key question | If yes | If no |
+| Leitfrage | Wenn ja | Wenn nein |
 | --- | --- | --- |
-| Does the core product almost exclusively implement the nonprofit purpose directly? | Model A or B | Check Model C. |
-| Is commercial SaaS or enterprise distribution strategically important? | Model C | Model A or B may work. |
-| Are custom development and B2B services major revenue drivers? | Model C | Model A or B may work. |
-| Can the commercial part be clearly separated organizationally? | Model C becomes attractive. | Model B only with high discipline. |
-| Should the organization remain strongly funded by donations and grants? | Model A or B | Model C if market expansion matters. |
+| Verwirklicht das Kernprodukt den gemeinnuetzigen Zweck fast ausschliesslich unmittelbar? | Modell A oder B | Modell C pruefen. |
+| Ist kommerzielles SaaS- oder Enterprise-Geschaeft strategisch wichtig? | Modell C | Modell A oder B koennen reichen. |
+| Sind Individualentwicklung und B2B-Services wesentliche Umsatztreiber? | Modell C | Modell A oder B koennen reichen. |
+| Kann der kommerzielle Teil organisatorisch klar getrennt werden? | Modell C wird attraktiv. | Modell B nur mit hoher Disziplin. |
+| Soll die Organisation stark spenden- und foerdermittelgetragen bleiben? | Modell A oder B | Modell C, wenn Marktausbau relevant ist. |
 
-## Governance Principles
+## Governance-Prinzipien
 
-Regardless of model:
+Unabhaengig vom Modell:
 
-- separate roles, sales goals, and budgets
-- written service relationships between entities at arm's-length terms
-- no hidden distributions or inappropriate benefits
-- separate cost centers, offer logic, and reporting lines
+- getrennte Rollen, Vertriebsziele und Budgets
+- schriftliche Leistungsbeziehungen zwischen Einheiten zu fremdueblichen
+  Bedingungen
+- keine verdeckten Ausschuettungen oder unangemessenen Vorteile
+- getrennte Kostenstellen, Angebotslogik und Berichtslinien
 
-## Triggers For Model Review
+## Ausloeser fuer Modellreview
 
-Review a move to a hybrid structure if:
+Ein Wechsel zur Hybridstruktur ist zu pruefen, wenn:
 
-- most revenue comes from standard SaaS or enterprise licenses
-- the product roadmap is primarily market-driven rather than purpose-driven
-- sales, custom client work, or commercial features dominate daily operations
-- funders or tax advisors raise material doubts about purpose proximity
+- der groesste Teil der Einnahmen aus Standard-SaaS oder Enterprise-Lizenzen
+  stammt
+- die Produkt-Roadmap primaer markt- statt zweckgetrieben ist
+- Vertrieb, individuelle Kundenarbeit oder kommerzielle Features den Alltag
+  dominieren
+- Foerderer oder Steuerberater erhebliche Zweifel an der Zwecknaehe anmelden

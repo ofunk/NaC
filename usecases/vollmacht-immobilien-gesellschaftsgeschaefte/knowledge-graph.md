@@ -1,46 +1,41 @@
-# Vollmacht fuer Immobilien- oder Gesellschaftsgeschaefte Knowledge Graph
+# Vollmacht fuer Immobilien- oder Gesellschaftsgeschaefte KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `next10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.vollmacht_immobilien_gesellschaft`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `next10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.vollmacht_immobilien_gesellschaft`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `principal.identity` | Principal identity and capacity | `open` | `notary` | Who grants the power and how are identity and capacity verified? |
-| `agent.identity` | Agent identity and relation | `open` | `principal` | Who is authorized and what relationship or conflict flags exist? |
-| `transaction.scope` | Transaction scope | `open` | `notary` | Which real-estate, register, shareholder or share-transfer acts are covered? |
-| `form.requirement` | Required form | `open` | `notary` | Is public certification enough or is notarial recording required for the intended transaction? |
-| `limitations.expiry` | Limitations, substitution and expiry | `open` | `notary` | Which restrictions, self-dealing release, sub-authorization, duration or revocation rules apply? |
-| `delivery.evidence` | Original, copies and recipient route | `open` | `notary_clerk` | Who receives originals or certified copies and how is use evidenced? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `principal.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten principal.identity fachlich zu klaeren? | `open` | notary |
+| `agent.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten agent.identity fachlich zu klaeren? | `open` | principal |
+| `transaction.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten transaction.scope fachlich zu klaeren? | `open` | notary |
+| `form.requirement` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten form.requirement fachlich zu klaeren? | `open` | notary |
+| `limitations.expiry` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten limitations.expiry fachlich zu klaeren? | `open` | notary |
+| `delivery.evidence` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten delivery.evidence fachlich zu klaeren? | `open` | notary_clerk |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.power_of_attorney` | Power of attorney deed or certification | `open` |
-| `doc.scope_reference` | Transaction or register scope reference | `open` |
+| `doc.power_of_attorney` | Dokument/Nachweis: vollmacht of attorney | `open` |
+| `doc.scope_reference` | Dokument/Nachweis: umfang referenz | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.form_review` | Form and scope reviewed | `open` |
-| `gate.delivery_control` | Original and copy handling controlled | `open` |
+| `gate.form_review` | Prueftor: form pruefung | `open` |
+| `gate.delivery_control` | Prueftor: zustellung kontrolle | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

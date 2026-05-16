@@ -1,49 +1,44 @@
-# Schenkungsvertrag / Uebertragungsvertrag Knowledge Graph
+# Schenkungsvertrag / Uebertragungsvertrag KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `top10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.schenkungsvertrag_uebertragung`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `top10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.schenkungsvertrag_uebertragung`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `transferor.identity` | Transferor identity and capacity | `open` | `notary_clerk` | Who transfers and are identity, capacity and ownership verified? |
-| `transferee.identity` | Transferee identity and family relation | `open` | `notary_clerk` | Who receives and what family or tax relationship is relevant? |
-| `asset.identity` | Transferred asset or property | `open` | `notary_clerk` | Which property, share, business interest or other asset is transferred? |
-| `reserved.rights` | Reserved rights | `open` | `notary` | Are usufruct, residential rights, maintenance, care obligations or usage rights reserved? |
-| `reversion.rights` | Reversion, revocation and securing rights | `open` | `notary` | Which retransfer events, revocation grounds or notices should be secured? |
-| `consideration.obligations` | Consideration and obligations | `open` | `notary` | Is the transfer gratuitous, mixed, subject to debts, care or equalization payments? |
-| `consents.approvals` | Consents and approvals | `open` | `notary_clerk` | Are spouse, court, guardian, administrator, bank, co-owner or public approvals required? |
-| `tax.family.flags` | Tax, succession and mandatory-share flags | `open` | `notary` | Which gift tax, succession, care, equalization or mandatory-share clarification flags apply? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `transferor.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten transferor.identity fachlich zu klaeren? | `open` | notary_clerk |
+| `transferee.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten transferee.identity fachlich zu klaeren? | `open` | notary_clerk |
+| `asset.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten asset.identity fachlich zu klaeren? | `open` | notary_clerk |
+| `reserved.rights` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten reserved.rights fachlich zu klaeren? | `open` | notary |
+| `reversion.rights` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten reversion.rights fachlich zu klaeren? | `open` | notary |
+| `consideration.obligations` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten consideration.obligations fachlich zu klaeren? | `open` | notary |
+| `consents.approvals` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten consents.approvals fachlich zu klaeren? | `open` | notary_clerk |
+| `tax.family.flags` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.family.flags fachlich zu klaeren? | `open` | notary |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.transfer_draft` | Transfer agreement draft | `open` |
-| `doc.land_register_excerpt` | Land register excerpt if real estate is involved | `open` |
-| `doc.approvals` | Approval and consent evidence | `open` |
+| `doc.transfer_draft` | Dokument/Nachweis: uebertragung entwurf | `open` |
+| `doc.land_register_excerpt` | Dokument/Nachweis: grundbuch register excerpt | `open` |
+| `doc.approvals` | Dokument/Nachweis: genehmigungen | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.asset_review` | Asset and ownership reviewed | `open` |
-| `gate.family_tax_review` | Family, tax and succession flags reviewed | `open` |
+| `gate.asset_review` | Prueftor: vermoegen pruefung | `open` |
+| `gate.family_tax_review` | Prueftor: familie steuer pruefung | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

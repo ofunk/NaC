@@ -1,84 +1,79 @@
 # Erbausschlagung
 
-Status: KG baseline  
-KG node: `case.erbausschlagung`  
+Status: KG-Basis
+KG-Knoten: `case.erbausschlagung`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Section 1945
+Primaere Quellenanker: `src.beurkg`, `src.bgb.1945`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for inheritance renunciation
-declarations. The workflow must keep deadline risk, identity, capacity,
-minor/guardian flags, court route and delivery evidence visible and reviewable.
+Erbausschlagung gegenueber dem Nachlassgericht mit Frist, Identitaet, Vertretung, Minderjaehrigen- oder Betreuungsbezug und Zustellnachweis.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for decedent, estate court, renouncer, heirship basis and deadline.
-- Publicly certified or recorded declaration package.
-- Approval checks for minors, guardianship or representation.
-- Delivery trace to estate court.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No automated legal advice on accepting or rejecting an inheritance.
-- No real family, estate or court documents in Git.
-- No deadline assumption without notarial review.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `decedent.identity` | Who died and which estate court is competent? | Applicant | Personal data |
-| `renouncer.identity` | Who renounces and is capacity verified? | Notary | Personal data |
-| `deadline.status` | When did knowledge start and is the deadline open? | Notary | Sensitive process data |
-| `heirship.basis` | Why is the person called as heir? | Applicant | Family data |
-| `representation.minors` | Are minors, guardians or approvals involved? | Notary | Sensitive family data |
-| `delivery.route` | How will the declaration reach the estate court? | Notary clerk | Mandate metadata |
+| `decedent.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten decedent.identity fachlich zu klaeren? | applicant | `personal_data` |
+| `renouncer.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten renouncer.identity fachlich zu klaeren? | notary | `personal_data` |
+| `deadline.status` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten deadline.status fachlich zu klaeren? | notary | `sensitive_process_data` |
+| `heirship.basis` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten heirship.basis fachlich zu klaeren? | applicant | `family_data` |
+| `representation.minors` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten representation.minors fachlich zu klaeren? | notary | `sensitive_family_data` |
+| `delivery.route` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten delivery.route fachlich zu klaeren? | notary_clerk | `mandate_metadata` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Renunciation declaration | Core notarial declaration. | Metadata or synthetic only. |
-| Death/court reference | Identifies estate proceeding. | Evidence reference only. |
-| Approval evidence | Supports minor/guardian cases. | Evidence reference only. |
-| Delivery trace | Shows court delivery. | Metadata only. |
+| `doc.renunciation_declaration` | Dokument/Nachweis: ausschlagung erklaerung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.death_or_court_reference` | Dokument/Nachweis: tod oder gericht referenz | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.approval_evidence` | Dokument/Nachweis: genehmigung nachweis | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Deadline risk: low, urgent, expired/unclear or unknown.
-- Approval needed: yes, no, already available or blocked.
-- Declaration before notary or court route.
-- Whether substitute heirs or follow-up declarations are triggered.
+- `decision.deadline_risk`: Entscheidung: frist risk. Optionen: `low`, `urgent`, `expired_or_unclear`, `unknown`.
+- `decision.approval_needed`: Entscheidung: genehmigung needed. Optionen: `yes`, `no`, `needs_review`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Deadline reviewed | Notary | Declaration release |
-| Identity and capacity reviewed | Notary | Execution |
-| Approval status reviewed | Notary | Court delivery |
-| Court delivery completed | Notary clerk | Closing |
+| `gate.deadline_review` | Prueftor: frist pruefung | notary |
+| `gate.court_delivery` | Prueftor: gericht zustellung | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Sensitive estate workflow guardrails. |
-| `noc-idaas` | Identity support where permitted. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Build renunciation intake schema.
-2. Add deadline-risk checklist.
-3. Add minor/guardian approval branch.
-4. Add court delivery state model.
-5. Validate with synthetic estate fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Deadline status must be explicit.
-- Minor/guardian flags block closing until reviewed.
-- Delivery evidence is captured.
-- No real estate or family data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

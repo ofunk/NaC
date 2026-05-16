@@ -1,86 +1,80 @@
 # Loeschungsbewilligung / Grundbuchloeschung
 
-Status: KG baseline  
-KG node: `case.loeschungsbewilligung_grundbuchloeschung`  
+Status: KG-Basis
+KG-Knoten: `case.loeschungsbewilligung_grundbuchloeschung`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, GBO Sections 19/29/46, BGB Section 875
+Primaere Quellenanker: `src.beurkg`, `src.gbo.19_29_46`, `src.bgb.875`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for deletion of registered land rights,
-especially old land charges after loan repayment. The package must verify the
-right, beneficiary authority, owner consent where required, letter handling and
-land-register filing evidence.
+Loeschung eingetragener Grundbuchrechte, haeufig alter Grundschulden nach Darlehensrueckzahlung, mit Glaeubigerlegitimation, Eigentuemerzustimmung, Formnachweis und Einreichungsspur.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for property, affected right, beneficiary, owner and filing route.
-- Review of deletion authorization, public form and evidence package.
-- Handling of book rights, letter rights and replacement evidence.
-- Filing and completion trace after land-register deletion.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No deletion without authority and land-register review.
-- No real land-register excerpts, bank consents or letters in Git.
-- No assumption that every old right is deletable without further evidence.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `property.identity` | Which land register district, sheet, section and entry are affected? | Notary clerk | Property register data |
-| `right.identity` | Which right should be deleted? | Notary clerk | Property register data |
-| `creditor.authorization` | Who may consent to deletion and how is authority proven? | Notary | Company or financial data |
-| `owner.consent` | Is owner consent or representation needed? | Notary clerk | Personal or company data |
-| `brief.status` | Is this a book right or is a land-charge/mortgage letter involved? | Notary clerk | Financial metadata |
-| `filing.route` | Which XNP/land-register filing route and completion notice apply? | Notary clerk | Technical metadata |
+| `property.identity` | Welches Grundstueck, Grundbuchblatt, Flurstueck, Einheit oder welche aktuelle Bezeichnung identifiziert den Gegenstand? | notary_clerk | `property_register_data` |
+| `right.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten right.identity fachlich zu klaeren? | notary_clerk | `property_register_data` |
+| `creditor.authorization` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten creditor.authorization fachlich zu klaeren? | notary | `company_or_financial_data` |
+| `owner.consent` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten owner.consent fachlich zu klaeren? | notary_clerk | `personal_or_company_data` |
+| `brief.status` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten brief.status fachlich zu klaeren? | notary_clerk | `financial_metadata` |
+| `filing.route` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten filing.route fachlich zu klaeren? | notary_clerk | `technical_metadata` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Deletion authorization | Proves beneficiary consent. | Evidence reference only. |
-| Land-register excerpt | Confirms affected right and current owner. | Evidence reference only. |
-| Letter or replacement evidence | Supports deletion of letter rights. | External reviewed evidence store. |
-| Filing response | Confirms application and completion. | Metadata only. |
+| `doc.deletion_consent` | Dokument/Nachweis: loeschung zustimmung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.land_register_excerpt` | Dokument/Nachweis: grundbuch register excerpt | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.right_letter` | Dokument/Nachweis: right brief | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Full deletion, partial deletion or correction.
-- Book right, letter present, replacement evidence or blocked.
-- Whether owner consent is necessary.
-- Whether creditor identity changed by merger, assignment or succession.
+- `decision.deletion_type`: Entscheidung: loeschung art. Optionen: `full`, `partial`, `correction`, `unknown`.
+- `decision.brief_handling`: Entscheidung: brief handling. Optionen: `book_right`, `letter_present`, `replacement_evidence`, `blocked`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Beneficiary authorization reviewed | Notary | Filing |
-| Letter/evidence handling complete | Notary clerk | Filing |
-| Land-register entry matched | Notary | Draft/application release |
-| Completion notice reviewed | Notary clerk | Closing |
+| `gate.authority_review` | Prueftor: befugnis pruefung | notary |
+| `gate.filing_ready` | Prueftor: einreichung ready | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Guardrails and evidence model. |
-| `noc-grundbuch-portal` | Land-register state review. |
-| `noc-bnotk-xnp` | Notary filing route readiness. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-grundbuch-portal` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Convert KG nodes into a deletion intake schema.
-2. Add evidence checklist for book and letter rights.
-3. Bind land-register review to affected-right matching.
-4. Add filing/completion state machine.
-5. Validate with synthetic bank and property fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Missing beneficiary authority blocks filing.
-- Missing letter/replacement evidence blocks letter-right deletion.
-- The affected right is matched against current land-register metadata.
-- No real bank or property data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

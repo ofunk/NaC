@@ -1,89 +1,80 @@
 # Vollmacht fuer Immobilien- oder Gesellschaftsgeschaefte
 
-Status: KG baseline  
-KG node: `case.vollmacht_immobilien_gesellschaft`  
+Status: KG-Basis
+KG-Knoten: `case.vollmacht_immobilien_gesellschaft`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Sections 167 and 129, BGB Section 311b, HGB Section 12
+Primaere Quellenanker: `src.beurkg`, `src.bgb.167_129`, `src.bgb.311b`, `src.hgb.12`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for notarized or publicly certified
-powers of attorney used in real-estate contracts, company-register filings,
-shareholder meetings or share transfers. The workflow must control scope, form,
-limitations, original/copy handling and evidence.
+Notarielle oder oeffentlich beglaubigte Vollmachten fuer Immobilienvertraege, Registeranmeldungen, Gesellschafterversammlungen oder Anteilsuebertragungen mit Umfang, Form und Nachweisen.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for principal, agent, transaction scope, form requirement,
-  limitations, self-dealing release, substitution and expiry.
-- Form decision: notarial deed, public certification or electronic
-  certification.
-- Delivery and copy control for originals and certified copies.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No generic blanket power without scope review.
-- No real identity documents, signatures or transaction documents in Git.
-- No assumption that one form works for all target transactions.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `principal.identity` | Who grants the power and is capacity verified? | Notary | Personal or company data |
-| `agent.identity` | Who is authorized and are conflicts present? | Principal | Personal data |
-| `transaction.scope` | Which real-estate or company acts are covered? | Notary | Mandate metadata |
-| `form.requirement` | Is public certification enough or is a deed required? | Notary | Legal metadata |
-| `limitations.expiry` | Which limits, self-dealing, substitution or expiry rules apply? | Notary | Mandate metadata |
-| `delivery.evidence` | Who receives originals or certified copies? | Notary clerk | Mandate metadata |
+| `principal.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten principal.identity fachlich zu klaeren? | notary | `personal_or_company_data` |
+| `agent.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten agent.identity fachlich zu klaeren? | principal | `personal_data` |
+| `transaction.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten transaction.scope fachlich zu klaeren? | notary | `mandate_metadata` |
+| `form.requirement` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten form.requirement fachlich zu klaeren? | notary | `legal_metadata` |
+| `limitations.expiry` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten limitations.expiry fachlich zu klaeren? | notary | `mandate_metadata` |
+| `delivery.evidence` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten delivery.evidence fachlich zu klaeren? | notary_clerk | `mandate_metadata` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Power of attorney deed/certification | Core instrument. | Synthetic or metadata only. |
-| Transaction scope reference | Explains target use. | Evidence reference only. |
-| Identity and capacity evidence | Supports review. | Evidence reference only. |
-| Copy and delivery trace | Controls originals/certified copies. | Metadata only. |
+| `doc.power_of_attorney` | Dokument/Nachweis: vollmacht of attorney | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.scope_reference` | Dokument/Nachweis: umfang referenz | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Notarial deed, public certification, electronic certification or blocked.
-- Scope type: real estate, company register, shareholder resolution, share
-  transfer or mixed.
-- Whether self-dealing or substitution is allowed.
-- Whether original must remain controlled by the notary office.
+- `decision.form_route`: Entscheidung: form weg. Optionen: `notarial_deed`, `public_certification`, `electronic_certification`, `blocked`, `unknown`.
+- `decision.scope_type`: Entscheidung: umfang art. Optionen: `real_estate`, `company_register`, `shareholder_resolution`, `share_transfer`, `mixed`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Principal identity and capacity reviewed | Notary | Execution |
-| Form and scope reviewed | Notary | Draft release |
-| Limitations and self-dealing reviewed | Notary | Execution |
-| Original and copy handling controlled | Notary clerk | Closing |
+| `gate.form_review` | Prueftor: form pruefung | notary |
+| `gate.delivery_control` | Prueftor: zustellung kontrolle | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Guardrails and evidence model. |
-| `noc-idaas` | Identity support where permitted. |
-| `noc-grundbuch-portal` | Real-estate scope context where needed. |
-| `noc-bnotk-xnp` | Electronic/register route readiness. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-grundbuch-portal` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define scope-specific power-of-attorney intake schema.
-2. Add form requirement decision model.
-3. Add self-dealing/substitution checklist.
-4. Add copy/original control state model.
-5. Validate with synthetic real-estate and company fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Form route is explicit before execution.
-- Scope cannot remain generic for register or real-estate transactions.
-- Original/copy handling is tracked.
-- No real identity or transaction data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

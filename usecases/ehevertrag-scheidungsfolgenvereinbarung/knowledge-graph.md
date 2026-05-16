@@ -1,48 +1,43 @@
-# Ehevertrag / Scheidungsfolgenvereinbarung Knowledge Graph
+# Ehevertrag / Scheidungsfolgenvereinbarung KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `top10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.ehevertrag_scheidungsfolgen`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `top10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.ehevertrag_scheidungsfolgen`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `spouses.identity` | Spouse identities and personal status | `open` | `notary_clerk` | Who are the spouses or intended spouses and what status applies? |
-| `marriage.context` | Marriage, separation or divorce context | `open` | `notary` | Is this pre-marriage, during marriage, separation, divorce pending or post-divorce? |
-| `property.regime` | Property regime and equalization target | `open` | `notary` | Should statutory property regime be modified, excluded or replaced? |
-| `asset.disclosure` | Asset and debt disclosure categories | `open` | `spouses` | Which asset categories, business interests, debts or pensions are relevant without committing real values? |
-| `maintenance.rules` | Maintenance provisions | `open` | `notary` | Which spousal maintenance rules or waivers are intended and are fairness limits triggered? |
-| `pension.equalization` | Pension equalization provisions | `open` | `notary` | Should pension equalization be modified and is court review expected? |
-| `child.family.flags` | Child and family dependency flags | `open` | `notary` | Are child-care, dependency, pregnancy or imbalance flags relevant to fairness review? |
-| `asset.transfer` | Asset transfers and register consequences | `open` | `notary_clerk` | Are real estate, company share, account or debt transfers part of the agreement? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `spouses.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten spouses.identity fachlich zu klaeren? | `open` | notary_clerk |
+| `marriage.context` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten marriage.context fachlich zu klaeren? | `open` | notary |
+| `property.regime` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten property.regime fachlich zu klaeren? | `open` | notary |
+| `asset.disclosure` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten asset.disclosure fachlich zu klaeren? | `open` | spouses |
+| `maintenance.rules` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten maintenance.rules fachlich zu klaeren? | `open` | notary |
+| `pension.equalization` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten pension.equalization fachlich zu klaeren? | `open` | notary |
+| `child.family.flags` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten child.family.flags fachlich zu klaeren? | `open` | notary |
+| `asset.transfer` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten asset.transfer fachlich zu klaeren? | `open` | notary_clerk |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.agreement_draft` | Marriage contract or divorce consequences agreement draft | `open` |
-| `doc.asset_schedule_reference` | Asset schedule evidence reference | `open` |
+| `doc.agreement_draft` | Dokument/Nachweis: vereinbarung entwurf | `open` |
+| `doc.asset_schedule_reference` | Dokument/Nachweis: vermoegen schedule referenz | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.fairness_review` | Fairness and imbalance review completed by notary | `open` |
-| `gate.simultaneous_presence` | Simultaneous personal presence route checked | `open` |
+| `gate.fairness_review` | Prueftor: angemessenheit pruefung | `open` |
+| `gate.simultaneous_presence` | Prueftor: gleichzeitig anwesenheit | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

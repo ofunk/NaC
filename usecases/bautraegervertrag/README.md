@@ -1,88 +1,81 @@
 # Bautraegervertrag
 
-Status: KG baseline  
-KG node: `case.bautraegervertrag`  
+Status: KG-Basis
+KG-Knoten: `case.bautraegervertrag`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Sections 311b and 650u, AbschlagsV, GBO
+Primaere Quellenanker: `src.beurkg`, `src.bgb.311b`, `src.bgb.650u`, `src.abschlagsv`, `src.gbo.19_29_46`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for developer contracts covering a
-property or unit and construction/renovation obligations. The workflow must
-capture developer authority, buyer status, object state, construction
-specification, installment plan, security model, acceptance and evidence.
+Kauf eines Grundstuecks oder einer Einheit vom Bautraeger mit Bauverpflichtungen, Ratenplan, Bautenstand, Sicherheiten und Verbraucherschutz-Prueftoren.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for developer, buyer, land-register state, unit/object and construction
-  phase.
-- Building specification, permits, plan attachments and maturity evidence.
-- Consumer draft period, installment plan and security review gates.
-- Filing, completion, handover and defect/acceptance metadata.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No construction-technical assessment as final truth.
-- No real buyer, price, plan or permit documents in Git.
-- No automated acceptance or payment release.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `developer.identity` | Who is developer and who may represent it? | Notary clerk | Company data |
-| `buyer.identity` | Who buys and is consumer handling required? | Notary | Personal data |
-| `object.identity` | Which unit/property and construction phase are involved? | Notary clerk | Property register data |
-| `construction.specification` | Which plans, permits and building description define performance? | Developer | Property metadata |
-| `installment.plan` | Which installment and maturity model applies? | Notary | Financial data |
-| `defects.acceptance` | How are acceptance, handover and defects handled? | Notary | Mandate metadata |
+| `developer.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten developer.identity fachlich zu klaeren? | notary_clerk | `company_data` |
+| `buyer.identity` | Wer erwirbt und welche Erwerbs-, Verbraucher- oder Berechtigtenstruktur ist zu klaeren? | notary | `personal_data` |
+| `object.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten object.identity fachlich zu klaeren? | notary_clerk | `property_register_data` |
+| `construction.specification` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten construction.specification fachlich zu klaeren? | developer | `property_metadata` |
+| `installment.plan` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten installment.plan fachlich zu klaeren? | notary | `financial_data` |
+| `defects.acceptance` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten defects.acceptance fachlich zu klaeren? | notary | `mandate_metadata` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Developer contract draft | Human-reviewed deed. | Synthetic or metadata only. |
-| Building specification and plans | Defines construction performance. | Evidence reference only. |
-| Land-register and division state | Confirms property route. | Evidence reference only. |
-| Consumer and installment evidence | Tracks review and maturity requirements. | Metadata only. |
+| `doc.developer_contract_draft` | Dokument/Nachweis: developer vertrag entwurf | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.specification_package` | Dokument/Nachweis: beschreibung paket | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.land_register_state` | Dokument/Nachweis: grundbuch register state | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Installment schedule or alternative security model.
-- Planned, under-construction, completed or mixed object state.
-- Whether WEG division, buyer financing or land charge workflow is linked.
-- Whether consumer draft period blocks appointment.
+- `decision.payment_model`: Entscheidung: zahlung modell. Optionen: `installments`, `security_alternative`, `blocked`, `unknown`.
+- `decision.object_state`: Entscheidung: gegenstand state. Optionen: `planned`, `under_construction`, `completed`, `mixed`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Consumer draft period checked | Notary | Appointment |
-| Installment/security model reviewed | Notary | Draft release |
-| Building specification package complete | Notary clerk | Execution |
-| Filing and maturity package ready | Notary clerk | Closing |
+| `gate.consumer_draft_period` | Prueftor: consumer entwurf frist | notary |
+| `gate.installment_review` | Prueftor: rate pruefung | notary |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Guardrails and evidence model. |
-| `noc-grundbuch-portal` | Land-register and division state review. |
-| `noc-bnotk-xnp` | Filing route readiness. |
-| `noc-idaas` | Identity support where permitted. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-grundbuch-portal` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Build developer-contract intake schema.
-2. Add consumer and installment warning gates.
-3. Link optional WEG division and financing/land-charge dependencies.
-4. Add construction evidence package state model.
-5. Validate with synthetic developer and buyer fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Consumer and installment gates block appointment/release where incomplete.
-- Object state and construction package are explicit.
-- Linked land-register and WEG dependencies are visible.
-- No real plan, permit or price data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

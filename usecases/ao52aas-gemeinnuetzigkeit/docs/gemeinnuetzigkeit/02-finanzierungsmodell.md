@@ -1,76 +1,75 @@
-# Financing Model And Revenue Classification
+# Finanzierungsmodell und Einnahmenklassifikation
 
-## Goal
+## Ziel
 
-This document classifies typical revenue streams of a nonprofit software
-company into four tax areas:
+Dieses Dokument ordnet typische Einnahmen eines gemeinnuetzig ausgerichteten
+Softwareunternehmens vier steuerlichen Bereichen zu:
 
-- ideal nonprofit area
-- asset management
-- purpose operation
-- taxable economic business operation
+- ideeller Bereich
+- Vermoegensverwaltung
+- Zweckbetrieb
+- steuerpflichtiger wirtschaftlicher Geschaeftsbetrieb
 
-The classification affects tax treatment, documentation, and operational
-separation.
+Die Einordnung beeinflusst Besteuerung, Dokumentation und operative Trennung.
 
-## Basic Rule
+## Grundregel
 
-Not every permitted revenue is automatically nonprofit revenue. The decisive
-questions are whether there is a specific service exchange, whether the revenue
-directly serves the nonprofit purpose, and how strongly the activity competes
-with normal market offerings.
+Nicht jede erlaubte Einnahme ist automatisch gemeinnuetzige Einnahme.
+Entscheidend ist, ob ein konkreter Leistungsaustausch vorliegt, ob die Einnahme
+den gemeinnuetzigen Zweck unmittelbar verwirklicht und wie stark die Taetigkeit
+mit normalen Marktangeboten konkurriert.
 
-## Revenue Matrix
+## Einnahmenmatrix
 
-| Revenue type | Typical classification | Reason |
+| Einnahmenart | Typische Einordnung | Begruendung |
 | --- | --- | --- |
-| Donations from individuals | Ideal area | No service exchange; direct funds for the statutory purpose. |
-| Corporate donations without consideration | Ideal area | Contribution without concrete service in return. |
-| Public grants and funding | Ideal area | Project or institutional funding without market-style consideration. |
-| Foundation funding | Ideal area | Funds purpose implementation. |
-| Interest income | Asset management | Return from capital use. |
-| Passive investment income | Asset management | Passive management of assets. |
-| Paid educational software with direct education impact | Purpose operation | The paid service may itself implement the educational purpose. |
-| Paid assistive software for benefited groups | Purpose operation | The software directly serves the nonprofit purpose. |
-| Research infrastructure use | Purpose operation | Paid use may be part of direct purpose implementation. |
-| Training for the nonprofit core product | Purpose operation or economic operation | Depends on whether training is necessary for purpose implementation. |
-| Support and maintenance for nonprofit core operation | Purpose operation or economic operation | Only favored if tightly bound to the statutory purpose. |
-| Implementation services for third parties | Economic business operation | Usually a marketable service. |
-| Custom software development | Economic business operation | Classic commercial service. |
-| SaaS contracts for companies | Economic business operation | Market-style standard business. |
-| Enterprise licenses | Economic business operation | Commercial distribution. |
-| White-label solutions | Economic business operation | Strongly commercial and usually not purpose-critical. |
-| Sponsorship with advertising service | Economic business operation | Consideration moves it out of the donation area. |
+| Spenden von Privatpersonen | Ideeller Bereich | Kein Leistungsaustausch; unmittelbare Mittel fuer den Satzungszweck. |
+| Unternehmensspenden ohne Gegenleistung | Ideeller Bereich | Zuwendung ohne konkrete Gegenleistung. |
+| Oeffentliche Zuschuesse und Foerdermittel | Ideeller Bereich | Projekt- oder institutionelle Foerderung ohne marktfoermige Gegenleistung. |
+| Stiftungsfoerderung | Ideeller Bereich | Mittel dienen der Zweckverwirklichung. |
+| Zinsertraege | Vermoegensverwaltung | Ertrag aus Kapitalnutzung. |
+| Passive Beteiligungsertraege | Vermoegensverwaltung | Passive Verwaltung von Vermoegen. |
+| Entgeltliche Bildungssoftware mit unmittelbarer Bildungswirkung | Zweckbetrieb | Die entgeltliche Leistung kann selbst den Bildungszweck verwirklichen. |
+| Entgeltliche assistive Software fuer beguenstigte Gruppen | Zweckbetrieb | Die Software dient unmittelbar dem gemeinnuetzigen Zweck. |
+| Nutzung von Forschungsinfrastruktur | Zweckbetrieb | Entgeltliche Nutzung kann Teil der unmittelbaren Zweckverwirklichung sein. |
+| Schulung fuer das gemeinnuetzige Kernprodukt | Zweckbetrieb oder wirtschaftlicher Geschaeftsbetrieb | Abhaengig davon, ob die Schulung fuer die Zweckverwirklichung notwendig ist. |
+| Support und Wartung fuer den gemeinnuetzigen Kernbetrieb | Zweckbetrieb oder wirtschaftlicher Geschaeftsbetrieb | Beguenstigt nur bei enger Bindung an den Satzungszweck. |
+| Implementierungsleistungen fuer Dritte | Wirtschaftlicher Geschaeftsbetrieb | In der Regel marktfaehige Dienstleistung. |
+| Individuelle Softwareentwicklung | Wirtschaftlicher Geschaeftsbetrieb | Klassische kommerzielle Dienstleistung. |
+| SaaS-Vertraege mit Unternehmen | Wirtschaftlicher Geschaeftsbetrieb | Marktfoermiges Standardgeschaeft. |
+| Enterprise-Lizenzen | Wirtschaftlicher Geschaeftsbetrieb | Kommerzielle Verbreitung. |
+| White-Label-Loesungen | Wirtschaftlicher Geschaeftsbetrieb | Stark kommerziell und meist nicht zweckkritisch. |
+| Sponsoring mit Werbeleistung | Wirtschaftlicher Geschaeftsbetrieb | Die Gegenleistung fuehrt aus dem Spendenbereich heraus. |
 
-## Practical Assessment
+## Praktische Bewertung
 
-The purpose-operation area is valuable but review-intensive. It is most robust
-when the paid software service is not merely funding the mission, but is itself
-the direct route to purpose implementation.
+Der Zweckbetrieb ist wertvoll, aber pruefungsintensiv. Er ist am robustesten,
+wenn die entgeltliche Softwareleistung nicht nur die Mission finanziert, sondern
+selbst der direkte Weg zur Zweckverwirklichung ist.
 
-The taxable economic business operation usually captures classic market
-activity such as consulting, custom development, enterprise SaaS, hosting for
-market participants, or sponsorship packages. This can be permissible, but it
-must be separated in offers, contracts, cost centers, and reports from the
-start.
+Der steuerpflichtige wirtschaftliche Geschaeftsbetrieb umfasst regelmaessig
+klassische Markttaetigkeiten wie Beratung, individuelle Entwicklung,
+Enterprise-SaaS, Hosting fuer Marktteilnehmer oder Sponsoringpakete. Das kann
+zulaessig sein, muss aber von Beginn an in Angeboten, Vertraegen,
+Kostenstellen und Berichten getrennt werden.
 
-## Minimum Accounting Separation
+## Mindesttrennung in der Buchhaltung
 
-Track separately from the beginning:
+Von Anfang an getrennt erfassen:
 
-- revenue by area
-- direct personnel costs
-- infrastructure and hosting costs
-- product development costs
-- sales and marketing costs
-- project costs tied to grants
+- Einnahmen je Bereich
+- direkte Personalkosten
+- Infrastruktur- und Hostingkosten
+- Produktentwicklungskosten
+- Vertriebs- und Marketingkosten
+- projektbezogene Kosten aus Foerdermitteln
 
-## Decision Questions For Each Revenue Stream
+## Entscheidungsfragen je Einnahmestrom
 
-1. Is there a concrete service in return?
-2. Does the service directly serve the nonprofit statutory purpose?
-3. Would purpose implementation be impossible or materially worse without this
-   paid service?
-4. Does the organization compete materially with commercial providers?
-5. Must the revenue be moved into the economic business operation or a separate
-   company?
+1. Gibt es eine konkrete Gegenleistung?
+2. Dient die Leistung unmittelbar dem gemeinnuetzigen Satzungszweck?
+3. Waere die Zweckverwirklichung ohne diese entgeltliche Leistung unmoeglich
+   oder wesentlich schlechter?
+4. Konkurriert die Organisation wesentlich mit kommerziellen Anbietern?
+5. Muss die Einnahme in den wirtschaftlichen Geschaeftsbetrieb oder eine
+   separate Gesellschaft verlagert werden?

@@ -1,138 +1,144 @@
-# Pre-check: Statute, Funds Use, And Actual Management
+# Vorabpruefung: Satzung, Mittelverwendung und tatsaechliche Geschaeftsfuehrung
 
-## Purpose
+## Zweck
 
-This checklist prepares discussions with tax advisors, nonprofit experts,
-notaries, and, if needed, the tax authority. It does not replace legal or tax
-advice. It makes critical pre-formation and restructuring questions visible.
+Diese Checkliste bereitet Gespraeche mit Steuerberatung,
+Gemeinnuetzigkeitsexpertise, Notariat und bei Bedarf Finanzverwaltung vor. Sie
+ersetzt keine Rechts- oder Steuerberatung. Sie macht kritische Fragen vor
+Gruendung oder Umstrukturierung sichtbar.
 
-## 1. Purpose And Statute
+## 1. Zweck und Satzung
 
-Clarify first:
+Zuerst klaeren:
 
-- Which concrete AO52 purpose is the main purpose?
-- Which secondary purposes should also be pursued?
-- Who is the benefited target group?
-- How exactly does the organization implement its purposes through software,
-  operation, training, or support?
+- Welcher konkrete AO52-Zweck ist Hauptzweck?
+- Welche Nebenzwecke sollen zusaetzlich verfolgt werden?
+- Wer ist die beguenstigte Zielgruppe?
+- Wie verwirklicht die Organisation ihre Zwecke konkret durch Software,
+  Betrieb, Schulung oder Support?
 
-Reflect clearly in the statute:
+In der Satzung klar abbilden:
 
-- nonprofit purpose with precise wording
-- activities for direct purpose implementation
-- selflessness and exclusion of profit distributions
-- asset dedication upon dissolution
-- funds-use rules
+- gemeinnuetziger Zweck mit praeziser Formulierung
+- Taetigkeiten zur unmittelbaren Zweckverwirklichung
+- Selbstlosigkeit und Ausschluss von Gewinnausschuettungen
+- Vermoegensbindung bei Aufloesung
+- Regeln zur Mittelverwendung
 
-## 2. Actual Management
+## 2. Tatsaechliche Geschaeftsfuehrung
 
-Review questions:
+Prueffragen:
 
-- Does daily operation really follow the statute?
-- Does the organization implement the nonprofit purpose itself rather than only
-  financing it indirectly?
-- Are product development, communication, and resources primarily focused on
-  impact rather than return?
-- Are there business lines that operate like a normal software company?
+- Folgt der laufende Betrieb wirklich der Satzung?
+- Verwirklicht die Organisation den gemeinnuetzigen Zweck selbst, statt ihn nur
+  mittelbar zu finanzieren?
+- Sind Produktentwicklung, Kommunikation und Ressourcen primaer auf Wirkung
+  statt Rendite ausgerichtet?
+- Gibt es Geschaeftsfelder, die wie ein normales Softwareunternehmen arbeiten?
 
-Warning signals:
+Warnsignale:
 
-- product roadmap is primarily driven by high-paying enterprise customers
-- major resources flow into sales rather than purpose implementation
-- central narratives focus on scale, exit, or market share
+- Produkt-Roadmap wird vor allem durch zahlungskraeftige Enterprise-Kunden
+  getrieben
+- wesentliche Ressourcen fliessen in Vertrieb statt Zweckverwirklichung
+- zentrale Narrative betonen Skalierung, Exit oder Marktanteil
 
-## 3. Funds Use And Selflessness
+## 3. Mittelverwendung und Selbstlosigkeit
 
-Check:
+Pruefen:
 
-- shareholders or members must not receive profits
-- salaries, fees, and advisor compensation are reasonable and documented
-- funds are used only for statutory purposes
-- timely funds use is operationally secured
-- reserves are planned within permissible boundaries
+- Gesellschafter oder Mitglieder duerfen keine Gewinne erhalten
+- Gehaelter, Honorare und Beraterverguetungen sind angemessen und dokumentiert
+- Mittel werden nur fuer satzungsmaessige Zwecke verwendet
+- zeitnahe Mittelverwendung ist operativ abgesichert
+- Ruecklagen sind innerhalb zulaessiger Grenzen geplant
 
-Prepare:
+Vorbereiten:
 
-- budget plan
-- compensation concept for management and key roles
-- reserves and liquidity logic
-- grant-use evidence
+- Budgetplan
+- Verguetungskonzept fuer Geschaeftsfuehrung und Schluesselrollen
+- Ruecklagen- und Liquiditaetslogik
+- Nachweise zur Foerdermittelverwendung
 
-## 4. Revenue And Tax Areas
+## 4. Einnahmen und Steuerbereiche
 
-Classify every planned revenue source:
+Jede geplante Einnahmequelle klassifizieren:
 
-- ideal area
-- asset management
-- purpose operation
-- taxable economic business operation
+- ideeller Bereich
+- Vermoegensverwaltung
+- Zweckbetrieb
+- steuerpflichtiger wirtschaftlicher Geschaeftsbetrieb
 
-Discuss with advisors:
+Mit Beratern besprechen:
 
-- which services can plausibly remain purpose-related
-- when support, training, or hosting moves into market activity
-- whether a commercial subsidiary makes sense from the start
+- welche Leistungen plausibel zweckbezogen bleiben koennen
+- wann Support, Schulung oder Hosting in Markttaetigkeit kippt
+- ob eine kommerzielle Tochtergesellschaft von Beginn an sinnvoll ist
 
-## 5. Contracts And Service Relationships
+## 5. Vertraege und Leistungsbeziehungen
 
-Prepare and review:
+Vorbereiten und pruefen:
 
-- grant agreements and funding notices
-- terms of use for the core product
-- support and service contracts
-- sponsorship contracts clearly separated from donations
-- service relationships between nonprofit and commercial entities
+- Foerdervertraege und Zuwendungsbescheide
+- Nutzungsbedingungen fuer das Kernprodukt
+- Support- und Servicevertraege
+- Sponsoringvertraege mit klarer Trennung von Spenden
+- Leistungsbeziehungen zwischen gemeinnuetzigen und kommerziellen Einheiten
 
-Important:
+Wichtig:
 
-- clear service description
-- traceable prices
-- no hidden benefit for related persons or companies
+- klare Leistungsbeschreibung
+- nachvollziehbare Preise
+- kein verdeckter Vorteil fuer nahestehende Personen oder Unternehmen
 
-## 6. Accounting And Controlling
+## 6. Buchhaltung und Controlling
 
-Set up before start:
+Vor Start einrichten:
 
-- cost centers by tax area
-- separated revenue accounts
-- documentation for product, grant, and customer projects
-- reporting for funds use and purpose achievement
+- Kostenstellen nach Steuerbereich
+- getrennte Einnahmenkonten
+- Dokumentation fuer Produkt-, Foerder- und Kundenprojekte
+- Reporting zur Mittelverwendung und Zweckerreichung
 
-Review at least quarterly:
+Mindestens quartalsweise pruefen:
 
-- revenue share by area
-- cost allocation
-- purpose-related services versus commercial services
-- compliance with grant conditions
+- Einnahmenanteile je Bereich
+- Kostenzuordnung
+- zweckbezogene Leistungen gegenueber kommerziellen Leistungen
+- Einhaltung von Foerderbedingungen
 
-## 7. Structure Decision
+## 7. Strukturentscheidung
 
-Discuss with advisors:
+Mit Beratern besprechen:
 
-- Is a pure gGmbH or gUG enough?
-- Is an economic business operation sufficient or already too risky?
-- Should a hybrid structure be built now or later?
-- Which governance rules prevent conflicts of interest and commercial
-  over-shaping?
+- Reicht eine reine gGmbH oder gUG?
+- Ist ein wirtschaftlicher Geschaeftsbetrieb ausreichend oder bereits zu
+  riskant?
+- Soll jetzt oder spaeter eine Hybridstruktur aufgebaut werden?
+- Welche Governance-Regeln verhindern Interessenkonflikte und kommerzielle
+  Ueberformung?
 
-## 8. Advisor Meeting Agenda
+## 8. Agenda fuer das Erstberatungsgespraech
 
-Ask explicitly:
+Ausdruecklich fragen:
 
-1. Is the proposed main purpose under AO52 viable for the planned product?
-2. Which revenues can realistically qualify as purpose operation?
-3. Which services must move to economic business operation or a separate entity?
-4. Which statute wording reduces later revocation risk?
-5. How should compensation, licensing, and intercompany services be documented?
+1. Ist der vorgeschlagene Hauptzweck nach AO52 fuer das geplante Produkt
+   tragfaehig?
+2. Welche Einnahmen koennen realistisch als Zweckbetrieb qualifiziert werden?
+3. Welche Leistungen muessen in den wirtschaftlichen Geschaeftsbetrieb oder
+   eine separate Gesellschaft?
+4. Welche Satzungsformulierung reduziert spaetere Widerrufsrisiken?
+5. Wie sollen Verguetung, Lizenzierung und gruppeninterne Leistungen
+   dokumentiert werden?
 
-## 9. Starter Package
+## 9. Starterpaket
 
-Prepare for the first advisory meeting:
+Fuer das erste Beratungsgespraech vorbereiten:
 
-- short project description
-- target group description
-- product overview
-- revenue model
-- draft structure model
-- 24-month budget
-- sample contracts or pricing logic
+- kurze Projektbeschreibung
+- Zielgruppenbeschreibung
+- Produktuebersicht
+- Einnahmenmodell
+- Entwurf des Strukturmodells
+- 24-Monats-Budget
+- Mustervertraege oder Preislogik

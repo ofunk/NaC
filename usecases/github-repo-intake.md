@@ -1,31 +1,34 @@
-# GitHub Usecase Repository Intake
+# GitHub-Usecase-Repository-Aufnahme
 
-Scan date: 2026-05-14
+Scan-Datum: 2026-05-14
 
-Authenticated GitHub user: `ofunk-nvidia`
+Authentifizierter GitHub-Nutzer: `ofunk-nvidia`
 
-## Decision Summary
+## Entscheidungsuebersicht
 
-| Repository | Decision | Reason |
+| Repository | Entscheidung | Begruendung |
 | --- | --- | --- |
-| `ofunk/Online-GmbH-Gruendung` | Canonicalized into `usecases/online-gmbh-gruendung/` | The repository name is a concrete notarial usecase. The repository is empty, so no source files were imported. |
-| `ofunk/NaaS` | Do not move wholesale; decompose over time | The README describes a notarial workflow platform with usecases and workflows. It is broader than one usecase and should be decomposed into `usecases/` and `workflows/` through reviewed changes. |
-| `ofunk/IDaaS` | Migrated as plugin `plugins/noc-idaas/` | This is an identity-verification and IAM-projection concept. It belongs in the plugin layer, not in the usecase catalog. |
-| `ofunk/oci-landing-zone` | Do not move to usecases | This is infrastructure/evidence work and is already represented by the `noc-oci-evidence` plugin track. |
-| `ofunk/PaaS` | Do not move to usecases | This is a VS Code extension/orchestrator integration repository, not a notarial business usecase. |
-| `ofunk/1gem8` | Do not move to usecases | This is a startup workspace concept, not a notarial business usecase. |
-| `ofunk/Steuer-aaS` | Canonicalized into `usecases/steuer-aas/` | The repository is empty, but the owner explicitly classified it as a usecase. It is now tracked as the canonical tax-readiness usecase for notary-adjacent formation, nonprofit, tax registration, and evidence workflows. |
-| `ofunk/AO52aaS` | Canonicalized into `usecases/ao52aas-gemeinnuetzigkeit/` | The repository contains `docs/gemeinnuetzigkeit/` with AO52 nonprofit software-company formation material. It belongs in the usecase catalog because it drives notarial entity formation, statute preparation, tax/nonprofit pre-checks, and possible hybrid-structure decisions. |
+| `ofunk/Online-GmbH-Gruendung` | Nach `usecases/online-gmbh-gruendung/` kanonisiert | Der Repository-Name bezeichnet einen konkreten notariellen Usecase. Das Repository war leer; deshalb wurden keine Quelldateien importiert. |
+| `ofunk/NaaS` | Nicht pauschal verschieben; schrittweise zerlegen | Die README beschreibt eine Notariats-Workflow-Plattform mit Usecases und Workflows. Der Inhalt ist breiter als ein einzelner Usecase und muss ueber reviewte Aenderungen in [usecases/](.) und [workflows/](../workflows) zerlegt werden. |
+| `ofunk/IDaaS` | Als Plugin [plugins/noc-idaas/](../plugins/noc-idaas) migriert | Das ist ein Konzept fuer Identitaetspruefung und IAM-Projektion. Es gehoert in die Plugin-Schicht, nicht in den Usecase-Katalog. |
+| `ofunk/oci-landing-zone` | Nicht nach `usecases/` verschieben | Das ist Infrastruktur- und Evidenzarbeit und bereits im Plugin-Track `noc-oci-evidence` abgebildet. |
+| `ofunk/PaaS` | Nicht nach `usecases/` verschieben | Das ist eine VS-Code-Erweiterung bzw. Orchestrator-Integration, kein notarieller Fachusecase. |
+| `ofunk/1gem8` | Nicht nach `usecases/` verschieben | Das ist ein Startup-Workspace-Konzept, kein notarieller Fachusecase. |
+| `ofunk/Steuer-aaS` | Nach [steuer-aas/](steuer-aas) kanonisiert | Das Repository war leer, wurde vom Owner aber ausdruecklich als Usecase eingeordnet. Es ist jetzt der kanonische Steuer-Readiness-Usecase fuer notar-nahe Gruendung, Gemeinnuetzigkeit, steuerliche Registrierung und Evidenz-Workflows. |
+| `ofunk/AO52aaS` | Nach [ao52aas-gemeinnuetzigkeit/](ao52aas-gemeinnuetzigkeit) kanonisiert | Das Repository enthielt `docs/gemeinnuetzigkeit/` mit Material zur Gruendung eines gemeinnuetzig ausgerichteten Softwareunternehmens. Es gehoert in den Usecase-Katalog, weil es notarielle Gesellschaftsgruendung, Satzungsvorbereitung, steuerliche Gemeinnuetzigkeits-Vorpruefung und moegliche Hybridstruktur-Entscheidungen steuert. |
 
-## Follow-up
+## Folgepunkte
 
-- Extract relevant `ofunk/NaaS` usecase and workflow material only through a
-  reviewed migration plan.
-- Keep `ofunk/Online-GmbH-Gruendung` as an external source reference until it is
-  archived, redirected, or formally replaced by this repository.
-- Keep `ofunk/AO52aaS` as an external source reference until it is archived,
-  redirected, or formally replaced by this repository.
-- Keep `ofunk/Steuer-aaS` as an external source reference until it is archived,
-  redirected, or formally replaced by this repository.
-- Add new notarial usecases directly under `usecases/` instead of creating
-  separate repositories unless a formal split decision is documented.
+- Relevantes Material aus `ofunk/NaaS` nur ueber einen reviewten
+  Migrationsplan in Usecase- und Workflow-Bestandteile zerlegen.
+- `ofunk/Online-GmbH-Gruendung` als externe Quellenreferenz fuehren, bis das
+  Alt-Repository archiviert, umgeleitet oder formal durch dieses Repository
+  ersetzt ist.
+- `ofunk/AO52aaS` als externe Quellenreferenz fuehren, bis das Alt-Repository
+  archiviert, umgeleitet oder formal durch dieses Repository ersetzt ist.
+- `ofunk/Steuer-aaS` als externe Quellenreferenz fuehren, bis das
+  Alt-Repository archiviert, umgeleitet oder formal durch dieses Repository
+  ersetzt ist.
+- Neue notarielle Usecases direkt unter [usecases/](.) anlegen, statt separate
+  Repositories zu erzeugen, sofern keine formale Split-Entscheidung
+  dokumentiert ist.

@@ -1,88 +1,80 @@
 # Erbscheinsantrag / Nachlassangelegenheiten
 
-Status: KG baseline  
-KG node: `case.erbscheinsantrag_nachlass`  
+Status: KG-Basis
+KG-Knoten: `case.erbscheinsantrag_nachlass`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Section 2353, GBO inheritance evidence
+Primaere Quellenanker: `src.beurkg`, `src.bgb.2353`, `src.gbo`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for certificate of inheritance
-applications, estate declarations, renunciations, oaths and related estate court
-processes. The package must separate sensitive family facts from workflow state
-and use evidence references instead of raw personal data.
+Antrag und Erklaerungen fuer Erbschein, Nachlassgericht, Ausschlagung, eidesstattliche Versicherung und Erbnachweise.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for decedent, jurisdiction, applicants, heirship basis, family
-  evidence, dispositions, renunciations and oath statement.
-- Application draft and evidence package preparation.
-- Estate court submission and response tracking.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No automated final heirship determination.
-- No real civil-status certificates, wills or estate facts in Git.
-- No hidden storage of family disputes or sensitive declarations.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `decedent.identity` | Who died, when and where, and which evidence confirms this? | Applicant | Personal data |
-| `residence.jurisdiction` | Which estate court has jurisdiction? | Notary clerk | Mandate metadata |
-| `applicants.identity` | Who applies and in which legal position? | Notary clerk | Personal data |
-| `heirship.basis` | Is heirship statutory, testamentary, contractual or European? | Notary | Sensitive family data |
-| `family.evidence` | Which civil-status evidence is required? | Applicant | Family data |
-| `dispositions.evidence` | Which wills, contracts and opening records exist? | Notary clerk | Sensitive legal data |
-| `renunciations.disclaimers` | Are there renunciations, contests or disclaimers? | Notary | Sensitive legal data |
-| `oath.statement` | Which facts must be declared under oath and by whom? | Notary | Sensitive process data |
+| `decedent.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten decedent.identity fachlich zu klaeren? | applicant | `personal_data` |
+| `residence.jurisdiction` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten residence.jurisdiction fachlich zu klaeren? | notary_clerk | `mandate_metadata` |
+| `applicants.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten applicants.identity fachlich zu klaeren? | notary_clerk | `personal_data` |
+| `heirship.basis` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten heirship.basis fachlich zu klaeren? | notary | `sensitive_family_data` |
+| `family.evidence` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten family.evidence fachlich zu klaeren? | applicant | `family_data` |
+| `dispositions.evidence` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten dispositions.evidence fachlich zu klaeren? | notary_clerk | `sensitive_legal_data` |
+| `renunciations.disclaimers` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten renunciations.disclaimers fachlich zu klaeren? | notary | `sensitive_legal_data` |
+| `oath.statement` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten oath.statement fachlich zu klaeren? | notary | `sensitive_process_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Death evidence reference | Establishes death fact. | Evidence reference only. |
-| Civil-status evidence package | Supports statutory succession. | External reviewed evidence store. |
-| Disposition and opening record reference | Supports testamentary succession. | Evidence reference only. |
-| Erbschein application draft | Human-reviewed application. | Synthetic or metadata only. |
-| Court submission trace | Tracks filing and response. | Metadata only. |
+| `doc.death_certificate_reference` | Dokument/Nachweis: death bescheinigung referenz | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.application_draft` | Dokument/Nachweis: anmeldung entwurf | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.family_evidence` | Dokument/Nachweis: familie nachweis | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Certificate type: national Erbschein, European certificate, renunciation or
-  other estate declaration.
-- Oath route: notary, court, not required or unknown.
-- Whether statutory or testamentary evidence is sufficient.
-- Whether disputes, disclaimers or contests block application readiness.
+- `decision.certificate_type`: Entscheidung: bescheinigung art. Optionen: `national_erbschein`, `european_certificate`, `renunciation`, `other`, `unknown`.
+- `decision.oath_required`: Entscheidung: eid erforderlich. Optionen: `notary`, `court`, `not_required`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Heirship and evidence reviewed | Notary | Application release |
-| Oath statement readiness | Notary | Appointment |
-| Evidence package complete | Notary clerk | Court submission |
-| Court response reviewed | Notary clerk | Closing |
+| `gate.heirship_review` | Prueftor: erbrecht pruefung | notary |
+| `gate.oath_readiness` | Prueftor: eid bereitschaft | notary |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Sensitive estate workflow guardrails. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define estate-intake schema with strict privacy classes.
-2. Add civil-status and disposition evidence checklist.
-3. Add oath declaration route logic.
-4. Add court submission state model.
-5. Validate with synthetic succession fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Application cannot be marked ready without heirship and evidence review.
-- Oath route must be explicit.
-- No real decedent, family or estate evidence is committed.
-- Court response is tracked as metadata only.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

@@ -1,87 +1,81 @@
 # Geschaeftsanteilsuebertragung GmbH
 
-Status: KG baseline  
-KG node: `case.geschaeftsanteilsuebertragung_gmbh`  
+Status: KG-Basis
+KG-Knoten: `case.geschaeftsanteilsuebertragung_gmbh`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, GmbHG Section 15, HGB Section 12
+Primaere Quellenanker: `src.beurkg`, `src.gmbhg.15`, `src.hgb.12`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for sale, gift or other transfer of
-GmbH shares. The workflow must capture share identity, chain of title, parties,
-consent restrictions, AML/beneficial-owner flags, consideration, updated
-shareholder list and submission evidence.
+Verkauf, Schenkung oder sonstige Uebertragung von GmbH-Geschaeftsanteilen mit Beteiligten, Anteilskette, Zustimmungsvorbehalten, Gegenleistung, Gesellschafterliste und Registervollzug.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for company, shares, seller, buyer, price/gift route and consents.
-- Review of articles restrictions, pre-emption rights and authority.
-- Preparation of transfer deed and shareholder list.
-- Filing/submission trace for register-relevant documents.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No tax advice as final truth.
-- No real shareholder, price or AML data in Git.
-- No register submission without reviewed notarial execution.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `company.identity` | Which GmbH and register data define the target? | Notary clerk | Company register data |
-| `share.identity` | Which shares and chain of title are transferred? | Notary | Company financial data |
-| `seller.identity` | Who transfers and how is authority proven? | Notary clerk | Personal or company data |
-| `buyer.identity` | Who acquires and which AML flags apply? | Notary | Compliance data |
-| `consents.restrictions` | Are consent restrictions or pre-emption rights triggered? | Notary | Company data |
-| `consideration.tax` | Is this sale, gift, mixed transfer or other route? | Notary | Financial data |
+| `company.identity` | Welche Gesellschafts- und Registerdaten bestimmen den Zielrechtstraeger? | notary_clerk | `company_register_data` |
+| `share.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten share.identity fachlich zu klaeren? | notary | `company_financial_data` |
+| `seller.identity` | Wer verkauft und wie werden Identitaet, Geschaeftsfaehigkeit und Vertretung geprueft? | notary_clerk | `personal_or_company_data` |
+| `buyer.identity` | Wer erwirbt und welche Erwerbs-, Verbraucher- oder Berechtigtenstruktur ist zu klaeren? | notary | `compliance_data` |
+| `consents.restrictions` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten consents.restrictions fachlich zu klaeren? | notary | `company_data` |
+| `consideration.tax` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten consideration.tax fachlich zu klaeren? | notary | `financial_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Share transfer agreement | Human-reviewed notarial deed. | Synthetic or metadata only. |
-| Updated shareholder list | Register-relevant follow-up artifact. | Evidence reference only. |
-| Consent/waiver evidence | Confirms restrictions are handled. | Evidence reference only. |
-| AML/beneficial-owner review | Compliance gate evidence. | Metadata only. |
+| `doc.transfer_agreement` | Dokument/Nachweis: uebertragung vereinbarung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.shareholder_list` | Dokument/Nachweis: gesellschafter list | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.consent_evidence` | Dokument/Nachweis: zustimmung nachweis | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Sale, gift, mixed transfer, pool/trust or other route.
-- Consent or waiver needed.
-- Shareholder list ready or blocked.
-- Whether post-closing register or transparency-register work is triggered.
+- `decision.transfer_type`: Entscheidung: uebertragung art. Optionen: `sale`, `gift`, `mixed`, `trust_or_pool`, `unknown`.
+- `decision.consent_needed`: Entscheidung: zustimmung needed. Optionen: `yes`, `no`, `already_available`, `blocked`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Chain of title and restrictions reviewed | Notary | Deed release |
-| Seller/buyer identity and authority reviewed | Notary | Execution |
-| AML and beneficial-owner flags reviewed | Notary | Closing |
-| Updated shareholder list ready | Notary clerk | Submission |
+| `gate.chain_of_title_review` | Prueftor: kette of title pruefung | notary |
+| `gate.shareholder_list_ready` | Prueftor: gesellschafter list ready | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Company workflow guardrails and evidence model. |
-| `noc-bnotk-xnp` | Notary filing route readiness. |
-| `noc-handelsregister` | Shareholder-list submission route. |
-| `noc-idaas` | Identity support where permitted. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-handelsregister` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Build share-transfer intake schema.
-2. Add share chain and consent checklist.
-3. Add shareholder-list generation/review workflow.
-4. Add AML red-flag metadata.
-5. Validate with synthetic shareholder fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Chain of title and consent review block execution.
-- Updated shareholder list cannot be marked ready before transfer review.
-- AML flags are explicit.
-- No real price, identity or ownership data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

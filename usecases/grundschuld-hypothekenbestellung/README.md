@@ -1,89 +1,81 @@
 # Grundschuld / Hypothekenbestellung
 
-Status: KG baseline  
-KG node: `case.grundschuld_hypothek`  
+Status: KG-Basis
+KG-Knoten: `case.grundschuld_hypothek`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, GBO, BGB land-charge rules
+Primaere Quellenanker: `src.beurkg`, `src.gbo`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for creation, amendment or refinancing
-of a land charge or mortgage. The workflow must capture bank instructions,
-owner and debtor data, charge amount, rank, prior rights and enforcement-clause
-scope, then produce a reviewed filing package.
+Bestellung, Aenderung oder Refinanzierung einer Grundschuld oder Hypothek mit Eigentuemer, Schuldner, Glaeubiger, Rang und Vollstreckungsunterwerfung.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for property, owner, borrower/debtor, bank, amount and rank.
-- Bank instruction review and deviation tracking.
-- Land-register filing readiness and evidence metadata.
-- Consumer and enforcement-clause review flags where applicable.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No automatic acceptance of bank order text.
-- No real bank instructions or land-register excerpts in Git.
-- No filing without notarial review and connector approval.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `property.identity` | Which property or unit is to be charged? | Notary clerk | Property register data |
-| `owner.identity` | Who grants the charge and with which authority? | Notary clerk | Personal or company data |
-| `debtor.identity` | Who is the borrower or personal debtor? | Notary | Financial data |
-| `lender.identity` | Which creditor bank and channel apply? | Notary clerk | Mandate metadata |
-| `charge.amount` | Which amount, interest and ancillary charges are requested? | Notary clerk | Financial data |
-| `security.purpose` | Which financing context is secured? | Notary | Financial data |
-| `ranking.requirement` | Which rank is needed and which rights precede it? | Notary clerk | Property register data |
-| `enforcement.clause` | Which immediate-enforcement scope is requested? | Notary | Financial data |
+| `property.identity` | Welches Grundstueck, Grundbuchblatt, Flurstueck, Einheit oder welche aktuelle Bezeichnung identifiziert den Gegenstand? | notary_clerk | `property_register_data` |
+| `owner.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten owner.identity fachlich zu klaeren? | notary_clerk | `personal_or_company_data` |
+| `debtor.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten debtor.identity fachlich zu klaeren? | notary | `financial_data` |
+| `lender.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten lender.identity fachlich zu klaeren? | notary_clerk | `mandate_metadata` |
+| `charge.amount` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten charge.amount fachlich zu klaeren? | notary_clerk | `financial_data` |
+| `security.purpose` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten security.purpose fachlich zu klaeren? | notary | `financial_data` |
+| `ranking.requirement` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten ranking.requirement fachlich zu klaeren? | notary_clerk | `property_register_data` |
+| `enforcement.clause` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten enforcement.clause fachlich zu klaeren? | notary | `financial_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Bank land-charge order | Source for amount, creditor, wording and filing request. | Evidence reference only. |
-| Land-register excerpt | Confirms ownership and rank situation. | Evidence reference only. |
-| Draft deed | Human-reviewed land-charge or mortgage deed. | Synthetic or metadata only. |
-| Filing response | Tracks land-register application and completion. | Metadata only. |
+| `doc.bank_instruction` | Dokument/Nachweis: bank belehrung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.land_register_excerpt` | Dokument/Nachweis: grundbuch register excerpt | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Instrument: land charge, mortgage, amendment or refinancing.
-- Enforcement clause: property only, personal assets, both or not requested.
-- Rank handling: first rank, subordinate rank, deletion of prior rights or
-  consent required.
-- Bank instruction deviations: accepted, corrected, blocked or pending.
+- `decision.charge_type`: Entscheidung: grundschuld art. Optionen: `land_charge`, `mortgage`, `amendment`, `refinancing`, `unknown`.
+- `decision.execution_clause_scope`: Entscheidung: vollzug clause umfang. Optionen: `property_only`, `personal_assets`, `both`, `not_requested`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Bank instruction matched to draft | Notary clerk | Draft release |
-| Rank and prior-rights review | Notary | Filing |
-| Owner/debtor identity and representation | Notary | Appointment |
-| Enforcement-clause review | Notary | Execution |
+| `gate.bank_instruction_review` | Prueftor: bank belehrung pruefung | notary_clerk |
+| `gate.rank_review` | Prueftor: rang pruefung | notary |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Shared guardrails and evidence model. |
-| `noc-grundbuch-portal` | Property and rank review support. |
-| `noc-bnotk-xnp` | XNP route readiness for filing. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-grundbuch-portal` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define bank-instruction intake contract.
-2. Add deterministic comparison between bank order and deed metadata.
-3. Bind land-register rank state to filing readiness.
-4. Add enforcement-clause review marker.
-5. Validate with synthetic bank and property fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Amount, creditor, debtor, property and rank must be complete before filing.
-- Deviations from bank instruction are explicit and reviewed.
-- Missing rank review blocks execution.
-- No real financial or property data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

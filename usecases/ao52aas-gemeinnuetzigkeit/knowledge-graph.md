@@ -1,45 +1,40 @@
-# AO52 Nonprofit Software Company Knowledge Graph
+# AO52 gemeinnuetziges Softwareunternehmen KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `active-intake`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.ao52aas_gemeinnuetzigkeit`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `active-intake`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.ao52aas_gemeinnuetzigkeit`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `purpose.model` | Charitable purpose model | `open` | `founder` | Which charitable purpose, beneficiaries and activities define the organization? |
-| `entity.form` | Entity and formation route | `open` | `notary_clerk` | Which legal form, founders and register route are intended? |
-| `funding.model` | Funding and revenue model | `open` | `founder` | Which grants, donations, services or commercial activities finance the organization? |
-| `governance.rules` | Governance and asset-lock rules | `open` | `notary` | Which governance restrictions, asset-lock clauses and conflict rules are required? |
-| `tax.precheck` | Tax precheck route | `open` | `tax_specialist` | Which nonprofit/tax precheck route and evidence package are needed? |
-| `software.scope` | Software-company operating scope | `open` | `founder` | Which software activities, IP ownership and service boundaries must be reflected? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `purpose.model` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten purpose.model fachlich zu klaeren? | `open` | founder |
+| `entity.form` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten entity.form fachlich zu klaeren? | `open` | notary_clerk |
+| `funding.model` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten funding.model fachlich zu klaeren? | `open` | founder |
+| `governance.rules` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten governance.rules fachlich zu klaeren? | `open` | notary |
+| `tax.precheck` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.precheck fachlich zu klaeren? | `open` | tax_specialist |
+| `software.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten software.scope fachlich zu klaeren? | `open` | founder |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.intake_package` | Reviewed intake package | `open` |
+| `doc.intake_package` | Dokument/Nachweis: aufnahme paket | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.identity` | Identity, authority and data minimization reviewed | `open` |
-| `gate.notarial_review` | Human notarial review completed | `open` |
+| `gate.identity` | Prueftor: identitaet | `open` |
+| `gate.notarial_review` | Prueftor: notariell pruefung | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

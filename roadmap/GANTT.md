@@ -1,6 +1,6 @@
 # NoC Global Gantt
 
-Last update: 2026-05-15
+Last update: 2026-05-16
 
 Every push must update this global Gantt. Changes under `plugins/`,
 `workflows/`, or `usecases/` must also update the matching area Gantt:
@@ -50,6 +50,7 @@ gantt
     Case-local KG folder migration               :done,    c3a, 2026-05-15, 1d
     German-leading usecase language rule         :done,    c3b, 2026-05-15, 1d
     KG editor binding for usecase KGs            :done,    c3c, 2026-05-15, 1d
+    German usecase review surfaces               :done,    c3d, 2026-05-16, 1d
     GmbH formation canonicalization              :active,  c4, 2026-05-14, 21d
     AO52 nonprofit formation intake              :active,  c5, 2026-05-14, 21d
     Steuer-aaS tax usecase intake                :active,  c6, 2026-05-14, 21d
@@ -63,7 +64,7 @@ gantt
 | --- | --- | --- | --- | --- |
 | A | Installable plugins for notary offices | Active | 67% | `noc-cyberjack-rfid` now detects REINER SCT DriverPackage, morris browser middleware and the optional morris loopback API/PCSC path locally; `noc-pkcs7-certbundle` adds a separate local certificate-bundle evidence track without signing; OpenAI-backed processing has an AVV/DPA governance section; and SBOM for AI now has a repo-wide baseline, minimum-requirements inventory and strict validator. |
 | B | Installable skills and deterministic Python workflows | Active | 40% | First executable KG runtime package and CLI are implemented with unit tests; `START_HERE` is now the operational entry path distinct from the README overview, startup verification has environment profiles for base, plugin-dev and notary-workstation setups, docs are grouped into `eventstream/`, `issues/`, `operations/` and `service-model/`, README/index references now have clickable-link validation, PDF export is manual-only during active development, `fertig` means merged to `main` plus clean local `main`, the GitHub root README uses a Deutsch/English start table, language parity now blocks copied identical localized Markdown/text mirrors, and the KG editor exposes a safe no-code form/checklist view plus patch contract. |
-| C | Notarial usecases such as property, register, company, association, estate, family and power-of-attorney matters | Active | 56% | Every usecase now owns a case-local static KG; German is explicit as the leading and legally binding language for German-law notarial usecases; Fachpersonal edits those KGs through the no-code editor view instead of raw JSON. |
+| C | Notarial usecases such as property, register, company, association, estate, family and power-of-attorney matters | Active | 59% | Every usecase now owns a case-local static KG; German is explicit as the leading and legally binding language for German-law notarial usecases; README files, KG review views and human-readable KG values are German-led; Fachpersonal edits those KGs through the no-code editor view instead of raw JSON. |
 
 ## Rule
 

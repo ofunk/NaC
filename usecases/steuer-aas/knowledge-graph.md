@@ -1,45 +1,40 @@
-# Steuer-aaS Tax Readiness Knowledge Graph
+# Steuer-aaS Steuer-Readiness KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `active-intake`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.steuer_aas`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `active-intake`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.steuer_aas`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `tax.subject` | Tax subject | `open` | `tax_clerk` | Which entity or person is in scope, without committing real identifiers? |
-| `tax.type` | Tax process type | `open` | `tax_clerk` | Which tax process, notification, filing or readiness check is needed? |
-| `period.scope` | Period and deadline scope | `open` | `tax_clerk` | Which period, statutory deadline and internal review deadline apply? |
-| `elster.identity` | ELSTER identity route | `open` | `system_betreuer` | Which local ELSTER/ERIC identity route is available and approved? |
-| `documents.package` | Document package | `open` | `tax_clerk` | Which synthetic or metadata-only document references are required? |
-| `audit.evidence` | Audit evidence route | `open` | `compliance` | Where is reviewed evidence stored without raw tax data in Git? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `tax.subject` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.subject fachlich zu klaeren? | `open` | tax_clerk |
+| `tax.type` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.type fachlich zu klaeren? | `open` | tax_clerk |
+| `period.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten period.scope fachlich zu klaeren? | `open` | tax_clerk |
+| `elster.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten elster.identity fachlich zu klaeren? | `open` | system_betreuer |
+| `documents.package` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten documents.package fachlich zu klaeren? | `open` | tax_clerk |
+| `audit.evidence` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten audit.evidence fachlich zu klaeren? | `open` | compliance |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.intake_package` | Reviewed intake package | `open` |
+| `doc.intake_package` | Dokument/Nachweis: aufnahme paket | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.identity` | Identity, authority and data minimization reviewed | `open` |
-| `gate.notarial_review` | Human notarial review completed | `open` |
+| `gate.identity` | Prueftor: identitaet | `open` |
+| `gate.notarial_review` | Prueftor: notariell pruefung | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

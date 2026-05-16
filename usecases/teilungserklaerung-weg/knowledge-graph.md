@@ -1,47 +1,42 @@
-# Teilungserklaerung nach WEG Knowledge Graph
+# Teilungserklaerung nach WEG KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `next10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.teilungserklaerung_weg`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `next10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.teilungserklaerung_weg`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `property.identity` | Base property identity | `open` | `notary_clerk` | Which land register sheet and cadastral object will be divided? |
-| `owner.identity` | Owner and authority | `open` | `notary` | Who owns the property and is the owner authorized to divide? |
-| `unit.structure` | Unit structure and allocation | `open` | `client` | Which apartment, partial ownership, rooms and special-use rights are planned? |
-| `ownership.shares` | Co-ownership shares | `open` | `client` | Which co-ownership fractions are assigned to each unit? |
-| `plans.certificates` | Plans and separation certificate | `open` | `client` | Are plans, numbering, completion state and authority certificate available? |
-| `encumbrance.handling` | Existing encumbrance allocation | `open` | `notary` | How do existing rights, land charges, easements or restrictions affect the future unit registers? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `property.identity` | Welches Grundstueck, Grundbuchblatt, Flurstueck, Einheit oder welche aktuelle Bezeichnung identifiziert den Gegenstand? | `open` | notary_clerk |
+| `owner.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten owner.identity fachlich zu klaeren? | `open` | notary |
+| `unit.structure` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten unit.structure fachlich zu klaeren? | `open` | client |
+| `ownership.shares` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten ownership.shares fachlich zu klaeren? | `open` | client |
+| `plans.certificates` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten plans.certificates fachlich zu klaeren? | `open` | client |
+| `encumbrance.handling` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten encumbrance.handling fachlich zu klaeren? | `open` | notary |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.division_declaration` | Declaration of division and community rules | `open` |
-| `doc.plans_certificate` | Plans and separation certificate reference | `open` |
-| `doc.land_register_excerpt` | Current land register excerpt | `open` |
+| `doc.division_declaration` | Dokument/Nachweis: teilung erklaerung | `open` |
+| `doc.plans_certificate` | Dokument/Nachweis: plaene bescheinigung | `open` |
+| `doc.land_register_excerpt` | Dokument/Nachweis: grundbuch register excerpt | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.plan_certificate_review` | Plans and certificate reviewed | `open` |
-| `gate.land_register_implementation` | Unit-register implementation package ready | `open` |
+| `gate.plan_certificate_review` | Prueftor: plan bescheinigung pruefung | `open` |
+| `gate.land_register_implementation` | Prueftor: grundbuch register umsetzung | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

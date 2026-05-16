@@ -1,86 +1,80 @@
 # Vereinsregisteranmeldung
 
-Status: KG baseline  
-KG node: `case.vereinsregisteranmeldung`  
+Status: KG-Basis
+KG-Knoten: `case.vereinsregisteranmeldung`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Section 77
+Primaere Quellenanker: `src.beurkg`, `src.bgb.77`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for association-register filings, such
-as board changes, articles amendments, new registrations, dissolution or
-liquidator changes.
+Vereinsregisteranmeldungen fuer Vorstandsaenderungen, Satzungsaenderungen, Gruendung oder Aufloesung mit oeffentlicher Beglaubigung, Beschluessen und Anlagen.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for association, register data, filing type, board signers, resolutions,
-  articles and court route.
-- Public certification of board signatures.
-- Attachment and copy package tracking.
-- Register-court response evidence.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No association-law final assessment by the LLM.
-- No real membership lists, minutes or signatures in Git.
-- No court submission without reviewed signing authority.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `association.identity` | Which e.V., register court and number are affected? | Notary clerk | Association register data |
-| `filing.type` | Which filing type is needed? | Notary | Association data |
-| `board.identity` | Which board members sign and how may they represent? | Notary clerk | Personal data |
-| `resolution.evidence` | Which minutes, election or resolution evidence is needed? | Association | Association data |
-| `articles.current` | Which articles text applies and was it changed? | Association | Association data |
-| `filing.route` | Which court route and copy package applies? | Notary clerk | Technical metadata |
+| `association.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten association.identity fachlich zu klaeren? | notary_clerk | `association_register_data` |
+| `filing.type` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten filing.type fachlich zu klaeren? | notary | `association_data` |
+| `board.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten board.identity fachlich zu klaeren? | notary_clerk | `personal_data` |
+| `resolution.evidence` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten resolution.evidence fachlich zu klaeren? | association | `association_data` |
+| `articles.current` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten articles.current fachlich zu klaeren? | association | `association_data` |
+| `filing.route` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten filing.route fachlich zu klaeren? | notary_clerk | `technical_metadata` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Register application | Certified application package. | Metadata only. |
-| Minutes/election/resolution evidence | Supports filing. | Evidence reference only. |
-| Articles or amended wording | Supports articles amendment. | Evidence reference only. |
-| Court response | Tracks completion or correction. | Metadata only. |
+| `doc.register_application` | Dokument/Nachweis: register anmeldung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.minutes_resolution` | Dokument/Nachweis: niederschrift beschluss | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.articles` | Dokument/Nachweis: satzung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Paper, electronic or video-certification route.
-- Attachment package complete or special review.
-- Board representation rule.
-- Whether articles amendment needs full wording comparison.
+- `decision.certification_route`: Entscheidung: beglaubigung weg. Optionen: `paper`, `video_allowed`, `electronic`, `unknown`.
+- `decision.attachment_complete`: Entscheidung: attachment vollstaendigkeit. Optionen: `complete`, `incomplete`, `special_review`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Board signer authority reviewed | Notary | Certification |
-| Resolution and articles evidence reviewed | Notary | Application release |
-| Register package ready | Notary clerk | Submission |
-| Court response reviewed | Notary clerk | Closing |
+| `gate.signer_authority` | Prueftor: unterzeichner befugnis | notary |
+| `gate.register_package_ready` | Prueftor: register paket ready | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Guardrails and evidence model. |
-| `noc-bnotk-xnp` | Electronic route readiness where used. |
-| `noc-idaas` | Identity support where permitted. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define filing-type and attachment matrix.
-2. Add board authority and signing checks.
-3. Add articles comparison placeholder.
-4. Add court submission state model.
-5. Validate with synthetic e.V. fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Signer authority blocks certification.
-- Filing type determines attachments.
-- Court response is tracked.
-- No real association member or board data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

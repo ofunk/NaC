@@ -1,57 +1,78 @@
-# AO52 Nonprofit Software Company
+# AO52 gemeinnuetziges Softwareunternehmen
 
-Status: active intake
+Status: KG-Basis
+KG-Knoten: `case.ao52aas_gemeinnuetzigkeit`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
+Primaere Quellenanker: `src.beurkg`, `src.gmbhg`, `src.hgb.12`
 
-Source repository checked on 2026-05-14: `ofunk/AO52aaS`
+## Ziel
 
-The source repository contained only `docs/gemeinnuetzigkeit/` documents. Those
-documents are now migrated here as the canonical usecase package for forming or
-restructuring a nonprofit software organization with AO52 relevance.
+Vorbereitungs- und Readiness-Paket fuer ein gemeinnuetzig ausgerichtetes Softwareunternehmen mit Zweckbindung, Governance, Finanzierung sowie Register- und Steuerklaerungen.
 
-## Goal
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-Prepare a notary-office usecase package for a nonprofit or hybrid software
-company. The usecase covers purpose definition, revenue classification,
-structure choice, statute preparation, nonprofit pre-check, formation workflow,
-and evidence metadata.
+## Umfang
 
-## Boundaries
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- This usecase does not replace tax advice, legal advice, notarial review, or
-  Finanzamt pre-clearance.
-- The LLM is an intake and structuring interface, not the legal or tax truth.
-- No real personal data, business secrets, tax IDs, certificates, or bank data
-  may be stored in Git.
-- Formation, statute wording, nonprofit qualification, and registration steps
-  require human expert review.
+## Ausserhalb des Umfangs
 
-## Initial Dependencies
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Layer | Dependency | Purpose |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
+| --- | --- | --- | --- |
+| `purpose.model` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten purpose.model fachlich zu klaeren? | founder | `company_strategy` |
+| `entity.form` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten entity.form fachlich zu klaeren? | notary_clerk | `company_register_data` |
+| `funding.model` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten funding.model fachlich zu klaeren? | founder | `financial_data` |
+| `governance.rules` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten governance.rules fachlich zu klaeren? | notary | `company_register_data` |
+| `tax.precheck` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.precheck fachlich zu klaeren? | tax_specialist | `tax_data` |
+| `software.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten software.scope fachlich zu klaeren? | founder | `business_data` |
+
+## Dokumente und Nachweise
+
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Plugin | `noc-regulated-core` | Shared regulated workflow guardrails. |
-| Plugin | `noc-bnotk-xnp` | Notary workstation readiness when required. |
-| Plugin | `noc-handelsregister` | Register filing readiness for gGmbH/gUG or hybrid entities. |
-| Plugin | `noc-elster-eric` | Tax registration and nonprofit-adjacent tax workflow planning. |
-| Workflow | `workflows/contracts/` | Intake, approval, data-class, and evidence contract. |
-| Workflow | `workflows/python/` | Deterministic checks for completeness, gates, and plan preview. |
+| `doc.intake_package` | Dokument/Nachweis: aufnahme paket | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Delivery Plan
+## Entscheidungen
 
-1. Define intake contract for purpose, target groups, product, revenue streams,
-   legal form, stakeholders, funding, and review owners.
-2. Bind AO52 purpose and statute pre-checks to a human tax/legal review gate.
-3. Create a formation plan preview for pure nonprofit, nonprofit with economic
-   business operation, and hybrid structure.
-4. Bind register-readiness and tax-readiness plugin outputs.
-5. Define evidence metadata for purpose decision, structure decision, statute
-   review, notarial formation, tax pre-check, and Day2 compliance review.
+- `decision.workflow_route`: Entscheidung: workflow weg. Optionen: `notarial_review`, `external_system_route`, `blocked`.
 
-## Migrated Source Documents
+## Prueftore
 
-- `docs/gemeinnuetzigkeit/README.md`
-- `docs/gemeinnuetzigkeit/01-zweckbild.md`
-- `docs/gemeinnuetzigkeit/02-finanzierungsmodell.md`
-- `docs/gemeinnuetzigkeit/03-strukturmodell.md`
-- `docs/gemeinnuetzigkeit/04-vorabpruefung-checkliste.md`
+| Prueftor | Pruefzweck | Verantwortung |
+| --- | --- | --- |
+| `gate.identity` | Prueftor: identitaet |  |
+| `gate.notarial_review` | Prueftor: notariell pruefung |  |
+
+## Plugin-Abhaengigkeiten
+
+| Plugin | Zweck |
+| --- | --- |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-handelsregister` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-elster-eric` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+
+## Lieferaufgaben
+
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
+
+## Annahmekriterien
+
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

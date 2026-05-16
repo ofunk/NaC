@@ -1,82 +1,84 @@
-# Usecase Gantt
+# Usecase-Gantt
 
-Last update: 2026-05-15
+Letzte Aktualisierung: 2026-05-16
 
 ```mermaid
 gantt
-    title Notary usecase delivery plan
+    title Notarieller Usecase-Lieferplan
     dateFormat  YYYY-MM-DD
     axisFormat  %Y-%m
 
-    section Intake
-    GitHub repository scan                      :done,   u1, 2026-05-14, 1d
-    Create canonical usecase root              :done,   u2, 2026-05-14, 1d
+    section Aufnahme
+    GitHub-Repository-Scan                   :done,   u1, 2026-05-14, 1d
+    Kanonischen Usecase-Root anlegen         :done,   u2, 2026-05-14, 1d
 
-    section Priority usecases
-    Top-10 notarial usecase baseline           :done,   u3, 2026-05-15, 1d
-    Static KG binding for Top-10 cases         :done,   u4, 2026-05-15, 1d
-    Next-10 notarial usecase baseline          :done,   u5, 2026-05-15, 1d
-    Static KG binding for Next-10 cases        :done,   u6, 2026-05-15, 1d
-    Case-local KG folder migration             :done,   u6a, 2026-05-15, 1d
-    German-leading usecase index rule          :done,   u6b, 2026-05-15, 1d
-    No-code KG editor binding                  :done,   u6c, 2026-05-15, 1d
-    Online GmbH formation                      :active, u7, 2026-05-14, 28d
-    AO52 nonprofit software company            :active, u8, 2026-05-14, 28d
-    Steuer-aaS tax readiness                   :active, u9, 2026-05-14, 28d
-    Immobilienkaufvertrag and Grundschuld      :active, u10, 2026-05-15, 28d
-    Register, association and company cases    :active, u11, 2026-05-15, 35d
-    Family, estate and power cases             :active, u12, 2026-05-15, 35d
+    section Priorisierte Usecases
+    Top-10-Usecase-Basis                     :done,   u3, 2026-05-15, 1d
+    Statische KG-Bindung fuer Top-10         :done,   u4, 2026-05-15, 1d
+    Next-10-Usecase-Basis                    :done,   u5, 2026-05-15, 1d
+    Statische KG-Bindung fuer Next-10        :done,   u6, 2026-05-15, 1d
+    Usecase-lokale KG-Migration              :done,   u6a, 2026-05-15, 1d
+    Deutsch fuehrende Usecase-Indexregel     :done,   u6b, 2026-05-15, 1d
+    No-code-KG-Editor-Bindung                :done,   u6c, 2026-05-15, 1d
+    Deutsche KG-Review-Sichten               :done,   u6d, 2026-05-16, 1d
+    Online-GmbH-Gruendung                    :active, u7, 2026-05-14, 28d
+    AO52 gemeinnuetziges Softwareunternehmen :active, u8, 2026-05-14, 28d
+    Steuer-aaS Steuer-Readiness              :active, u9, 2026-05-14, 28d
+    Immobilienkaufvertrag und Grundschuld    :active, u10, 2026-05-15, 28d
+    Register-, Vereins- und Gesellschaftsfaelle :active, u11, 2026-05-15, 35d
+    Familien-, Nachlass- und Vollmachtsfaelle :active, u12, 2026-05-15, 35d
 
-    section Pilot readiness
-    Bind usecases to plugin dependencies        :        u13, 2026-06-15, 28d
-    Bind usecases to workflow contracts         :        u14, after u13, 28d
-    KG-fed workflow state updates               :        u15, after u14, 28d
-    Pilot package review                        :        u16, after u15, 21d
+    section Pilotbereitschaft
+    Usecases an Plugin-Abhaengigkeiten binden :        u13, 2026-06-15, 28d
+    Usecases an Workflow-Kontrakte binden     :        u14, after u13, 28d
+    KG-gestuetzte Workflow-Statusupdates      :        u15, after u14, 28d
+    Pilotpaket-Review                         :        u16, after u15, 21d
 ```
 
 ## Status
 
-| Usecase | Folder | Status | Source |
+| Usecase | Ordner | Status | Quelle |
 | --- | --- | --- | --- |
-| Top-10 notarial usecase baseline | `usecases/*/knowledge-graph.graph.json` | Done | Created canonical usecase folders and case-local KG nodes for the ten most important notarial case types. |
-| Next-10 notarial usecase baseline | `usecases/*/knowledge-graph.graph.json` | Done | Created canonical usecase folders and case-local KG nodes for the next ten frequent notarial case types. |
-| German-leading usecase language | `usecases/README.md` | Done | German is now explicit as leading and legally binding language for German-law notarial usecases. |
-| No-code KG editor binding | `usecases/README.md` plus `src/notary_kg/editor.py` | Done | Fachpersonal edits usecase KGs through a form/checklist editor view; raw JSON and `value` fields stay blocked. |
-| Online GmbH-/UG-Gruendung | `usecases/online-gmbh-gruendung/` | Active | Canonicalized from the empty GitHub repo `ofunk/Online-GmbH-Gruendung`; now part of the Top-10 KG. |
-| AO52 nonprofit software company | `usecases/ao52aas-gemeinnuetzigkeit/` | Active | Migrated from `ofunk/AO52aaS`. |
-| Steuer-aaS tax readiness | `usecases/steuer-aas/` | Active | Canonicalized from the empty GitHub repo `ofunk/Steuer-aaS`. |
-| Immobilienkaufvertrag | `usecases/immobilienkaufvertrag/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Grundschuld / Hypothekenbestellung | `usecases/grundschuld-hypothekenbestellung/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Handelsregisteranmeldung | `usecases/handelsregisteranmeldung/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Beglaubigung von Unterschriften | `usecases/unterschriftsbeglaubigung/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Testament / Erbvertrag | `usecases/testament-erbvertrag/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Erbscheinsantrag / Nachlass | `usecases/erbscheinsantrag-nachlass/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Vorsorgevollmacht und Patientenverfuegung | `usecases/vorsorgevollmacht-patientenverfuegung/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Schenkungsvertrag / Uebertragungsvertrag | `usecases/schenkungsvertrag-uebertragungsvertrag/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Ehevertrag / Scheidungsfolgenvereinbarung | `usecases/ehevertrag-scheidungsfolgenvereinbarung/` | KG baseline | New canonical Top-10 usecase in this repository. |
-| Loeschungsbewilligung / Grundbuchloeschung | `usecases/loeschungsbewilligung-grundbuchloeschung/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Teilungserklaerung nach WEG | `usecases/teilungserklaerung-weg/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Bautraegervertrag | `usecases/bautraegervertrag/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Gesellschafterbeschluss GmbH/UG | `usecases/gesellschafterbeschluss-gmbh-ug/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Geschaeftsanteilsuebertragung GmbH | `usecases/geschaeftsanteilsuebertragung-gmbh/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Vereinsregisteranmeldung | `usecases/vereinsregisteranmeldung/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Erbausschlagung | `usecases/erbausschlagung/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Pflichtteilsverzicht / Erbverzicht | `usecases/pflichtteilsverzicht-erbverzicht/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Adoption / familienrechtliche Erklaerungen | `usecases/adoption-familienrechtliche-erklaerungen/` | KG baseline | New canonical Next-10 usecase in this repository. |
-| Vollmacht fuer Immobilien- oder Gesellschaftsgeschaefte | `usecases/vollmacht-immobilien-gesellschaftsgeschaefte/` | KG baseline | New canonical Next-10 usecase in this repository. |
+| Top-10 notarielle Usecase-Basis | `usecases/*/knowledge-graph.graph.json` | Abgeschlossen | Kanonische Usecase-Ordner und usecase-lokale KG-Knoten fuer die zehn wichtigsten notariellen Vorgangsarten angelegt. |
+| Next-10 notarielle Usecase-Basis | `usecases/*/knowledge-graph.graph.json` | Abgeschlossen | Kanonische Usecase-Ordner und usecase-lokale KG-Knoten fuer die naechsten zehn haeufigen notariellen Vorgangsarten angelegt. |
+| Deutsch fuehrende Usecase-Sprache | [usecases/README.md](README.md) | Abgeschlossen | Deutsch ist als fuehrende und rechtlich bindende Sprache fuer deutsche notarielle Usecases festgeschrieben. |
+| Deutsche KG-Review-Sichten | `usecases/*/README.md`, `usecases/*/knowledge-graph.md`, `usecases/*/knowledge-graph.graph.json` | Abgeschlossen | Alle Usecase-README-Dateien, Markdown-KG-Review-Sichten und menschenlesbaren KG-Werte sind deutsch gefuehrt; technische Identifier bleiben stabil. |
+| No-code-KG-Editor-Bindung | [usecases/README.md](README.md) plus [src/notary_kg/editor.py](../src/notary_kg/editor.py) | Abgeschlossen | Fachpersonal bearbeitet Usecase-KGs ueber eine Formular-/Checklistenansicht; rohes JSON und `value`-Felder bleiben blockiert. |
+| Online GmbH-/UG-Gruendung | [online-gmbh-gruendung/](online-gmbh-gruendung) | Aktiv | Aus dem leeren GitHub-Repository `ofunk/Online-GmbH-Gruendung` kanonisiert; jetzt Teil des Top-10-KG. |
+| AO52 gemeinnuetziges Softwareunternehmen | [ao52aas-gemeinnuetzigkeit/](ao52aas-gemeinnuetzigkeit) | Aktiv | Aus `ofunk/AO52aaS` migriert. |
+| Steuer-aaS Steuer-Readiness | [steuer-aas/](steuer-aas) | Aktiv | Aus dem leeren GitHub-Repository `ofunk/Steuer-aaS` kanonisiert. |
+| Immobilienkaufvertrag | [immobilienkaufvertrag/](immobilienkaufvertrag) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Grundschuld / Hypothekenbestellung | [grundschuld-hypothekenbestellung/](grundschuld-hypothekenbestellung) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Handelsregisteranmeldung | [handelsregisteranmeldung/](handelsregisteranmeldung) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Beglaubigung von Unterschriften | [unterschriftsbeglaubigung/](unterschriftsbeglaubigung) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Testament / Erbvertrag | [testament-erbvertrag/](testament-erbvertrag) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Erbscheinsantrag / Nachlass | [erbscheinsantrag-nachlass/](erbscheinsantrag-nachlass) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Vorsorgevollmacht und Patientenverfuegung | [vorsorgevollmacht-patientenverfuegung/](vorsorgevollmacht-patientenverfuegung) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Schenkungsvertrag / Uebertragungsvertrag | [schenkungsvertrag-uebertragungsvertrag/](schenkungsvertrag-uebertragungsvertrag) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Ehevertrag / Scheidungsfolgenvereinbarung | [ehevertrag-scheidungsfolgenvereinbarung/](ehevertrag-scheidungsfolgenvereinbarung) | KG-Basis | Neuer kanonischer Top-10-Usecase in diesem Repository. |
+| Loeschungsbewilligung / Grundbuchloeschung | [loeschungsbewilligung-grundbuchloeschung/](loeschungsbewilligung-grundbuchloeschung) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Teilungserklaerung nach WEG | [teilungserklaerung-weg/](teilungserklaerung-weg) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Bautraegervertrag | [bautraegervertrag/](bautraegervertrag) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Gesellschafterbeschluss GmbH/UG | [gesellschafterbeschluss-gmbh-ug/](gesellschafterbeschluss-gmbh-ug) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Geschaeftsanteilsuebertragung GmbH | [geschaeftsanteilsuebertragung-gmbh/](geschaeftsanteilsuebertragung-gmbh) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Vereinsregisteranmeldung | [vereinsregisteranmeldung/](vereinsregisteranmeldung) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Erbausschlagung | [erbausschlagung/](erbausschlagung) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Pflichtteilsverzicht / Erbverzicht | [pflichtteilsverzicht-erbverzicht/](pflichtteilsverzicht-erbverzicht) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Adoption / familienrechtliche Erklaerungen | [adoption-familienrechtliche-erklaerungen/](adoption-familienrechtliche-erklaerungen) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
+| Vollmacht fuer Immobilien- oder Gesellschaftsgeschaefte | [vollmacht-immobilien-gesellschaftsgeschaefte/](vollmacht-immobilien-gesellschaftsgeschaefte) | KG-Basis | Neuer kanonischer Next-10-Usecase in diesem Repository. |
 
-## Plugin-Classified Sources
+## Plugin-klassifizierte Quellen
 
-| Source | Decision |
+| Quelle | Entscheidung |
 | --- | --- |
-| `ofunk/IDaaS` | Migrated as `plugins/noc-idaas/`, not as a usecase. |
+| `ofunk/IDaaS` | Als [plugins/noc-idaas/](../plugins/noc-idaas) migriert, nicht als Usecase. |
 
-## KG Rule
+## KG-Regel
 
-Each usecase owns its KG under `usecases/<slug>/knowledge-graph.graph.json` plus
-`usecases/<slug>/knowledge-graph.md`. The strict quality gate rejects a central
-`knowledge-graph/` folder and rejects any usecase folder without a local KG.
-Every KG update must keep all case `value` fields empty in Git and must update
-this Gantt plus the global Gantt when pushed. Fachpersonal-facing changes use
-the KG editor view and patch workflow; direct raw-JSON editing is reserved for
-reviewed developer maintenance.
+Jeder Usecase fuehrt seinen KG unter `usecases/<slug>/knowledge-graph.graph.json`
+plus `usecases/<slug>/knowledge-graph.md`. Das strikte Quality Gate verwirft
+einen zentralen `knowledge-graph/` Ordner und jeden Usecase-Ordner ohne lokalen
+KG. Jedes KG-Update muss alle `value`-Felder leer oder `null` halten und dieses
+Gantt plus das globale Gantt aktualisieren. Fachpersonal nutzt die
+KG-Editor-Ansicht und den Patch-Workflow; direkte Roh-JSON-Bearbeitung bleibt
+reviewter Entwicklerwartung vorbehalten.

@@ -1,86 +1,81 @@
 # Gesellschafterbeschluss bei GmbH/UG
 
-Status: KG baseline  
-KG node: `case.gesellschafterbeschluss_gmbh_ug`  
+Status: KG-Basis
+KG-Knoten: `case.gesellschafterbeschluss_gmbh_ug`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, GmbHG Section 53, HGB Section 12
+Primaere Quellenanker: `src.beurkg`, `src.gmbhg.53`, `src.hgb.12`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for GmbH/UG shareholder resolutions,
-including articles amendments, capital increases, managing-director
-appointments, consent to share transfers and other register-relevant decisions.
+Gesellschafterbeschluesse fuer Satzungsaenderungen, Kapitalmassnahmen, Geschaeftsfuehrerbestellungen, Zustimmungen zu Anteilsuebertragungen oder sonstige Gesellschaftsentscheidungen.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for company, register data, resolution type, shareholders, votes,
-  representation, majority requirements and articles wording.
-- Notarial deed or certification route selection.
-- Register filing and notary certificate evidence.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No automated company-law final assessment.
-- No real shareholder lists, minutes or articles in Git.
-- No register filing without XNP/Handelsregister review.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `company.identity` | Which GmbH/UG and register data are affected? | Notary clerk | Company register data |
-| `resolution.type` | Which resolution type and legal basis apply? | Notary | Company data |
-| `shareholders.present` | Who participates and who represents whom? | Notary clerk | Personal or company data |
-| `majority.requirement` | Which statutory and articles majority rules apply? | Notary | Company data |
-| `articles.wording` | Which current text changes and what is the new wording? | Notary | Company data |
-| `register.filing` | Which register application and XNP route are needed? | Notary clerk | Technical metadata |
+| `company.identity` | Welche Gesellschafts- und Registerdaten bestimmen den Zielrechtstraeger? | notary_clerk | `company_register_data` |
+| `resolution.type` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten resolution.type fachlich zu klaeren? | notary | `company_data` |
+| `shareholders.present` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten shareholders.present fachlich zu klaeren? | notary_clerk | `personal_or_company_data` |
+| `majority.requirement` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten majority.requirement fachlich zu klaeren? | notary | `company_data` |
+| `articles.wording` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten articles.wording fachlich zu klaeren? | notary | `company_data` |
+| `register.filing` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten register.filing fachlich zu klaeren? | notary_clerk | `technical_metadata` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Resolution minutes or deed | Captures decision and votes. | Synthetic or metadata only. |
-| Current and amended articles | Supports notary certificate and register filing. | Evidence reference only. |
-| Register application | Filing package. | Metadata only. |
-| Voting/authority evidence | Supports quorum and majority gate. | Evidence reference only. |
+| `doc.resolution_minutes` | Dokument/Nachweis: beschluss niederschrift | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.current_articles` | Dokument/Nachweis: aktuell satzung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.register_application` | Dokument/Nachweis: register anmeldung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Notarial deed, certified signature or private resolution only.
-- Register filing required or not.
-- Majority/unanimity threshold and special consent rules.
-- Whether current articles wording is sufficient.
+- `decision.notarial_form`: Entscheidung: notariell form. Optionen: `notarial_deed_required`, `certified_signature`, `private_resolution_only`, `unknown`.
+- `decision.register_relevance`: Entscheidung: register relevance. Optionen: `yes`, `no`, `needs_review`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Quorum, votes and majority reviewed | Notary | Deed release |
-| Authority and representation reviewed | Notary | Execution |
-| Articles wording certified | Notary | Register filing |
-| Register package ready | Notary clerk | Submission |
+| `gate.quorum_majority_review` | Prueftor: beschlussfaehigkeit majority pruefung | notary |
+| `gate.register_package_ready` | Prueftor: register paket ready | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Regulated company workflow guardrails. |
-| `noc-bnotk-xnp` | Notary filing route readiness. |
-| `noc-handelsregister` | Register package and response handling. |
-| `noc-cyberjack-rfid` | Card/signature readiness. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-handelsregister` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-cyberjack-rfid` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Create resolution-type taxonomy.
-2. Add vote and majority completeness checks.
-3. Bind articles wording to notary certificate package.
-4. Add register filing state model.
-5. Validate with synthetic GmbH/UG fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Majority and representation review blocks execution.
-- Articles wording must be available for amendments.
-- Register relevance is explicit.
-- No real company minutes or shareholder data are committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

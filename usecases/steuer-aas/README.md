@@ -1,56 +1,76 @@
-# Steuer-aaS Tax Readiness
+# Steuer-aaS Steuer-Readiness
 
-Status: active intake
+Status: KG-Basis
+KG-Knoten: `case.steuer_aas`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
+Primaere Quellenanker: `src.beurkg`
 
-Source repository checked on 2026-05-14: `ofunk/Steuer-aaS`
+## Ziel
 
-The source repository is empty. This folder is now the canonical location for
-the Steuer-aaS tax-readiness usecase in this repository.
+Steuer-Readiness-Usecase fuer deterministische Aufnahme, ELSTER-nahe Vorbereitung und Pruefnachweise ohne echte Steuerdaten im Git-Repository.
 
-## Goal
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-Prepare a usecase package for tax-readiness workflows that are adjacent to
-notarial formation and regulated entity setup. The usecase focuses on intake,
-classification, tax-registration preparation, nonprofit or business tax
-handoffs, review gates, and evidence metadata.
+## Umfang
 
-## Boundaries
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- This usecase does not replace tax advice, legal advice, notarial review, or
-  official filings.
-- The LLM is an intake and structuring interface, not the tax authority or final
-  professional judgment.
-- No real tax IDs, personal data, bank data, certificates, ERiC credentials, or
-  secrets may be stored in Git.
-- External filing, submission, or portal automation requires a separately
-  reviewed connector and explicit human approval.
+## Ausserhalb des Umfangs
 
-## Initial Dependencies
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Layer | Dependency | Purpose |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
+| --- | --- | --- | --- |
+| `tax.subject` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.subject fachlich zu klaeren? | tax_clerk | `tax_data` |
+| `tax.type` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.type fachlich zu klaeren? | tax_clerk | `tax_data` |
+| `period.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten period.scope fachlich zu klaeren? | tax_clerk | `deadline_data` |
+| `elster.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten elster.identity fachlich zu klaeren? | system_betreuer | `technical_metadata` |
+| `documents.package` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten documents.package fachlich zu klaeren? | tax_clerk | `metadata_only` |
+| `audit.evidence` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten audit.evidence fachlich zu klaeren? | compliance | `metadata_only` |
+
+## Dokumente und Nachweise
+
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Plugin | `noc-regulated-core` | Shared regulated workflow guardrails. |
-| Plugin | `noc-elster-eric` | ELSTER/ERiC readiness, dry-run filing plans, and evidence companion. |
-| Workflow | `workflows/contracts/` | Intake, data-class, approval, and evidence contract. |
-| Workflow | `workflows/python/` | Deterministic validation, plan-preview, and completeness checks. |
+| `doc.intake_package` | Dokument/Nachweis: aufnahme paket | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Candidate Workflow Scope
+## Entscheidungen
 
-| Area | Example questions |
+- `decision.workflow_route`: Entscheidung: workflow weg. Optionen: `notarial_review`, `external_system_route`, `blocked`.
+
+## Prueftore
+
+| Prueftor | Pruefzweck | Verantwortung |
+| --- | --- | --- |
+| `gate.identity` | Prueftor: identitaet |  |
+| `gate.notarial_review` | Prueftor: notariell pruefung |  |
+
+## Plugin-Abhaengigkeiten
+
+| Plugin | Zweck |
 | --- | --- |
-| Formation tax readiness | Which tax-registration data is needed after a notarial formation workflow? |
-| Nonprofit handoff | Which AO52 or nonprofit pre-check outputs must be handed to tax advisors or the Finanzamt? |
-| VAT and payroll readiness | Which flags, roles, and deadlines are relevant before operational start? |
-| Evidence | Which decisions, versions, approvals, and handoff timestamps must be recorded? |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-elster-eric` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Plan
+## Lieferaufgaben
 
-1. Define intake contract for entity, activity, tax-advisor role, expected
-   revenue classes, nonprofit flags, VAT flags, payroll flags, and deadlines.
-2. Bind `noc-elster-eric` readiness outputs without storing credentials or
-   submission secrets.
-3. Create a dry-run tax-readiness plan preview.
-4. Define evidence metadata for intake, review, handoff, filing-readiness, and
-   Day2 follow-up.
-5. Validate with synthetic, non-personal test data.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
+
+## Annahmekriterien
+
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

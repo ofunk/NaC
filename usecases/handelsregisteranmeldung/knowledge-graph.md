@@ -1,48 +1,43 @@
-# Handelsregisteranmeldung Knowledge Graph
+# Handelsregisteranmeldung KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `top10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.handelsregisteranmeldung`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `top10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.handelsregisteranmeldung`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `entity.identity` | Entity, register court and register number | `open` | `notary_clerk` | Which entity and register sheet are affected? |
-| `event.type` | Register event type | `open` | `notary` | Which event is being registered: management, seat, capital, company name, object, prokura or other? |
-| `signers.identity` | Signing persons and signing authority | `open` | `notary_clerk` | Who must sign and how is authority proven? |
-| `corporate.resolution` | Corporate resolution or legal basis | `open` | `notary` | Which resolution, articles clause or external fact authorizes the application? |
-| `attachments.required` | Required attachments | `open` | `notary_clerk` | Which documents must be filed in machine-readable electronic form? |
-| `effective.date` | Effective date and wording | `open` | `notary` | Is the change already effective, conditional, future-dated or register-effective only? |
-| `xnp.route` | XNP and signature route | `open` | `notary_clerk` | Which notary card, XNP workspace and EGVP/beN route will be used? |
-| `fees.costs` | Cost and invoice metadata | `open` | `notary_clerk` | Which value or cost metadata is required for GNotKG and office billing? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `entity.identity` | Welcher Rechtstraeger und welches Registerblatt sind betroffen? | `open` | notary_clerk |
+| `event.type` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten event.type fachlich zu klaeren? | `open` | notary |
+| `signers.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten signers.identity fachlich zu klaeren? | `open` | notary_clerk |
+| `corporate.resolution` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten corporate.resolution fachlich zu klaeren? | `open` | notary |
+| `attachments.required` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten attachments.required fachlich zu klaeren? | `open` | notary_clerk |
+| `effective.date` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten effective.date fachlich zu klaeren? | `open` | notary |
+| `xnp.route` | Welcher XNP-, Karten-, Signatur- und Uebermittlungsweg wird genutzt? | `open` | notary_clerk |
+| `fees.costs` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten fees.costs fachlich zu klaeren? | `open` | notary_clerk |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.register_application` | Publicly certified electronic register application | `open` |
-| `doc.corporate_evidence` | Resolution, appointment, articles or related evidence | `open` |
+| `doc.register_application` | Dokument/Nachweis: register anmeldung | `open` |
+| `doc.corporate_evidence` | Dokument/Nachweis: gesellschaft nachweis | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.public_certification` | Public certification requirements met | `open` |
-| `gate.electronic_format` | Electronic machine-readable package checked | `open` |
+| `gate.public_certification` | Prueftor: oeffentlich beglaubigung | `open` |
+| `gate.electronic_format` | Prueftor: electronic format | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

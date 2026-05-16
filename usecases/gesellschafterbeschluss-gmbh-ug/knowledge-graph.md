@@ -1,47 +1,42 @@
-# Gesellschafterbeschluss bei GmbH/UG Knowledge Graph
+# Gesellschafterbeschluss bei GmbH/UG KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `next10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.gesellschafterbeschluss_gmbh_ug`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `next10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.gesellschafterbeschluss_gmbh_ug`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `company.identity` | Company and register identity | `open` | `notary_clerk` | Which GmbH/UG, register court and register number are affected? |
-| `resolution.type` | Resolution type and legal basis | `open` | `notary` | Is this an articles amendment, capital measure, appointment, consent or other resolution? |
-| `shareholders.present` | Shareholders, votes and representation | `open` | `notary_clerk` | Who participates, which votes exist and which representatives act? |
-| `majority.requirement` | Majority and consent requirements | `open` | `notary` | Which statutory and articles-based majority or unanimity requirements apply? |
-| `articles.wording` | Current and amended articles wording | `open` | `notary` | Which current article text is changed and what new wording is proposed? |
-| `register.filing` | Register filing and notarized certificate route | `open` | `notary_clerk` | Which register application, notary certificate and XNP route are required? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `company.identity` | Welche Gesellschafts- und Registerdaten bestimmen den Zielrechtstraeger? | `open` | notary_clerk |
+| `resolution.type` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten resolution.type fachlich zu klaeren? | `open` | notary |
+| `shareholders.present` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten shareholders.present fachlich zu klaeren? | `open` | notary_clerk |
+| `majority.requirement` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten majority.requirement fachlich zu klaeren? | `open` | notary |
+| `articles.wording` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten articles.wording fachlich zu klaeren? | `open` | notary |
+| `register.filing` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten register.filing fachlich zu klaeren? | `open` | notary_clerk |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.resolution_minutes` | Shareholder resolution minutes | `open` |
-| `doc.current_articles` | Current articles and amended wording | `open` |
-| `doc.register_application` | Commercial-register application and certificate | `open` |
+| `doc.resolution_minutes` | Dokument/Nachweis: beschluss niederschrift | `open` |
+| `doc.current_articles` | Dokument/Nachweis: aktuell satzung | `open` |
+| `doc.register_application` | Dokument/Nachweis: register anmeldung | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.quorum_majority_review` | Quorum, votes and majority reviewed | `open` |
-| `gate.register_package_ready` | Register package ready | `open` |
+| `gate.quorum_majority_review` | Prueftor: beschlussfaehigkeit majority pruefung | `open` |
+| `gate.register_package_ready` | Prueftor: register paket ready | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

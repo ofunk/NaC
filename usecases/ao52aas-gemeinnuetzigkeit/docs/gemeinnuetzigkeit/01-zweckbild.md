@@ -1,67 +1,71 @@
-# Purpose Model And Target Groups
+# Zweckbild und Zielgruppen
 
-## Core Thesis
+## Kernthese
 
-A software company is not nonprofit because it creates software. Nonprofit
-status only becomes plausible when the organization's actual activity
-selflessly benefits the public and directly implements a tax-privileged purpose
-under AO52.
+Eine Softwaregesellschaft ist nicht schon deshalb gemeinnuetzig, weil sie
+Software erstellt. Gemeinnuetzigkeit wird erst plausibel, wenn die tatsaechliche
+Taetigkeit der Organisation selbstlos die Allgemeinheit foerdert und einen
+steuerbeguenstigten Zweck nach AO52 unmittelbar verwirklicht.
 
-## Recommended Purpose Model
+## Empfohlenes Zweckmodell
 
-The strongest model is one where software is the operating instrument for public
-benefit. Particularly plausible combinations include:
+Das staerkste Modell ist eines, in dem Software das operative Instrument fuer
+gemeinnuetzige Wirkung ist. Besonders plausible Kombinationen sind:
 
-- education, vocational training, and continuing education through open learning
-  or competence platforms
-- science and research through research software, open data platforms, or
-  research infrastructure
-- support for people with disabilities through accessible or assistive software
-- welfare through digital tools for social providers, advisory services, or
-  vulnerable groups
-- environmental and climate protection through software for education,
-  monitoring, steering, or participation
+- Bildung, Berufsbildung und Weiterbildung ueber offene Lern- oder
+  Kompetenzplattformen
+- Wissenschaft und Forschung ueber Forschungssoftware, offene Datenplattformen
+  oder Forschungsinfrastruktur
+- Hilfe fuer Menschen mit Behinderung durch barrierefreie oder assistive
+  Software
+- Wohlfahrtspflege durch digitale Werkzeuge fuer soziale Traeger,
+  Beratungsangebote oder vulnerable Gruppen
+- Umwelt- und Klimaschutz durch Software fuer Bildung, Monitoring, Steuerung
+  oder Beteiligung
 
-## Concrete Target Picture
+## Konkretes Zielbild
 
-The organization develops, operates, and improves digital tools, open software,
-and supporting education or assistance services to solve public-interest
-problems in education, research, inclusion, or digital public benefit. Revenues
-serve sustainable purpose implementation and not shareholder distributions.
+Die Organisation entwickelt, betreibt und verbessert digitale Werkzeuge, offene
+Software sowie begleitende Bildungs- oder Unterstuetzungsleistungen, um
+gemeinwohlbezogene Probleme in Bildung, Forschung, Inklusion oder digitalem
+Gemeinwohl zu loesen. Einnahmen dienen der nachhaltigen Zweckverwirklichung und
+nicht Gewinnausschuettungen.
 
-## Benefited Target Groups
+## Beguenstigte Zielgruppen
 
-The model is most plausible when the offering primarily serves one or more of
-these groups:
+Das Modell ist am plausibelsten, wenn das Angebot vor allem eine oder mehrere
+dieser Gruppen erreicht:
 
-- schools, universities, and education providers
-- nonprofit institutions and social providers
-- people with disabilities or other vulnerable groups
-- researchers, teachers, and learners
-- municipalities, public institutions, and the general public
+- Schulen, Hochschulen und Bildungstraeger
+- gemeinnuetzige Einrichtungen und soziale Traeger
+- Menschen mit Behinderung oder andere vulnerable Gruppen
+- Forschende, Lehrende und Lernende
+- Kommunen, oeffentliche Einrichtungen und die Allgemeinheit
 
-## Impact Logic
+## Wirkungslogik
 
-1. The organization identifies a societal problem that can be assigned to an
-   AO52 purpose.
-2. Software is developed, provided, and improved as the direct instrument for
-   solving that problem.
-3. Training, support, implementation, or community work ensure usage and impact.
-4. Surpluses flow back into product development, reach, quality, accessibility,
-   and nonprofit programs.
+1. Die Organisation identifiziert ein gesellschaftliches Problem, das einem
+   AO52-Zweck zugeordnet werden kann.
+2. Software wird als unmittelbares Instrument zur Loesung dieses Problems
+   entwickelt, bereitgestellt und verbessert.
+3. Schulung, Support, Implementierung oder Community-Arbeit sichern Nutzung und
+   Wirkung.
+4. Ueberschuesse fliessen in Produktentwicklung, Reichweite, Qualitaet,
+   Barrierefreiheit und gemeinnuetzige Programme zurueck.
 
-## Weak Boundary
+## Schwache Abgrenzung
 
-The following logic is usually not enough:
+Die folgende Logik reicht regelmaessig nicht aus:
 
-- commercial software development with later profit donation
-- discounts without a nonprofit core activity
-- SaaS growth, exit, or return logic with only incidental public-benefit claims
+- kommerzielle Softwareentwicklung mit spaeterer Gewinnspende
+- Rabatte ohne gemeinnuetzige Kerntaetigkeit
+- SaaS-Wachstum, Exit- oder Renditelogik mit nur beilaufigen
+  Gemeinwohlbehauptungen
 
-## Open Tailoring Points
+## Offene Zuschnittspunkte
 
-- concrete main purpose under AO52
-- primary target group
-- core product or service
-- impact criteria and success indicators
-- boundary between nonprofit core and commercial side activities
+- konkreter Hauptzweck nach AO52
+- primaere Zielgruppe
+- Kernprodukt oder Kerndienst
+- Wirkungskriterien und Erfolgsindikatoren
+- Grenze zwischen gemeinnuetzigem Kern und kommerziellen Nebentaetigkeiten

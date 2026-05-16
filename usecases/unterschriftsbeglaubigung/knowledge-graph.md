@@ -1,48 +1,43 @@
-# Beglaubigung von Unterschriften Knowledge Graph
+# Beglaubigung von Unterschriften KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `top10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.unterschriftsbeglaubigung`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `top10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.unterschriftsbeglaubigung`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `signer.identity` | Signer identity | `open` | `notary_clerk` | Who signs and how is identity established? |
-| `document.purpose` | Document purpose and recipient | `open` | `notary_clerk` | What is the document used for and who receives it? |
-| `signature.mode` | Signature already made or made before notary | `open` | `notary` | Is the signature acknowledged or executed in front of the notary? |
-| `language.understanding` | Language and understanding flags | `open` | `notary` | Can the signer understand the relevant language or is translation/support needed? |
-| `representation.context` | Representation or company role | `open` | `notary_clerk` | Does the signer act personally, as representative, organ, guardian or agent? |
-| `copies.routing` | Copies, electronic certificate and routing | `open` | `notary_clerk` | Which copies, electronic witnesses or delivery routes are required? |
-| `special.form` | Special form or legalization need | `open` | `notary` | Is apostille, legalization, register-specific form or foreign use involved? |
-| `fee.metadata` | Fee value and billing metadata | `open` | `notary_clerk` | Which value or fee metadata is needed for billing? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `signer.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten signer.identity fachlich zu klaeren? | `open` | notary_clerk |
+| `document.purpose` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten document.purpose fachlich zu klaeren? | `open` | notary_clerk |
+| `signature.mode` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten signature.mode fachlich zu klaeren? | `open` | notary |
+| `language.understanding` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten language.understanding fachlich zu klaeren? | `open` | notary |
+| `representation.context` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten representation.context fachlich zu klaeren? | `open` | notary_clerk |
+| `copies.routing` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten copies.routing fachlich zu klaeren? | `open` | notary_clerk |
+| `special.form` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten special.form fachlich zu klaeren? | `open` | notary |
+| `fee.metadata` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten fee.metadata fachlich zu klaeren? | `open` | notary_clerk |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.signed_document` | Document with signature to certify | `open` |
-| `doc.certification_note` | Certification note or electronic witness | `open` |
+| `doc.signed_document` | Dokument/Nachweis: signed dokument | `open` |
+| `doc.certification_note` | Dokument/Nachweis: beglaubigung note | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.identity_and_signature` | Identity and signature act reviewed | `open` |
-| `gate.form_route` | Correct form and route selected | `open` |
+| `gate.identity_and_signature` | Prueftor: identitaet und unterschrift | `open` |
+| `gate.form_route` | Prueftor: form weg | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

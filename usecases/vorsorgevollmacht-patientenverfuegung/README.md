@@ -1,87 +1,80 @@
 # Vorsorgevollmacht und Patientenverfuegung
 
-Status: KG baseline  
-KG node: `case.vorsorgevollmacht_patientenverfuegung`  
+Status: KG-Basis
+KG-Knoten: `case.vorsorgevollmacht_patientenverfuegung`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB care and patient-directive context
+Primaere Quellenanker: `src.beurkg`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for precautionary powers of attorney,
-health-care powers and patient directives. The workflow must capture principal,
-agents, scope, effectiveness, health-care instructions, central register route
-and copy handling.
+Vorsorgevollmacht, Gesundheitsvollmacht und Patientenverfuegung mit Umfang, Bevollmaechtigten, Wirksamkeit, Register und Ausfertigungsverwaltung.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for principal identity, capacity, agents, substitutes, financial scope,
-  health-care scope, patient directive wishes and effectiveness rules.
-- Draft support for power of attorney and patient directive instruments.
-- Copy, revocation and register evidence metadata.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No medical advice or automated final wording decisions.
-- No real health, care, family or address data in Git.
-- No registration or copy distribution without reviewed instruction.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `principal.identity` | Who grants the power and how is capacity reviewed? | Notary | Personal data |
-| `agent.identities` | Who should act as agent or substitute? | Principal | Personal data |
-| `authority.financial` | Which financial, banking, property or business powers are intended? | Principal | Financial data |
-| `authority.health` | Which health, care, residence and communication powers apply? | Principal | Health or sensitive data |
-| `patient.directive` | Which treatment situations and wishes should be documented? | Principal | Health or sensitive data |
-| `effectiveness.rules` | When can the power be used and how are copies handled? | Notary | Mandate metadata |
-| `self_dealing.release` | Should self-dealing or sub-delegation be allowed? | Notary | Mandate metadata |
-| `central_register` | Should central register registration be prepared? | Notary clerk | Personal data |
+| `principal.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten principal.identity fachlich zu klaeren? | notary | `personal_data` |
+| `agent.identities` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten agent.identities fachlich zu klaeren? | principal | `personal_data` |
+| `authority.financial` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten authority.financial fachlich zu klaeren? | principal | `financial_data` |
+| `authority.health` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten authority.health fachlich zu klaeren? | principal | `health_or_sensitive_data` |
+| `patient.directive` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten patient.directive fachlich zu klaeren? | principal | `health_or_sensitive_data` |
+| `effectiveness.rules` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten effectiveness.rules fachlich zu klaeren? | notary | `mandate_metadata` |
+| `self_dealing.release` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten self_dealing.release fachlich zu klaeren? | notary | `mandate_metadata` |
+| `central_register` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten central_register fachlich zu klaeren? | notary_clerk | `personal_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Power of attorney draft | Defines agent scope. | Synthetic or metadata only. |
-| Patient directive draft | Captures reviewed health-care wishes. | Synthetic or metadata only. |
-| Capacity and instruction reference | Supports notarial review. | Evidence reference only. |
-| Copy and register trace | Tracks copies and central register state. | Metadata only. |
+| `doc.power_of_attorney_draft` | Dokument/Nachweis: vollmacht of attorney entwurf | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.patient_directive_draft` | Dokument/Nachweis: patient verfuegung entwurf | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Instrument scope: power only, patient directive only or combined.
-- Register route: register, do not register, needs review or unknown.
-- Agent model: single, joint, substitute or conditional powers.
-- Whether financial/property powers need additional form or review.
+- `decision.instrument_scope`: Entscheidung: instrument umfang. Optionen: `power_only`, `patient_directive_only`, `combined`, `unknown`.
+- `decision.register`: Entscheidung: register. Optionen: `register`, `do_not_register`, `needs_review`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Capacity and free-will review | Notary | Execution |
-| Health-care and patient-directive wording reviewed | Notary | Draft release |
-| Copy and revocation model confirmed | Notary clerk | Closing |
-| Register route confirmed | Notary clerk | Post-execution |
+| `gate.capacity_review` | Prueftor: geschaeftsfaehigkeit pruefung | notary |
+| `gate.health_scope_review` | Prueftor: gesundheit umfang pruefung | notary |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Sensitive intake and evidence guardrails. |
-| `noc-idaas` | Identity support where permitted. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Create intake schema for power, health and patient-directive scopes.
-2. Add capacity and health-sensitivity warning gates.
-3. Add copy, revocation and register state model.
-4. Add deterministic missing-information report.
-5. Validate with synthetic principal and agent fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Principal identity and capacity gate are mandatory.
-- Health-care scope cannot be completed without review.
-- Register decision is explicit.
-- No real health or family data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

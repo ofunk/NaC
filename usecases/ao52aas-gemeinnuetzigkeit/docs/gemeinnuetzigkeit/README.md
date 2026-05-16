@@ -1,29 +1,37 @@
 # Gemeinnuetziges Softwareunternehmen nach AO52
 
-These documents turn the AO52 nonprofit software-company idea into reviewable
-working material. They separate purpose, revenue categories, structure model,
-and legal/tax pre-checks so the project can be evaluated before formation or
-restructuring.
+Diese Dokumente ueberfuehren die Idee eines gemeinnuetzig ausgerichteten
+Softwareunternehmens nach AO52 in reviewfaehiges Arbeitsmaterial. Sie trennen
+Zweckbild, Einnahmenkategorien, Strukturmodell und rechtlich-steuerliche
+Vorpruefung, damit das Projekt vor Gruendung oder Umstrukturierung bewertet
+werden kann.
 
-## Contents
+## Inhalt
 
-- `01-zweckbild.md`: nonprofit purpose, target groups, and impact logic
-- `02-finanzierungsmodell.md`: revenue assignment to tax areas
-- `03-strukturmodell.md`: pure nonprofit entity, mixed model, or hybrid model
-- `04-vorabpruefung-checkliste.md`: statute, funds use, and actual management
-  pre-check
+- [01-zweckbild.md](01-zweckbild.md): gemeinnuetziges Zweckbild, Zielgruppen
+  und Wirkungslogik
+- [02-finanzierungsmodell.md](02-finanzierungsmodell.md): Zuordnung von
+  Einnahmen zu steuerlichen Bereichen
+- [03-strukturmodell.md](03-strukturmodell.md): reine gemeinnuetzige
+  Gesellschaft, Mischmodell oder Hybridstruktur
+- [04-vorabpruefung-checkliste.md](04-vorabpruefung-checkliste.md):
+  Vorpruefung von Satzung, Mittelverwendung und tatsaechlicher Geschaeftsfuehrung
 
-## Working Assumption
+## Arbeitsannahme
 
-The strongest starting point is not a classic profit-oriented software company
-with later donations. The stronger model is a mission-driven organization whose
-software directly implements the nonprofit purpose. If relevant commercial SaaS
-or enterprise revenue is planned, a hybrid structure is usually more robust.
+Der staerkste Ausgangspunkt ist nicht eine klassische gewinnorientierte
+Softwaregesellschaft mit spaeteren Spenden. Tragfaehiger ist eine
+missionsgetriebene Organisation, deren Software den gemeinnuetzig beguenstigten
+Zweck unmittelbar verwirklicht. Wenn relevante kommerzielle SaaS- oder
+Enterprise-Erloese geplant sind, ist eine Hybridstruktur regelmaessig robuster.
 
-## Next Use
+## Naechste Nutzung
 
-1. Tailor `01-zweckbild.md` to the concrete product.
-2. Enter and classify planned revenues in `02-finanzierungsmodell.md`.
-3. Choose the preferred legal and operating model in `03-strukturmodell.md`.
-4. Review `04-vorabpruefung-checkliste.md` with tax and nonprofit-law
-   expertise before formation or restructuring.
+1. [01-zweckbild.md](01-zweckbild.md) auf das konkrete Produkt zuschneiden.
+2. Geplante Einnahmen in [02-finanzierungsmodell.md](02-finanzierungsmodell.md)
+   erfassen und klassifizieren.
+3. Das bevorzugte Rechts- und Betriebsmodell in
+   [03-strukturmodell.md](03-strukturmodell.md) auswaehlen.
+4. [04-vorabpruefung-checkliste.md](04-vorabpruefung-checkliste.md) vor
+   Gruendung oder Umstrukturierung mit Steuer- und Gemeinnuetzigkeitskompetenz
+   pruefen.

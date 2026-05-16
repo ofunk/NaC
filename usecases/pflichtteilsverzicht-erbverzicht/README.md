@@ -1,84 +1,78 @@
 # Pflichtteilsverzicht / Erbverzicht
 
-Status: KG baseline  
-KG node: `case.pflichtteilsverzicht_erbverzicht`  
+Status: KG-Basis
+KG-Knoten: `case.pflichtteilsverzicht_erbverzicht`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Sections 2346 and 2348
+Primaere Quellenanker: `src.beurkg`, `src.bgb.2346_2348`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for inheritance waiver and
-compulsory-share waiver contracts. The workflow must capture parties, waiver
-scope, descendant effects, compensation, approval issues and fairness flags.
+Vertraglicher Erb- oder Pflichtteilsverzicht, typischerweise in der Familiennachfolge, mit Beteiligten, Verzichtsumfang, Abfindung, Erstreckung auf Abkoemmlinge und Angemessenheitspruefung.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for future decedent, waiving party, family context and scope.
-- Contract drafting support for inheritance or compulsory-share waiver.
-- Compensation and tax/family metadata.
-- Personal participation, fairness and approval review gates.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No automated succession-planning advice as final truth.
-- No real family, wealth or compensation data in Git.
-- No execution without notarial fairness review.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `future_decedent.identity` | Who contracts with the waiving party? | Notary | Personal data |
-| `waiver_party.identity` | Who waives and are approvals required? | Notary | Family data |
-| `waiver.scope` | Is waiver full, compulsory-share only or limited? | Notary | Sensitive legal data |
-| `descendant.effect` | Does the waiver extend to descendants? | Notary | Family data |
-| `compensation.model` | Is compensation paid or transferred? | Client | Financial data |
-| `family.fairness_flags` | Are dependency, pressure or imbalance flags present? | Notary | Sensitive family data |
+| `future_decedent.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten future_decedent.identity fachlich zu klaeren? | notary | `personal_data` |
+| `waiver_party.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten waiver_party.identity fachlich zu klaeren? | notary | `family_data` |
+| `waiver.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten waiver.scope fachlich zu klaeren? | notary | `sensitive_legal_data` |
+| `descendant.effect` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten descendant.effect fachlich zu klaeren? | notary | `family_data` |
+| `compensation.model` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten compensation.model fachlich zu klaeren? | client | `financial_data` |
+| `family.fairness_flags` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten family.fairness_flags fachlich zu klaeren? | notary | `sensitive_family_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Waiver contract draft | Human-reviewed deed. | Synthetic or metadata only. |
-| Compensation evidence | Supports settlement route. | Evidence reference only. |
-| Fairness review notes | Captures sensitive review gate. | Evidence reference only. |
-| Execution and copy trace | Tracks closing. | Metadata only. |
+| `doc.waiver_contract` | Dokument/Nachweis: verzicht vertrag | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.compensation_evidence` | Dokument/Nachweis: abfindung nachweis | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Erbverzicht, Pflichtteilsverzicht or limited waiver.
-- Compensation: none, cash, asset transfer or mixed.
-- Descendant extension included or excluded.
-- Whether family-law, guardianship or tax review is needed.
+- `decision.waiver_type`: Entscheidung: verzicht art. Optionen: `erbverzicht`, `pflichtteilsverzicht`, `limited`, `unknown`.
+- `decision.compensation`: Entscheidung: abfindung. Optionen: `none`, `cash`, `asset_transfer`, `mixed`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Personal participation reviewed | Notary | Appointment |
-| Fairness and family flags reviewed | Notary | Draft release |
-| Compensation route reviewed | Notary | Execution |
-| Copies and storage handled | Notary clerk | Closing |
+| `gate.personal_presence_review` | Prueftor: persoenlich anwesenheit pruefung | notary |
+| `gate.fairness_review` | Prueftor: angemessenheit pruefung | notary |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Sensitive family/succession workflow guardrails. |
-| `noc-idaas` | Identity support where permitted. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define waiver-intake schema.
-2. Add descendant-effect decision model.
-3. Add compensation and fairness checklist.
-4. Add execution/copy evidence model.
-5. Validate with synthetic family fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Waiver scope is explicit before drafting.
-- Fairness flags block release until reviewed.
-- Compensation route is captured.
-- No real family or financial data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

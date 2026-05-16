@@ -1,85 +1,78 @@
 # Adoption / familienrechtliche Erklaerungen
 
-Status: KG baseline  
-KG node: `case.adoption_familienrechtliche_erklaerungen`  
+Status: KG-Basis
+KG-Knoten: `case.adoption_familienrechtliche_erklaerungen`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Section 1750
+Primaere Quellenanker: `src.beurkg`, `src.bgb.1750`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for adoption consent and related
-family-law declarations where notarial recording or certification is required.
-The workflow must treat the matter as highly sensitive and track court route,
-capacity, warnings, approvals and delivery evidence.
+Notarieller Usecase fuer Adoptionszustimmungen und familienrechtliche Erklaerungen mit Identitaet, Zustimmungsbeteiligten, Familiengericht, Geschaeftsfaehigkeit, Unwiderruflichkeitswarnung und besonders sensibler Datenfuehrung.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for declaration type, child/adoptee context, consenting party, court
-  destination, warning notes and additional approvals.
-- Draft/declaration package for notarial recording.
-- Family-court delivery and response tracking.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No family-court decision prediction.
-- No real child, adoption or family-sensitive data in Git.
-- No declaration without notarial warning and capacity review.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `case.type` | Which adoption or family-law declaration is needed? | Notary | Sensitive family data |
-| `child.identity_context` | Which child/adoptee context is relevant? | Client | Sensitive personal data |
-| `consenting_party.identity` | Who consents and is capacity reviewed? | Notary | Sensitive personal data |
-| `court.destination` | Which family court receives the declaration? | Notary clerk | Mandate metadata |
-| `irrevocability.warning` | Which warnings must be documented? | Notary | Sensitive process data |
-| `additional.approvals` | Are further consents or approvals required? | Notary | Sensitive family data |
+| `case.type` | Welche Adoptions- oder familienrechtliche Erklaerung wird benoetigt? | notary | `sensitive_family_data` |
+| `child.identity_context` | Welcher Kinder- oder Adoptivkontext ist relevant, ohne Rohdaten in Git zu speichern? | client | `sensitive_personal_data` |
+| `consenting_party.identity` | Wer erteilt die Zustimmung und sind Geschaeftsfaehigkeit, Alter oder Unterstuetzungsbedarf geklaert? | notary | `sensitive_personal_data` |
+| `court.destination` | Welches Familiengericht erhaelt die Erklaerung und welche Referenz wird verwendet? | notary_clerk | `mandate_metadata` |
+| `irrevocability.warning` | Welche Belehrungen zu Unwiderruflichkeit, Bedingungen oder Fristen muessen dokumentiert werden? | notary | `sensitive_process_data` |
+| `additional.approvals` | Sind elterliche, vormundschaftliche, ehebezogene, behoerdliche oder gerichtliche Zustimmungen relevant? | notary | `sensitive_family_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Consent declaration | Core notarial declaration. | Metadata or synthetic only. |
-| Court reference | Identifies delivery target. | Evidence reference only. |
-| Approval evidence | Supports consent chain. | Evidence reference only. |
-| Warning notes | Documents notarial warning gate. | Evidence reference only. |
+| `doc.consent_declaration` | Dokument/Nachweis: zustimmung erklaerung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.court_reference` | Dokument/Nachweis: gericht referenz | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Adoption consent, revocation/withdrawal path or other family declaration.
-- Additional approval required, available, blocked or unknown.
-- Court delivery route.
-- Whether capacity/support flags require special handling.
+- `decision.declaration_route`: Entscheidung: erklaerung weg. Optionen: `adoption_consent`, `withdrawal_or_revocation`, `other_family_declaration`, `unknown`.
+- `decision.approval_status`: Entscheidung: genehmigung status. Optionen: `not_required`, `required`, `available`, `blocked`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Identity and capacity reviewed | Notary | Declaration |
-| Irrevocability and condition warning reviewed | Notary | Execution |
-| Additional approval status reviewed | Notary | Court delivery |
-| Court delivery package ready | Notary clerk | Submission |
+| `gate.capacity_and_warning` | Prueftor: geschaeftsfaehigkeit und belehrung | notary |
+| `gate.court_delivery` | Prueftor: gericht zustellung | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | High-sensitivity family workflow guardrails. |
-| `noc-idaas` | Identity support where permitted. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define family declaration intake schema.
-2. Add high-sensitivity privacy labels and red-flag checks.
-3. Add warning and approval review gates.
-4. Add family-court delivery state model.
-5. Validate with synthetic non-personal fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Warnings and capacity review block execution.
-- Court destination is explicit.
-- Approval status is visible.
-- No real child or adoption data is committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

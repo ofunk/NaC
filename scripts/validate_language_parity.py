@@ -12,6 +12,35 @@ LANGUAGE_CODE_PATTERN = re.compile(r"^[a-z]{2,3}$")
 GERMAN_USECASE_MARKER = "Deutsch ist fuer diese Usecases die fuehrende und rechtlich bindende Sprache"
 GERMAN_ROOT_MARKER = "Deutsch ist repo-weit die fuehrende Sprache"
 TEXT_FILE_SUFFIXES = {".md", ".mdc", ".txt"}
+USECASE_TEXT_SUFFIXES = {".md", ".json"}
+ENGLISH_USECASE_MARKERS = (
+    "## Goal",
+    "## Scope",
+    "## Out of Scope",
+    "## Required Information Nodes",
+    "## Documents and Evidence",
+    "## Plugin Dependencies",
+    "## Delivery Tasks",
+    "## Acceptance Criteria",
+    "## Operating Model",
+    "## Open Information Nodes",
+    "## Review Gates",
+    "## Privacy Rule",
+    "Primary source anchors:",
+    "Machine-readable KG:",
+    "This file is the human review view",
+    "Which ",
+    "Who ",
+    "What ",
+    "When ",
+    "Where ",
+    "How ",
+    "Does ",
+    "Do ",
+    "Are ",
+    "Is this ",
+    "Should ",
+)
 
 
 def collect_files(surface: str, language: str) -> set[str]:
@@ -125,11 +154,33 @@ def validate_domain_language_rules() -> list[str]:
     return errors
 
 
+def validate_usecase_text_surfaces() -> list[str]:
+    errors: list[str] = []
+    usecases_root = REPO_ROOT / "usecases"
+    if not usecases_root.exists():
+        return errors
+
+    for path in sorted(usecases_root.rglob("*")):
+        if not path.is_file() or path.suffix.lower() not in USECASE_TEXT_SUFFIXES:
+            continue
+
+        rel_path = path.relative_to(REPO_ROOT).as_posix()
+        text = path.read_text(encoding="utf-8")
+        for marker in ENGLISH_USECASE_MARKERS:
+            if marker in text:
+                errors.append(
+                    f"{rel_path} enthaelt englischen Usecase-Marker: {marker}"
+                )
+                break
+    return errors
+
+
 def main() -> int:
     errors = validate_language_roots()
     errors.extend(validate_file_parity())
     errors.extend(validate_localized_text_is_not_copied())
     errors.extend(validate_domain_language_rules())
+    errors.extend(validate_usecase_text_surfaces())
 
     if errors:
         print("STATUS: FAILED")

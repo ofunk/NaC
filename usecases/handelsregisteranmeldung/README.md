@@ -1,88 +1,82 @@
 # Handelsregisteranmeldung
 
-Status: KG baseline  
-KG node: `case.handelsregisteranmeldung`  
+Status: KG-Basis
+KG-Knoten: `case.handelsregisteranmeldung`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, HGB Section 12, GmbHG
+Primaere Quellenanker: `src.beurkg`, `src.hgb.12`, `src.gmbhg`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for commercial-register applications:
-managing director changes, seat relocation, company name changes, capital
-measures, object changes, procuration, branch data and similar register events.
+Registeranmeldung fuer Aenderungen wie Geschaeftsfuehrerwechsel, Sitzverlegung, Kapitalmassnahmen, Firma, Unternehmensgegenstand oder Prokura.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for entity, register number, event type, signers, authority evidence,
-  effective date, required attachments and XNP route.
-- Public certification and electronic filing readiness.
-- Machine-readable package checks and register response evidence.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No automatic filing without notarial approval.
-- No real register packages, IDs or company documents in Git.
-- No hidden substitution of missing corporate resolutions.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `entity.identity` | Which entity, register court and register number are affected? | Notary clerk | Company register data |
-| `event.type` | Which register event is being filed? | Notary | Company data |
-| `signers.identity` | Who must sign and how is authority proven? | Notary clerk | Personal or company data |
-| `corporate.resolution` | Which resolution or legal basis authorizes the filing? | Notary | Company data |
-| `attachments.required` | Which electronic attachments are required? | Notary clerk | Company data |
-| `effective.date` | Is the change effective, conditional or register-effective only? | Notary | Mandate metadata |
-| `xnp.route` | Which notary card, XNP workspace and EGVP/beN route applies? | Notary clerk | Technical metadata |
-| `fees.costs` | Which value or fee metadata is needed? | Notary clerk | Financial metadata |
+| `entity.identity` | Welcher Rechtstraeger und welches Registerblatt sind betroffen? | notary_clerk | `company_register_data` |
+| `event.type` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten event.type fachlich zu klaeren? | notary | `company_data` |
+| `signers.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten signers.identity fachlich zu klaeren? | notary_clerk | `personal_or_company_data` |
+| `corporate.resolution` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten corporate.resolution fachlich zu klaeren? | notary | `company_data` |
+| `attachments.required` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten attachments.required fachlich zu klaeren? | notary_clerk | `company_data` |
+| `effective.date` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten effective.date fachlich zu klaeren? | notary | `mandate_metadata` |
+| `xnp.route` | Welcher XNP-, Karten-, Signatur- und Uebermittlungsweg wird genutzt? | notary_clerk | `technical_metadata` |
+| `fees.costs` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten fees.costs fachlich zu klaeren? | notary_clerk | `financial_metadata` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Register application | Publicly certified filing instrument. | Metadata only in Git. |
-| Corporate evidence | Resolution, appointment, articles or authority proof. | Evidence reference only. |
-| Electronic attachments | Machine-readable filing package. | Hash/reference only after review. |
-| Register response | Confirms submission, correction or completion. | Trace metadata only. |
+| `doc.register_application` | Dokument/Nachweis: register anmeldung | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.corporate_evidence` | Dokument/Nachweis: gesellschaft nachweis | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Standard event route or special legal review.
-- Signature method: in-office, video route, existing certified power or blocked.
-- Whether attachments are complete and machine-readable.
-- Whether correction or resubmission is needed after register response.
+- `decision.event_route`: Entscheidung: ereignis weg. Optionen: `standard`, `special_review`, `blocked`, `unknown`.
+- `decision.signature_method`: Entscheidung: signatur methode. Optionen: `in_office`, `video`, `existing_certified_power`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Public certification requirements met | Notary | Filing |
-| Authority and signer identity reviewed | Notary | Signature |
-| Electronic package format checked | Notary clerk | Submission |
-| Register response reviewed | Notary clerk | Closing |
+| `gate.public_certification` | Prueftor: oeffentlich beglaubigung | notary |
+| `gate.electronic_format` | Prueftor: electronic format | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Guardrails and evidence model. |
-| `noc-bnotk-xnp` | XNP and notary signature route. |
-| `noc-handelsregister` | Register filing readiness and response handling. |
-| `noc-cyberjack-rfid` | Card and reader readiness for notary signature. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-bnotk-xnp` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-handelsregister` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-cyberjack-rfid` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Build event-type taxonomy and required-attachment matrix.
-2. Bind signer identity and authority evidence to public certification gate.
-3. Add XNP and register-package dry-run.
-4. Add response-state model for submitted, corrected, completed or blocked.
-5. Validate with synthetic HRB/HRA fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Event type determines required attachments.
-- Signer authority must be reviewed before public certification.
-- XNP route must be ready before submission.
-- Register response is captured as evidence metadata.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

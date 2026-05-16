@@ -1,47 +1,42 @@
-# Loeschungsbewilligung / Grundbuchloeschung Knowledge Graph
+# Loeschungsbewilligung / Grundbuchloeschung KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `next10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.loeschungsbewilligung_grundbuchloeschung`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `next10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.loeschungsbewilligung_grundbuchloeschung`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `property.identity` | Property and register identity | `open` | `notary_clerk` | Which land register district, sheet, section and entry are affected? |
-| `right.identity` | Right to be deleted | `open` | `notary_clerk` | Which land charge, mortgage, easement, restriction or other right should be deleted? |
-| `creditor.authorization` | Creditor or beneficiary authorization | `open` | `notary` | Who is the current beneficiary and how is authorization to consent to deletion proven? |
-| `owner.consent` | Owner consent and representation | `open` | `notary_clerk` | Is owner consent required and who may sign for the owner? |
-| `brief.status` | Brief or book right status | `open` | `notary_clerk` | Is the right certificated by a letter, and if so where is the letter or replacement evidence? |
-| `filing.route` | Filing route and post-deletion notification | `open` | `notary_clerk` | Which notary filing route, portal and completion notification should be used? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `property.identity` | Welches Grundstueck, Grundbuchblatt, Flurstueck, Einheit oder welche aktuelle Bezeichnung identifiziert den Gegenstand? | `open` | notary_clerk |
+| `right.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten right.identity fachlich zu klaeren? | `open` | notary_clerk |
+| `creditor.authorization` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten creditor.authorization fachlich zu klaeren? | `open` | notary |
+| `owner.consent` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten owner.consent fachlich zu klaeren? | `open` | notary_clerk |
+| `brief.status` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten brief.status fachlich zu klaeren? | `open` | notary_clerk |
+| `filing.route` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten filing.route fachlich zu klaeren? | `open` | notary_clerk |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.deletion_consent` | Deletion authorization or consent | `open` |
-| `doc.land_register_excerpt` | Current land register excerpt | `open` |
-| `doc.right_letter` | Land-charge, mortgage or replacement letter evidence if required | `open` |
+| `doc.deletion_consent` | Dokument/Nachweis: loeschung zustimmung | `open` |
+| `doc.land_register_excerpt` | Dokument/Nachweis: grundbuch register excerpt | `open` |
+| `doc.right_letter` | Dokument/Nachweis: right brief | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.authority_review` | Beneficiary authorization reviewed | `open` |
-| `gate.filing_ready` | Deletion filing package ready | `open` |
+| `gate.authority_review` | Prueftor: befugnis pruefung | `open` |
+| `gate.filing_ready` | Prueftor: einreichung ready | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

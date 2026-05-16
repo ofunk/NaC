@@ -1,46 +1,41 @@
-# Pflichtteilsverzicht / Erbverzicht Knowledge Graph
+# Pflichtteilsverzicht / Erbverzicht KG-Review-Sicht
 
-Status: case-local static KG baseline  
-Last update: 2026-05-15  
-Catalog group: `next10`  
-Usecase: [README.md](README.md)  
-Machine-readable KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)  
-KG node: `case.pflichtteilsverzicht_erbverzicht`
+Status: usecase-lokale statische KG-Basis
+Letzte Aktualisierung: 2026-05-16
+Kataloggruppe: `next10`
+Usecase: [README.md](README.md)
+Maschinenlesbarer KG: [knowledge-graph.graph.json](knowledge-graph.graph.json)
+KG-Knoten: `case.pflichtteilsverzicht_erbverzicht`
 
-## Operating Model
+## Betriebsmodell
 
-This file is the human review view for the case-local static KG. The JSON
-file next to it is the machine-readable workflow state. Workflows may update
-status and evidence references through reviewed Git changes, but real mandate
-values must stay outside the repository.
+Diese Datei ist die deutsch gefuehrte menschliche Review-Sicht auf den usecase-lokalen statischen KG. Die JSON-Datei daneben ist der maschinenlesbare Workflow-Zustand. Workflows duerfen Status- und Evidenzreferenzen nur ueber reviewte Git-Aenderungen fortschreiben; echte Mandatswerte bleiben ausserhalb des Repository.
 
-## Open Information Nodes
+## Offene Informationsknoten
 
-| ID | Label | Status | Owner | Open question |
-| --- | --- | --- | --- | --- |
-| `future_decedent.identity` | Future decedent identity and capacity | `open` | `notary` | Who contracts with the waiving party and how is capacity reviewed? |
-| `waiver_party.identity` | Waiving party identity | `open` | `notary` | Who waives and are representation or approval issues present? |
-| `waiver.scope` | Waiver scope | `open` | `notary` | Is the waiver full inheritance waiver, compulsory-share waiver or limited arrangement? |
-| `descendant.effect` | Effect on descendants | `open` | `notary` | Should or does the waiver extend to descendants? |
-| `compensation.model` | Compensation or settlement | `open` | `client` | Is compensation, settlement, transfer or no consideration intended? |
-| `family.fairness_flags` | Family and fairness flags | `open` | `notary` | Are pressure, dependency, minors, care or imbalance flags present? |
+| ID | Fachliche Klaerung | Status | Rolle |
+| --- | --- | --- | --- |
+| `future_decedent.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten future_decedent.identity fachlich zu klaeren? | `open` | notary |
+| `waiver_party.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten waiver_party.identity fachlich zu klaeren? | `open` | notary |
+| `waiver.scope` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten waiver.scope fachlich zu klaeren? | `open` | notary |
+| `descendant.effect` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten descendant.effect fachlich zu klaeren? | `open` | notary |
+| `compensation.model` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten compensation.model fachlich zu klaeren? | `open` | client |
+| `family.fairness_flags` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten family.fairness_flags fachlich zu klaeren? | `open` | notary |
 
-## Documents
+## Dokumente
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `doc.waiver_contract` | Inheritance or compulsory-share waiver contract | `open` |
-| `doc.compensation_evidence` | Compensation or settlement evidence reference | `open` |
+| `doc.waiver_contract` | Dokument/Nachweis: verzicht vertrag | `open` |
+| `doc.compensation_evidence` | Dokument/Nachweis: abfindung nachweis | `open` |
 
-## Review Gates
+## Prueftore
 
-| ID | Label | Status |
+| ID | Bezeichnung | Status |
 | --- | --- | --- |
-| `gate.personal_presence_review` | Required personal participation reviewed | `open` |
-| `gate.fairness_review` | Family and fairness review completed | `open` |
+| `gate.personal_presence_review` | Prueftor: persoenlich anwesenheit pruefung | `open` |
+| `gate.fairness_review` | Prueftor: angemessenheit pruefung | `open` |
 
-## Privacy Rule
+## Datenschutzregel
 
-All `value` fields remain empty in Git. The KG stores workflow state, open
-questions and evidence references only; it does not store real mandate data,
-secrets or personal data.
+Alle `value`-Felder bleiben in Git leer oder `null`. Der KG speichert nur Workflow-Status, offene fachliche Klaerungen und Evidenzreferenzen; echte Mandatsdaten, Secrets und personenbezogene Rohdaten gehoeren nicht in dieses Repository.

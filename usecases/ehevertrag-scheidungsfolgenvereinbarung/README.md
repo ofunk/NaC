@@ -1,90 +1,81 @@
 # Ehevertrag / Scheidungsfolgenvereinbarung
 
-Status: KG baseline  
-KG node: `case.ehevertrag_scheidungsfolgen`  
+Status: KG-Basis
+KG-Knoten: `case.ehevertrag_scheidungsfolgen`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Section 1410, Versorgungsausgleich context
+Primaere Quellenanker: `src.beurkg`, `src.bgb.1410`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for marriage contracts and divorce
-consequence agreements. The workflow must capture spouses, context, property
-regime, asset categories, maintenance, pension equalization, child/family flags,
-asset transfers and fairness-review evidence.
+Ehevertrag oder Scheidungsfolgenvereinbarung mit Gueterstand, Ausgleich, Versorgung, Unterhalt, Vermoegensauseinandersetzung und Angemessenheitspruefung.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for spouses, marriage or divorce context, property regime, asset and
-  debt categories, maintenance, pension equalization and transfers.
-- Draft support for pre-marriage, in-marriage and divorce-consequence variants.
-- Fairness, imbalance and simultaneous-presence review gates.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No automated family-law fairness decision as final truth.
-- No real asset schedules, child data, health data or private addresses in Git.
-- No court filing or register follow-up without reviewed connector.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `spouses.identity` | Who are the spouses or intended spouses? | Notary clerk | Personal data |
-| `marriage.context` | Is this pre-marriage, during marriage, separation or divorce? | Notary | Family data |
-| `property.regime` | Should statutory property regime be modified or replaced? | Notary | Financial data |
-| `asset.disclosure` | Which asset categories, debts, businesses or pensions are relevant? | Spouses | Financial data |
-| `maintenance.rules` | Which maintenance provisions or waivers are intended? | Notary | Sensitive family-financial data |
-| `pension.equalization` | Should pension equalization be modified? | Notary | Financial data |
-| `child.family.flags` | Are child-care, dependency, pregnancy or imbalance flags relevant? | Notary | Sensitive family data |
-| `asset.transfer` | Are real estate, shares, accounts or debt transfers included? | Notary clerk | Financial or property data |
+| `spouses.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten spouses.identity fachlich zu klaeren? | notary_clerk | `personal_data` |
+| `marriage.context` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten marriage.context fachlich zu klaeren? | notary | `family_data` |
+| `property.regime` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten property.regime fachlich zu klaeren? | notary | `financial_data` |
+| `asset.disclosure` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten asset.disclosure fachlich zu klaeren? | spouses | `financial_data` |
+| `maintenance.rules` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten maintenance.rules fachlich zu klaeren? | notary | `sensitive_family_financial_data` |
+| `pension.equalization` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten pension.equalization fachlich zu klaeren? | notary | `financial_data` |
+| `child.family.flags` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten child.family.flags fachlich zu klaeren? | notary | `sensitive_family_data` |
+| `asset.transfer` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten asset.transfer fachlich zu klaeren? | notary_clerk | `financial_or_property_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Agreement draft | Human-reviewed deed. | Synthetic or metadata only. |
-| Asset schedule reference | Supports fairness review without storing details. | Evidence reference only. |
-| Fairness review notes | Documents review gate and warnings. | Evidence reference only. |
-| Execution and follow-up trace | Tracks signature, copies and register steps. | Metadata only. |
+| `doc.agreement_draft` | Dokument/Nachweis: vereinbarung entwurf | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.asset_schedule_reference` | Dokument/Nachweis: vermoegen schedule referenz | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Instrument type: pre-marriage, marriage contract or divorce consequences.
-- Fairness and imbalance risk: low, medium, high, blocked or unknown.
-- Whether pension equalization, maintenance or property transfers require
-  specialist review.
-- Whether real-estate or company-share transfer creates additional usecase
-  dependencies.
+- `decision.instrument_type`: Entscheidung: instrument art. Optionen: `pre_marriage`, `marriage_contract`, `divorce_consequence`, `unknown`.
+- `decision.fairness_risk`: Entscheidung: angemessenheit risk. Optionen: `low`, `medium`, `high`, `blocked`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Identity and personal status checked | Notary clerk | Appointment |
-| Simultaneous presence route checked | Notary clerk | Execution |
-| Fairness and imbalance review completed | Notary | Draft release |
-| Asset transfer side effects reviewed | Notary | Closing and follow-up |
+| `gate.fairness_review` | Prueftor: angemessenheit pruefung | notary |
+| `gate.simultaneous_presence` | Prueftor: gleichzeitig anwesenheit | notary_clerk |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Sensitive family workflow guardrails. |
-| `noc-idaas` | Identity support where permitted. |
-| `noc-grundbuch-portal` | Land-register review if real estate transfer is included. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-idaas` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-grundbuch-portal` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define intake schema for spouse, property and family-law context.
-2. Add fairness and imbalance red-flag checklist.
-3. Add optional asset-transfer branch into property/register workflows.
-4. Add evidence model for asset schedules and review notes.
-5. Validate with synthetic spouse and asset-category fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Fairness review blocks draft release where risk is unknown or high.
-- Asset categories are referenced, not stored with real values.
-- Simultaneous-presence route is explicit.
-- Side effects into real-estate or company-share transfers are visible.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.

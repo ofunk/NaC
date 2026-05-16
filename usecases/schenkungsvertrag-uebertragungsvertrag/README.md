@@ -1,87 +1,81 @@
 # Schenkungsvertrag / Uebertragungsvertrag
 
-Status: KG baseline  
-KG node: `case.schenkungsvertrag_uebertragung`  
+Status: KG-Basis
+KG-Knoten: `case.schenkungsvertrag_uebertragung`
 KG: [knowledge-graph.graph.json](knowledge-graph.graph.json) / [knowledge-graph.md](knowledge-graph.md)
-Primary source anchors: BeurkG, BGB Sections 518 and 311b, GBO
+Primaere Quellenanker: `src.beurkg`, `src.bgb.518`, `src.bgb.311b`, `src.gbo`
 
-## Goal
+## Ziel
 
-Prepare a notary-office usecase package for gift and transfer agreements,
-especially family real-estate transfers and anticipated succession. The package
-must capture asset, parties, reserved rights, reversion, obligations, approvals,
-tax flags and land-register execution metadata.
+Schenkungs- oder Uebertragungsvertrag, haeufig familieninterne Immobilienuebertragung, mit Vorbehaltsrechten, Rueckforderungsrechten, Pflegepflichten, Steuerbezug und Grundbuchvollzug.
 
-## Scope
+Deutsch ist fuer diesen Usecase die fuehrende fachliche Sprache. Technische IDs, Plugin-Namen und Workflow-Schluessel bleiben stabile Identifier.
 
-- Intake for transferor, transferee, transferred asset, consideration,
-  reserved rights, reversion rights, approvals and tax/family flags.
-- Draft support for gift, mixed gift or transfer with obligations.
-- Land-register, tax notification and follow-up evidence references.
+## Umfang
 
-## Out of Scope
+- Fachliche Aufnahme der offenen Informationsknoten aus der KG-Tabelle.
+- Erstellung oder Pruefung der erforderlichen Urkunden-, Antrags- und Nachweispakete.
+- Review-Gates fuer Identitaet, Vertretung, Datenschutz, Fristen, Fachpruefung und Einreichungsreife.
+- Nachweisfuehrung ausschliesslich ueber Metadaten oder freigegebene externe Evidenzspeicher.
 
-- No tax advice as automated truth.
-- No real family, asset, value or property data in Git.
-- No filing before ownership and reserved rights are reviewed.
+## Ausserhalb des Umfangs
 
-## Required Information Nodes
+- Keine Speicherung echter Mandatswerte, personenbezogener Rohdaten oder Secrets in Git.
+- Keine automatische fachliche Rechtsentscheidung ohne notarielle Pruefung und Freigabe.
+- Keine Umgehung von Vier-Augen-Freigaben, gesetzlichen Formvorgaben oder lokalen Notariatsprozessen.
 
-| Node | Open question | Owner | Privacy class |
+## Erforderliche Informationsknoten
+
+| Knoten | Fachliche Klaerung | Rolle | Datenschutzklasse |
 | --- | --- | --- | --- |
-| `transferor.identity` | Who transfers and are identity, capacity and ownership verified? | Notary clerk | Personal data |
-| `transferee.identity` | Who receives and what family or tax relation is relevant? | Notary clerk | Personal or family data |
-| `asset.identity` | Which property, share, business interest or asset is transferred? | Notary clerk | Property or financial data |
-| `reserved.rights` | Are usufruct, residential, care or usage rights reserved? | Notary | Family or financial data |
-| `reversion.rights` | Which retransfer events, revocation grounds or notices apply? | Notary | Sensitive legal data |
-| `consideration.obligations` | Is the transfer gratuitous, mixed or obligation-based? | Notary | Financial data |
-| `consents.approvals` | Which spouse, court, bank or public approvals are needed? | Notary clerk | Mandate metadata |
-| `tax.family.flags` | Which gift tax, succession or mandatory-share flags apply? | Notary | Sensitive family-financial data |
+| `transferor.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten transferor.identity fachlich zu klaeren? | notary_clerk | `personal_data` |
+| `transferee.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten transferee.identity fachlich zu klaeren? | notary_clerk | `personal_or_family_data` |
+| `asset.identity` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten asset.identity fachlich zu klaeren? | notary_clerk | `property_or_financial_data` |
+| `reserved.rights` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten reserved.rights fachlich zu klaeren? | notary | `family_or_financial_data` |
+| `reversion.rights` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten reversion.rights fachlich zu klaeren? | notary | `sensitive_legal_data` |
+| `consideration.obligations` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten consideration.obligations fachlich zu klaeren? | notary | `financial_data` |
+| `consents.approvals` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten consents.approvals fachlich zu klaeren? | notary_clerk | `mandate_metadata` |
+| `tax.family.flags` | Welche Angaben, Nachweise und Freigaben sind fuer den Knoten tax.family.flags fachlich zu klaeren? | notary | `sensitive_family_financial_data` |
 
-## Documents and Evidence
+## Dokumente und Nachweise
 
-| Artifact | Purpose | Storage rule |
+| Artefakt | Zweck | Speicherregel |
 | --- | --- | --- |
-| Transfer agreement draft | Human-reviewed deed. | Synthetic or metadata only. |
-| Land-register excerpt | Ownership and rights review for real estate. | Evidence reference only. |
-| Approval and consent evidence | Tracks spouse, court, administrator, bank or public approvals. | External reviewed evidence store. |
-| Tax and filing trace | Tracks notifications and execution. | Metadata only. |
+| `doc.transfer_draft` | Dokument/Nachweis: uebertragung entwurf | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.land_register_excerpt` | Dokument/Nachweis: grundbuch register excerpt | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
+| `doc.approvals` | Dokument/Nachweis: genehmigungen | Nur Metadaten, synthetische Referenzen oder Verweis auf freigegebenen Evidenzspeicher. |
 
-## Decisions
+## Entscheidungen
 
-- Transfer type: gift, mixed gift or transfer with obligations.
-- Reserved rights: none, usufruct, residential right, reversion, mixed.
-- Whether care, maintenance or equalization obligations are included.
-- Whether family/tax flags require specialist review.
+- `decision.transfer_type`: Entscheidung: uebertragung art. Optionen: `gift`, `mixed_gift`, `transfer_with_obligations`, `unknown`.
+- `decision.reserved_rights`: Entscheidung: vorbehalten rights. Optionen: `none`, `usufruct`, `residential_right`, `reversion`, `mixed`, `unknown`.
 
-## Gates
+## Prueftore
 
-| Gate | Review owner | Blocks |
+| Prueftor | Pruefzweck | Verantwortung |
 | --- | --- | --- |
-| Asset and ownership review | Notary | Draft release |
-| Reserved rights and reversion review | Notary | Execution |
-| Family, tax and succession flags reviewed | Notary | Closing decision |
-| Filing and tax notification package ready | Notary clerk | Post-execution |
+| `gate.asset_review` | Prueftor: vermoegen pruefung | notary |
+| `gate.family_tax_review` | Prueftor: familie steuer pruefung | notary |
 
-## Plugin Dependencies
+## Plugin-Abhaengigkeiten
 
-| Plugin | Purpose |
+| Plugin | Zweck |
 | --- | --- |
-| `noc-regulated-core` | Regulated workflow and evidence model. |
-| `noc-grundbuch-portal` | Land-register readiness for real-estate transfers. |
+| `noc-regulated-core` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
+| `noc-grundbuch-portal` | Fachliche oder technische Begleitfaehigkeit fuer diesen Usecase. |
 
-## Delivery Tasks
+## Lieferaufgaben
 
-1. Define transfer-intake schema with asset-type branches.
-2. Add reserved-rights and reversion decision model.
-3. Add approval and consent checklist.
-4. Add land-register and tax-notification evidence model.
-5. Validate with synthetic family-transfer fixtures.
+1. Informationsknoten mit synthetischen oder metadatenbasierten Beispielen pruefen.
+2. Erforderliche Dokument- und Nachweisreferenzen fachlich abgleichen.
+3. Prueftore mit Verantwortlichkeiten und Blockadewirkung validieren.
+4. Workflow- und Plugin-Abhaengigkeiten gegen die genehmigte Zielumgebung pruefen.
+5. Aenderungen nur ueber Review, Freigabe und GitOps-Vollzug uebernehmen.
 
-## Acceptance Criteria
+## Annahmekriterien
 
-- Ownership and asset review block draft release until complete.
-- Reserved rights are explicit and evidenced.
-- Tax and family flags cannot be silently ignored.
-- No real asset values or family details are committed.
-
+- Die deutsch gefuehrte Review-Sicht ist vollstaendig und verweist auf den lokalen KG.
+- Alle `value`-Felder im KG bleiben leer oder `null`.
+- Personenbezogene oder mandatsbezogene Rohdaten werden nicht in Git gespeichert.
+- Relevante Prueftore blockieren Entwurf, Beurkundung, Beglaubigung oder Einreichung bis zur Freigabe.
+- Nachweise werden nur als Metadaten oder externe Evidenzreferenzen gefuehrt.
