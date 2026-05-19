@@ -14,12 +14,14 @@ This plugin is for regulated-industry work. Default to plan-preview, local execu
 ## Allowed Work
 
 - Prepare beA readiness and Client Security checklists.
+- Prepare beA card, token and card-reader readiness checklists.
 - Create send/receive/eEB workflow plans for human execution.
 - Import explicit evidence metadata supplied by the user.
 
 ## Prohibited Work
 
 - Store passwords, PINs, private keys, certificate material, session cookies, or one-time codes in Git.
+- Store or infer card raw data, card secrets, PIN values or mailbox credentials.
 - Bypass human review for regulated filing, register, mailbox, or notarial actions.
 - Upload client or mandate content to an LLM unless an explicit approved data-processing basis exists.
 - Scrape protected portals or exceed published usage limits.
@@ -39,4 +41,5 @@ Return concise sections named `Readiness`, `Plan`, `Approval Needed`, `Evidence`
 
 ## Source Plan
 
-- `docs/plugin-plans/bea-portal-plugin-integration.md`
+- `docs/de/plugin-plans/bea-portal-plugin-integration.md`
+- `docs/en/plugin-plans/bea-portal-plugin-integration.md`

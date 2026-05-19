@@ -1,0 +1,52 @@
+{
+  "name": "noc-ausweisapp-eid",
+  "version": "0.1.0",
+  "description": "Local AusweisApp eID session preflight and metadata evidence companion.",
+  "author": {
+    "name": "NoC Maintainers",
+    "email": "security@example.com",
+    "url": "https://github.com/ofunk/NoC"
+  },
+  "homepage": "https://github.com/ofunk/NoC/tree/main/docs/plugin-plans",
+  "repository": "https://github.com/ofunk/NoC",
+  "license": "GPL-3.0-only",
+  "keywords": [
+    "oac",
+    "noc",
+    "eid",
+    "ausweisapp",
+    "personalausweis",
+    "card-reader",
+    "tc-token",
+    "identity",
+    "evidence"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "NoC AusweisApp eID",
+    "shortDescription": "Prepare local AusweisApp eID sessions without PIN or identity-data capture.",
+    "longDescription": "Local Codex plugin for AusweisApp-oriented German eID preflight. It uses the Personalausweis visual mark as its local recognition cue, checks the local AusweisApp status endpoint, prepares metadata-only evidence for a purpose-bound eID session and models the handoff to an approved eID server or identification service. It does not read identity attributes directly from the card, capture PINs or store eID raw data in Git.",
+    "developerName": "NoC Maintainers",
+    "category": "Compliance",
+    "capabilities": [
+      "Local",
+      "AusweisApp",
+      "EIDPreflight",
+      "CardReader",
+      "MetadataEvidence",
+      "NoPIN",
+      "NoIdentityDump"
+    ],
+    "websiteURL": "https://github.com/ofunk/NoC/tree/main/docs/plugin-plans",
+    "privacyPolicyURL": "https://github.com/ofunk/NoC/blob/main/SECURITY.md",
+    "termsOfServiceURL": "https://github.com/ofunk/NoC/blob/main/LICENSE",
+    "defaultPrompt": [
+      "Prepare local AusweisApp eID preflight evidence.",
+      "Review the eID server boundary before reading Personalausweis data.",
+      "Create a minimal claim set for a German eID session."
+    ],
+    "brandColor": "#5489C2",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

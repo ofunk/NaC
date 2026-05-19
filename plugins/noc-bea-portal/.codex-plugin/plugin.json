@@ -1,7 +1,7 @@
 {
   "name": "noc-bea-portal",
   "version": "0.1.0",
-  "description": "beA workflow and evidence companion.",
+  "description": "beA card-reader workflow and evidence companion.",
   "author": {
     "name": "NoC Maintainers",
     "email": "security@example.com",
@@ -13,20 +13,27 @@
   "keywords": [
     "oac",
     "bea",
+    "brak",
+    "erv",
     "law-firm",
+    "client-security",
+    "card-reader",
+    "lawyer-card",
     "mailbox",
     "evidence"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "NoC beA Portal",
-    "shortDescription": "beA workflow and evidence companion.",
-    "longDescription": "Local beA workflow companion for readiness, mailbox/eEB task planning, Client Security checks and evidence capture without storing PINs, card data, mailbox secrets or mandate content in Git.",
+    "shortDescription": "beA card-reader and evidence companion.",
+    "longDescription": "Local beA workflow companion for BRaK beA/ERV readiness, beA card or token availability, card-reader and Client Security checks, mailbox/eEB task planning and evidence capture without storing PINs, card data, mailbox secrets or mandate content in Git. The plugin uses the beA visual mark from the BRaK beA & ERV page as a local recognition cue; beA remains the authoritative system.",
     "developerName": "NoC Maintainers",
     "category": "Compliance",
     "capabilities": [
       "Local",
       "Readiness",
+      "CardReader",
+      "ClientSecurity",
       "Workflow",
       "Evidence"
     ],
@@ -34,11 +41,11 @@
     "privacyPolicyURL": "https://github.com/ofunk/NoC/blob/main/SECURITY.md",
     "termsOfServiceURL": "https://github.com/ofunk/NoC/blob/main/LICENSE",
     "defaultPrompt": [
-      "Run NoC beA Portal readiness.",
+      "Check beA card-reader and Client Security readiness.",
       "Create a Day1 plan for NoC beA Portal.",
       "Review Day2 drift for NoC beA Portal."
     ],
-    "brandColor": "#6B3F5F",
+    "brandColor": "#4F9AB0",
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/logo.png"
   }

@@ -77,7 +77,8 @@ Signatur- oder XNP-Komponenten benoetigt werden.
 | SAK lite oder XNP-Kartenpfad | installiert/konfiguriert | Kartenbasierter XNP-Zugang |
 | secureFramework | installiert/konfiguriert, falls vom Kartenpfad verlangt | lokale Sicherheitskomponente |
 | XNotar/Exchange-Pfad | vorhanden, wenn Registervorgaenge getestet werden | HRA/HRB- und Austauschpakete |
-| AusweisApp | optional fuer IDaaS/eID-Pfade | eID-Funktionspruefung |
+| AusweisApp | erforderlich fuer `noc-ausweisapp-eid` und produktive eID-Pfade | eID-Funktionspruefung und lokaler Statusendpunkt `127.0.0.1:24727` |
+| beN Anwendung | verfuegbar nach XNP-Ersteinrichtung, falls `noc-ben-portal` getestet wird | Aktivierung, Empfang und Versand im besonderen elektronischen Notarpostfach |
 
 Ein morris-Test ist erfolgreich, wenn die Middleware erreichbar antwortet. Eine
 Antwort wie `kein Kartenleser angeschlossen`, `NoReader` oder `NoCard` ist fuer
@@ -88,8 +89,10 @@ Notariatsarbeitsplatz-Check:
 
 ```bash
 python scripts/startup_check.py --profile notary-workstation --ide auto
+python plugins\noc-ausweisapp-eid\scripts\prepare_eid_session.py --json
 python plugins\noc-cyberjack-rfid\scripts\check_readiness.py --json --probe-morris-api
 python plugins\noc-bnotk-xnp\scripts\reader_prompt.py --json --probe-morris-api
+python plugins\noc-ben-portal\scripts\prepare_ben_session.py --json
 ```
 
 ## Datenschutz Und Betriebsgrenzen

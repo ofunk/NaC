@@ -1,0 +1,61 @@
+{
+  "schema_version": "oac.plugin.contract/v1",
+  "plugin": "noc-ausweisapp-eid",
+  "status": "installable-mvp",
+  "source_plan": "docs/plugin-plans/ausweisapp-eid-plugin-integration.md",
+  "runtime_mode": "local-ausweisapp-eid-preflight",
+  "data_boundary": {
+    "secrets_in_git": false,
+    "client_content_in_git": false,
+    "identity_document_raw_data_in_git": false,
+    "pin_can_puk_in_git": false,
+    "tc_token_url_in_git": false,
+    "llm_receives_secret_values": false,
+    "evidence_is_metadata_only_by_default": true,
+    "identity_attributes_require_backend_assertion": true
+  },
+  "human_approval_required_for": [
+    "production_eid_transaction",
+    "personal_data_processing",
+    "backend_assertion_import",
+    "iam_projection_write",
+    "connector_activation",
+    "retention_policy_change"
+  ],
+  "allowed_work": [
+    "Check AusweisApp localhost status reachability as metadata only.",
+    "Prepare purpose-bound eID session evidence without PIN, CAN, PUK, card raw data or identity attribute capture.",
+    "Hash tcTokenURL values in evidence instead of storing full session URLs.",
+    "Define minimal verified-claim sets and consent evidence for downstream IDaaS use.",
+    "Route productive identity attributes through an approved eID server, eID service or identification service."
+  ],
+  "prohibited_work": [
+    "Store PIN, CAN, PUK, card raw data, card serial values, full identity-document dumps, access tokens, session cookies, certificates or private keys in Git.",
+    "Claim that local Codex or AusweisApp SDK access directly returns identity attributes to the client application.",
+    "Execute production eID flows without reviewed backend connector code and human approval.",
+    "Upload real identity data or client personal data to an LLM without an explicit approved data-processing basis.",
+    "Reuse verified claims outside the documented purpose."
+  ],
+  "day0": [
+    "Confirm purpose, tenant, actor role, reviewer role, claim-set minimization and privacy basis.",
+    "Confirm AusweisApp installation and localhost status reachability.",
+    "Confirm Online-Ausweisfunktion, six-digit PIN availability and reader path with the human holder without requesting PIN values.",
+    "Confirm backend route: identification service, eID service or own eID server with Berechtigungszertifikat where required."
+  ],
+  "day1": [
+    "Run scripts/prepare_eid_session.py to produce metadata-only evidence.",
+    "Start production eID only after documented approval and reviewed backend route.",
+    "Import only minimal approved backend claims into the downstream IDaaS contract."
+  ],
+  "day2": [
+    "Review AusweisApp version drift, eID service contract status, Berechtigungszertifikat status, claim-set minimization, failed sessions, expired assertions and retention drift."
+  ],
+  "required_accounts_or_approvals": [
+    "Approved data-processing basis for personal data",
+    "Approved eID server, eID service or identification service",
+    "Berechtigungszertifikat decision where no identification service is used",
+    "Human approval for production eID transaction",
+    "Reviewer approval for backend assertion import",
+    "AVV/DPA decision for SaaS identification services"
+  ]
+}

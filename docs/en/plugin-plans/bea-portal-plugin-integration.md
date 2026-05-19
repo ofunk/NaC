@@ -1,6 +1,6 @@
 # beA Portal Plugin Integration Plan
 
-Status: `draft`
+Status: `active`
 
 ## Goal
 
@@ -9,13 +9,17 @@ electronic attorney mailbox, `beA`, without bypassing the official client
 security, mailbox ownership or professional responsibility model.
 
 The target is a local companion that checks readiness, prepares send/receive
-workflows, records evidence metadata and supports later integration decisions.
+workflows, checks beA card or token and card-reader readiness, records evidence
+metadata and supports later integration decisions.
 It is not a portal-scraping or autonomous filing tool.
 
 ## Source And Integration Anchors
 
 - beA is the regulated electronic mailbox for lawyers in Germany.
 - The beA Client Security boundary and mailbox access model remain binding.
+- The BRaK beA and ERV page names beA card, card reader, beA Client Security,
+  supported browser and local administrator rights as practical setup
+  prerequisites.
 - Any direct integration path must be checked against the official beA and
   professional-software terms.
 - eEB, export, receipt and dispatch evidence must be handled with clear
@@ -33,11 +37,20 @@ The first implementation path is a **local companion**:
 Direct mailbox automation or dispatch automation is out of scope until legal,
 technical and professional responsibility have been approved in writing.
 
+## Visual Store Identity
+
+The plugin uses the beA logo asset from the official BRaK beA and ERV page as
+its store and composer recognition mark. This visual binding is only a
+recognition cue for the local NoC companion. beA, the beA portal and beA Client
+Security remain authoritative; BRaK/beA trademark or usage rights are not
+transferred by this repository.
+
 ## Plugin Boundaries
 
 The plugin may:
 
-- check local prerequisites for beA and Client Security,
+- check local prerequisites for beA, beA card or token, card reader and Client
+  Security,
 - create plan previews for send, receive, export and eEB workflows,
 - prepare checklists and approval gates,
 - record evidence metadata such as timestamp, case ID, hash and user
@@ -130,6 +143,7 @@ Typical states:
 ## MVP Scope
 
 - Local readiness check.
+- beA card or token and card-reader readiness check.
 - Send/receive/eEB plan preview.
 - Evidence metadata and hash model.
 - Human approval gates.
@@ -191,3 +205,9 @@ Typical states:
 - No credentials, PINs, mailbox IDs or mandate content are stored.
 - Evidence model contains hash, case, actor, time and approval reference.
 - The first workflow remains a local companion workflow.
+
+## Sources
+
+- beA portal: https://www.bea-brak.de/beaportal/
+- BRaK beA and ERV: https://www.brak.de/anwaltschaft/bea-erv/
+- beA user manual: https://handbuch.bea-brak.de/

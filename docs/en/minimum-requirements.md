@@ -76,7 +76,8 @@ required.
 | SAK lite or XNP card path | installed/configured | card-based XNP access |
 | secureFramework | installed/configured if required by the card path | local security component |
 | XNotar/exchange path | present when register cases are tested | HRA/HRB and exchange packages |
-| AusweisApp | optional for IDaaS/eID paths | eID function check |
+| AusweisApp | required for `noc-ausweisapp-eid` and productive eID paths | eID function check and local status endpoint `127.0.0.1:24727` |
+| beN application | available after XNP first setup when `noc-ben-portal` is tested | activation, receive and send workflows in the special electronic notary mailbox |
 
 A morris test is successful when the middleware responds. A response such as
 `no card reader attached`, `NoReader` or `NoCard` is sufficient for the
@@ -86,8 +87,10 @@ Notary-workstation check:
 
 ```bash
 python scripts/startup_check.py --profile notary-workstation --ide auto
+python plugins\noc-ausweisapp-eid\scripts\prepare_eid_session.py --json
 python plugins\noc-cyberjack-rfid\scripts\check_readiness.py --json --probe-morris-api
 python plugins\noc-bnotk-xnp\scripts\reader_prompt.py --json --probe-morris-api
+python plugins\noc-ben-portal\scripts\prepare_ben_session.py --json
 ```
 
 ## Privacy And Operating Boundaries

@@ -1,13 +1,13 @@
 # beA Portal Plugin Integration Plan
 
-Stand: 2026-05-11
+Stand: 2026-05-16
 
 ## Ziel
 
 Dieses Dokument plant die Integration des beA-Portals und der beA-nahen Arbeitsablaeufe als lokales bzw. mandantenfaehiges NoC-Plugin. Ziel ist nicht, das besondere elektronische Anwaltspostfach technisch zu ersetzen oder unkontrolliert zu automatisieren. Ziel ist ein sicherer, auditierbarer Arbeitsrahmen, in dem NoC:
 
 - beA-Voraussetzungen prueft,
-- lokale beA-Client-Security-Ablaeufe kontrolliert begleitet,
+- lokale beA-Client-Security-, Kartenleser- und Token-Ablaeufe kontrolliert begleitet,
 - Versand-, Empfangs-, Signatur- und eEB-Vorgaenge als NoC-Prozesse dokumentiert,
 - Nachweise minimiert speichert,
 - Kanzlei- und Mandanten-Onboarding reproduzierbar macht.
@@ -24,6 +24,7 @@ Aus den offiziellen beA-/BRAK-Unterlagen ergeben sich folgende belastbare Integr
 - Die beA Client Security ist lokal auf dem Nutzerrechner oder in einer Terminalserverumgebung installiert.
 - Die beA Client Security fuehrt sicherheitsrelevante Funktionen aus, die nicht im Internet stattfinden duerfen, darunter Anmeldung, Signieren, Signaturpruefung, Ver- und Entschluesselung sowie Export.
 - Browser und beA Client Security kommunizieren lokal. Dafuer wird ein individuelles Schluessel-/Zertifikatspaar erzeugt; das zugehoerige Zertifikat muss im Browser hinterlegt werden.
+- Fuer die lokale Einrichtung benennt die BRaK-Seite beA-Karte, Kartenleser, beA Client Security, unterstuetzten Browser und lokale Administratorrechte als praktische Voraussetzungen.
 - Fuer den Zugriff mit Hardware-Token gilt Zwei-Faktor-Authentifizierung aus Besitz der Karte und Wissen der PIN.
 - Hardware-Token werden fuer Registrierung, Anmeldung und Signatur genutzt.
 - Fuer qualifizierte elektronische Signaturen werden unterstuetzte Signaturkarten bzw. Fernsignaturverfahren genutzt. Signaturdateien werden typischerweise als `.p7s` neben dem Originaldokument erzeugt.
@@ -32,6 +33,10 @@ Aus den offiziellen beA-/BRAK-Unterlagen ergeben sich folgende belastbare Integr
 ## Leitentscheidung
 
 Die erste NoC-Integration erfolgt nicht als verdeckte Browser-Automation und nicht als direkter Zugriff auf beA-interne Schnittstellen. Der sichere Start ist ein lokaler Companion, der beA-Status, Client-Security-Bereitschaft, lokale Preconditions und NoC-Evidence abbildet.
+
+## Visuelle Store-Kennung
+
+Das Plugin verwendet das beA-Logo von der offiziellen BRaK-Seite zu beA und ERV als Store- und Composer-Erkennungszeichen. Diese visuelle Bindung dient nur der Wiedererkennbarkeit des lokalen NoC-Companions. beA, beA-Portal und beA Client Security bleiben die fuehrenden Systeme; Marken- und Nutzungsrechte von BRaK/beA werden dadurch nicht uebertragen.
 
 ```text
 Kanzlei-Arbeitsplatz oder Terminalserver
@@ -142,7 +147,7 @@ Das Plugin kann als lokaler MCP-Server oder lokaler HTTP-Service umgesetzt werde
 - `bea.check_browser_certificate`
   - dokumentiert, ob die lokale Browser-Kommunikation eingerichtet ist; keine Zertifikatsextraktion in NoC.
 - `bea.check_token_readiness`
-  - fuehrt eine Checkliste fuer Karte, Software-Token oder Fernsignatur.
+  - fuehrt eine Checkliste fuer Karte, Kartenleser, Software-Token oder Fernsignatur.
 
 ### Prozessvorbereitung
 

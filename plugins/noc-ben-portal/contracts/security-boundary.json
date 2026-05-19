@@ -1,0 +1,49 @@
+{
+  "schema_version": "oac.plugin.contract/v1",
+  "plugin": "noc-ben-portal",
+  "status": "installable-mvp",
+  "source_plan": "docs/de/plugin-plans/ben-portal-plugin-integration.md",
+  "runtime_mode": "local-notary-mailbox-companion",
+  "data_boundary": {
+    "secrets_in_git": false,
+    "notarial_matter_content_in_git": false,
+    "llm_receives_secret_values": false,
+    "evidence_is_metadata_only_by_default": true
+  },
+  "human_approval_required_for": [
+    "ben_activation_or_mailbox_action",
+    "card_reader_or_token_prompt",
+    "xnp_action_or_register_handoff",
+    "notarial_action",
+    "cloud_apply_or_policy_change"
+  ],
+  "allowed_work": [
+    "Prepare beN readiness and XNP-first setup checklists.",
+    "Prepare BNotK card, token and card-reader readiness checklists.",
+    "Create beN activation, send, receive, beN-to-beA and export evidence plans for human execution.",
+    "Import explicit evidence metadata supplied by the user."
+  ],
+  "prohibited_work": [
+    "Store passwords, PINs, private keys, certificate material, session cookies, one-time codes or XNP API keys in Git.",
+    "Store or infer card raw data, card secrets, PIN values, mailbox secrets or notarial matter content.",
+    "Bypass human review for mailbox, register, XNP, notarial or other regulated actions.",
+    "Upload notarial matter content to an LLM unless an explicit approved data-processing basis exists.",
+    "Scrape protected portals or exceed published usage limits."
+  ],
+  "day0": [
+    "Confirm notary or notary-administrator role, XNP first setup, BNotK card or token readiness, supported card-reader availability and beN application availability."
+  ],
+  "day1": [
+    "Create human-approved beN activation, receive, send, beN-to-beA and evidence checklists."
+  ],
+  "day2": [
+    "Track XNP versions, beN availability, failed mailbox checks, export integrity and card-reader drift."
+  ],
+  "required_accounts_or_approvals": [
+    "beN mailbox access",
+    "XNP first setup and local XNP workstation context",
+    "BNotK card or approved authentication method",
+    "Supported card reader for BNotK card workflows",
+    "Firm or notary-office policy for mailbox actions, exports and evidence"
+  ]
+}

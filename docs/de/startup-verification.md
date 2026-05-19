@@ -46,6 +46,16 @@ Fuer Notariatsarbeitsplatz, Kartenleser, morris und XNP-Pfad:
 python scripts/startup_check.py --profile notary-workstation --ide auto
 ```
 
+Optionale lokale Operator-Webapp fuer denselben Arbeitsplatz:
+
+```bash
+python scripts/nac_hw_bridge.py --open
+```
+
+Die Webapp startet keine Remote-Ausfuehrung. Sie spricht nur die lokale Bridge
+auf `127.0.0.1` an; die Bridge startet die freigegebenen CLI-Pruefskripte im
+NaC-Workspace.
+
 ## Grenzen
 
 - Der Check sieht nur lokal verfuegbare Informationen.

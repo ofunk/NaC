@@ -247,6 +247,9 @@ class CyberJackReadinessTests(unittest.TestCase):
         serialized_details = str(result["details"])
         self.assertNotIn("123456#sid456", serialized_details)
         self.assertNotIn("fixture-nonce-value", serialized_details)
+        auth_calls = [params for path, params in calls if path == "/system" and params.get("cmd") == "auth"]
+        self.assertEqual(auth_calls[0]["app_name"], "NaC Hardware Readiness Check")
+        self.assertNotIn("no_always_allow_button", auth_calls[0])
         self.assertTrue(any(path == "/system" and params.get("cmd") == "close" for path, params in calls))
 
 

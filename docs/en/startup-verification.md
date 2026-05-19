@@ -46,6 +46,16 @@ For the notary workstation, card reader, morris and XNP path:
 python scripts/startup_check.py --profile notary-workstation --ide auto
 ```
 
+Optional local operator webapp for the same workstation:
+
+```bash
+python scripts/nac_hw_bridge.py --open
+```
+
+The webapp does not start remote execution. It only talks to the local bridge on
+`127.0.0.1`; the bridge runs the approved CLI check scripts in the NaC
+workspace.
+
 ## Limits
 
 - The check only sees locally available information.

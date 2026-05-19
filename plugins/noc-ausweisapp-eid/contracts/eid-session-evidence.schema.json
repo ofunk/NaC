@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ofunk/NoC/plugins/noc-ausweisapp-eid/contracts/eid-session-evidence.schema.json",
+  "title": "NoC AusweisApp eID Session Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "plugin",
+    "created_utc",
+    "overall_status",
+    "purpose",
+    "claim_set",
+    "checks",
+    "policy",
+    "approvals",
+    "source_references"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "noc.eid-session-evidence/v1"
+    },
+    "plugin": {
+      "const": "noc-ausweisapp-eid"
+    },
+    "created_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "overall_status": {
+      "enum": [
+        "ready",
+        "manual_review",
+        "blocked"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested",
+        "backend_assertion_required"
+      ],
+      "properties": {
+        "requested": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "backend_assertion_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "tc_token": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provided",
+        "sha256"
+      ],
+      "properties": {
+        "provided": {
+          "type": "boolean"
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "activation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "desktop_activation_url_available",
+        "full_url_stored"
+      ],
+      "properties": {
+        "desktop_activation_url_available": {
+          "type": "boolean"
+        },
+        "full_url_stored": {
+          "type": "boolean"
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "id",
+          "title",
+          "status",
+          "severity",
+          "message"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "passed",
+              "manual_review",
+              "failed"
+            ]
+          },
+          "severity": {
+            "enum": [
+              "info",
+              "manual",
+              "blocker"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pin_captured",
+        "can_captured",
+        "puk_captured",
+        "card_data_captured",
+        "identity_attributes_captured",
+        "tc_token_url_stored",
+        "metadata_only"
+      ],
+      "properties": {
+        "pin_captured": {
+          "const": false
+        },
+        "can_captured": {
+          "const": false
+        },
+        "puk_captured": {
+          "const": false
+        },
+        "card_data_captured": {
+          "const": false
+        },
+        "identity_attributes_captured": {
+          "const": false
+        },
+        "tc_token_url_stored": {
+          "const": false
+        },
+        "metadata_only": {
+          "const": true
+        }
+      }
+    },
+    "approvals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "production_eid_transaction",
+        "personal_data_processing",
+        "backend_assertion_import"
+      ],
+      "properties": {
+        "production_eid_transaction": {
+          "type": "boolean"
+        },
+        "personal_data_processing": {
+          "type": "boolean"
+        },
+        "backend_assertion_import": {
+          "type": "boolean"
+        }
+      }
+    },
+    "source_references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      }
+    }
+  }
+}

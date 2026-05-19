@@ -1,10 +1,16 @@
 # NoC beA Portal
 
-Local beA workflow companion for readiness, mailbox/eEB task planning, Client Security checks and evidence capture without storing PINs, card data, mailbox secrets or mandate content in Git.
+![beA logo](assets/logo.png)
+
+Local beA workflow companion for BRaK beA/ERV readiness, beA card or token availability, card-reader and Client Security checks, mailbox/eEB task planning and evidence capture without storing PINs, card data, mailbox secrets or mandate content in Git.
 
 ## Status
 
 Installable MVP plugin scaffold. The plugin provides local Codex skill guidance, a machine-readable security contract and marketplace metadata. External write adapters are intentionally not enabled in this first version.
+
+## Visual Identity
+
+The plugin uses the beA logo asset from the official [BRaK beA and ERV page](https://www.brak.de/anwaltschaft/bea-erv/) as its store and composer recognition mark. The visual mark is only a recognition cue for the local companion; beA and the official beA portal remain authoritative, and BRaK/beA trademark or usage rights are not transferred by this repository.
 
 ## Install Boundary
 
@@ -15,7 +21,7 @@ Installable MVP plugin scaffold. The plugin provides local Codex skill guidance,
 
 ## Day0
 
-- Confirm mailbox owner, user role, card/token readiness and Client Security availability.
+- Confirm mailbox owner, user role, beA card or token readiness, supported card-reader availability and Client Security availability.
 
 ## Day1
 
@@ -29,7 +35,8 @@ Installable MVP plugin scaffold. The plugin provides local Codex skill guidance,
 
 - beA mailbox access
 - beA card or approved authentication method
+- Supported card reader for beA card workflows
 - beA Client Security on local workstation
 - Firm policy for eEB and exports
 
-See `docs/plugin-operations/account-and-approval-requests.md` for the consolidated request list.
+See [docs/de/plugin-operations/account-and-approval-requests.md](../../docs/de/plugin-operations/account-and-approval-requests.md) and [docs/en/plugin-operations/account-and-approval-requests.md](../../docs/en/plugin-operations/account-and-approval-requests.md) for the consolidated request list.

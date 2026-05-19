@@ -71,12 +71,20 @@ Zielkanal, insbesondere wenn Apps oder Actions beteiligt sind.
 ## Aktueller Entwicklungsmodus
 
 NoC wird als ausfuehrbare Software entwickelt, nicht nur als Dokumentation. Die
-aktuell implementierte Runtime-Oberflaeche ist die notarielle KG-CLI:
+aktuell versionierten Runtime-Einstiege sind lokal:
 
 ```bash
 python scripts/notary_kg.py --repo-root . status
 python scripts/notary_kg.py --repo-root . case bautraegervertrag
 python scripts/notary_kg.py --repo-root . editor-view immobilienkaufvertrag
+```
+
+Fuer Arbeitsplatz-Gates kann zusaetzlich die lokale Operator-Webapp genutzt
+werden. Sie ersetzt die CLI nicht, sondern spricht einen per CLI gestarteten
+Bridge-Prozess auf `127.0.0.1` an:
+
+```bash
+python scripts/nac_hw_bridge.py --open
 ```
 
 Das aktive Build-Board wird in [roadmap/BUILD_NOW.md](roadmap/BUILD_NOW.md)

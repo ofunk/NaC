@@ -18,9 +18,11 @@ Mailbox-IDs, Steuer-IDs, Zertifikatsmaterialien oder Mandatsinhalte.
 | Plugin | Zu beantragende Konten/Freigaben | Blockiert fuer |
 | --- | --- | --- |
 | `noc-regulated-core` | GitHub-Schreibzugriff; freigegebene Reviewer-Liste; Evidence-Storage-Entscheidung | Day1 produktive Nutzung |
+| `noc-ausweisapp-eid` | Datenschutzgrundlage fuer Personendaten; genehmigte Backend-Route ueber Identifizierungsdienst, eID-Service oder eigenen eID-Server; Berechtigungszertifikat-Entscheidung, sofern kein Identifizierungsdienst genutzt wird; AVV/DPA-Entscheidung fuer SaaS-Identifizierungsdienste; menschliche Freigabe fuer produktive eID-Transaktion und Backend-Assertion-Import | Day1 produktive Nutzung |
 | `noc-handelsregister` | Modusentscheidung: Buerger-Preflight oder notariatsseitiger Workflow; abgeschlossene `noc-cyberjack-rfid`- und `noc-bnotk-xnp`-Readiness fuer Notariatsworkflows; Notartermin oder Notariatsworkflow; Bundesnotarkammer-App fuer Online-Verfahren; eID-faehiger amtlicher Ausweis und PIN; Antragsteller- und Reviewer-Freigabe fuer das Registeranmeldungspaket | Day1 produktive Nutzung |
 | `noc-bnotk-xnp` | Abgeschlossene `noc-cyberjack-rfid` Card/SAK-Readiness; BNotK/XNP-Zugang fuer das Notariat; lokale XNP-Anmeldung und aktiver Amtstaetigkeitskontext; XNotar-/Registermodul oder Austauschordnerroute; Freigabe der Schnittstelle durch Notariatssoftwarehersteller; lokale Arbeitsplatz-Adminfreigabe | Day1 produktive Nutzung |
-| `noc-bea-portal` | beA-Postfachzugriff; beA-Karte oder freigegebene Authentifizierungsmethode; beA Client Security am lokalen Arbeitsplatz; Kanzleipolicy fuer eEB und Exporte | Day1 produktive Nutzung |
+| `noc-ben-portal` | beN-Postfachzugriff; abgeschlossene XNP-Ersteinrichtung; BNotK-Karte oder freigegebene Authentifizierungsmethode; unterstuetzter Kartenleser fuer BNotK-Kartenpfade; Notariats-Policy fuer beN-Aktivierung, Postfachaktionen, Exporte und Evidence | Day1 produktive Nutzung |
+| `noc-bea-portal` | beA-Postfachzugriff; beA-Karte oder freigegebene Authentifizierungsmethode; unterstuetzter Kartenleser fuer beA-Kartenpfade; beA Client Security am lokalen Arbeitsplatz; Kanzleipolicy fuer eEB und Exporte | Day1 produktive Nutzung |
 | `noc-elster-eric` | ELSTER-Organisations- oder Nutzerzugang; lokales Zertifikat oder freigegebene Authentifizierungsmethode; ERiC-Herstellerregistrierung bei serverseitiger Integration; Freigabe zur steuerlichen Vertretung | Day1 produktive Nutzung |
 | `noc-cyberjack-rfid` | BNotK-Chip-/Signaturkarte oder lokale Schneider/SCP-Karte; Kartenleser Sicherheitsklasse 3; BNotK SAK lite oder XNP-Kartenpfad; secureFramework-Kommunikationspfad; freigegebene Hardwarebeschaffung; lokale Arbeitsplatz-Adminfreigabe; Treiber-/Hersteller-Supportkanal | Day1 produktive Nutzung |
 | `noc-grundbuch-portal` | Bundeslandspezifischer Grundbuchportalzugang; Bestaetigung der berechtigten Berufsrolle; Kostenstellenfreigabe; Retention-/DMS-Entscheidung | Day1 produktive Nutzung |
@@ -31,12 +33,16 @@ Mailbox-IDs, Steuer-IDs, Zertifikatsmaterialien oder Mandatsinhalte.
 Direkte externe Schreibadapter duerfen nicht implementiert oder aktiviert
 werden, bis diese Punkte schriftlich freigegeben sind:
 
-- beA-Sende-/Empfangs-/eEB-Automationspfad und Client-Security-Grenze.
+- beA-Sende-/Empfangs-/eEB-Automationspfad, Kartenleser-/Token-Grenze und
+  Client-Security-Grenze.
 - Card/SAK-Gate fuer BNotK-Chip-/Signaturkarte oder lokale Schneider/SCP-Karte,
   Kartenleser Sicherheitsklasse 3, secureFramework und keine PIN-Erfassung.
 - Offizieller XNP-/Notariatssoftware-Schnittstellenvertrag, abgeschlossenes
   Card/SAK-Gate, lokales Authentifizierungsgate, Amtstaetigkeitskontext und
   Credential-Grenze.
+- beN-Aktivierungs-, Sende-/Empfangs- und beN-zu-beA-Pfad, abgeschlossene
+  XNP-Ersteinrichtung, Kartenleser-/Token-Grenze und keine Postfachinhalte in
+  LLM-Kontexten.
 - ELSTER/ERiC-Hersteller- oder Portalbetreiber-Onboarding, falls serverseitige
   Integration verfolgt wird.
 - Autorisierter Grundbuchportal-Direktadapter, landesspezifische Bedingungen
@@ -44,6 +50,9 @@ werden, bis diese Punkte schriftlich freigegeben sind:
 - Online-Handelsregisteranmeldungsroute, Modusentscheidung, abgeschlossene
   Card/SAK- und XNP-Gates fuer notariatsseitige Workflows, Antragstellerbefugnis
   und eID-/App-Readiness.
+- AusweisApp/eID-Produktivroute, Backend-Anbindung an Identifizierungsdienst,
+  eID-Service oder eigenen eID-Server, Berechtigungszertifikat-Entscheidung,
+  Datenschutzgrundlage, AVV/DPA-Status und keine lokale PIN-/Ausweisdatenablage.
 - OCI Resource Manager Apply-Rechte, Vault-Policy und Audit-Retention.
 
 ## Day2-Rezertifizierung

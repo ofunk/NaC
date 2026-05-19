@@ -167,6 +167,11 @@
             "purpose": "BNotK and register communication"
           },
           {
+            "component": "ben_application",
+            "minimum": "available after XNP first setup when noc-ben-portal is tested",
+            "purpose": "activation, receive and send workflows in the special electronic notary mailbox"
+          },
+          {
             "component": "sak_lite_or_xnp_card_path",
             "minimum": "installed and configured when card-based XNP access is tested",
             "purpose": "local card access for XNP"
@@ -183,8 +188,8 @@
           },
           {
             "component": "ausweisapp",
-            "minimum": "optional for IDaaS and eID paths",
-            "purpose": "eID function check"
+            "minimum": "required for noc-ausweisapp-eid and productive eID paths",
+            "purpose": "eID function check and local status endpoint on 127.0.0.1:24727"
           }
         ],
         "negative_readiness_responses_allowed": [
@@ -201,8 +206,10 @@
         ],
         "verification": [
           "python scripts/startup_check.py --profile notary-workstation --ide auto",
+          "python plugins\\noc-ausweisapp-eid\\scripts\\prepare_eid_session.py --json",
           "python plugins\\noc-cyberjack-rfid\\scripts\\check_readiness.py --json --probe-morris-api",
-          "python plugins\\noc-bnotk-xnp\\scripts\\reader_prompt.py --json --probe-morris-api"
+          "python plugins\\noc-bnotk-xnp\\scripts\\reader_prompt.py --json --probe-morris-api",
+          "python plugins\\noc-ben-portal\\scripts\\prepare_ben_session.py --json"
         ]
       }
     ],
